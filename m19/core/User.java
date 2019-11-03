@@ -1,5 +1,9 @@
 package m19.core;
 
+import java.util.HashSet;
+
+import m19.core.Request;
+
 public class User {
     private int _iD;
     private boolean _isActive = true;
@@ -8,12 +12,20 @@ public class User {
     private int _fine;
     private int _countFouls;
     //private Behaviour _behaviour;
-    //private TypeOfCollection<Request> _request = new TypeOfCollection<>();
+    private HashSet<Request> _requests = new HashSet<>();
 
     public User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
+    }
+
+    public int getID() {
+        return _iD;
+    }
+
+    boolean isActive() {
+        return _isActive;
     }
 
     public void changeStatus() {
@@ -28,12 +40,12 @@ public class User {
         _countFouls--;
     }
 
-    public void makeRequest() {  // falta request a adicionar
-        //add._request()
+    public void makeRequest(Request request) {
+        _requests.add(request);
     }
 
-    public void returnWork() {  // falta request a remover
-        //remove._request()
+    public void returnWork(Request request) { 
+        _requests.remove(request);
     }
 
     public void changeBehaviour() {

@@ -1,6 +1,7 @@
 package m19.core.work;
 
 import m19.core.work.Work;
+import m19.core.Category;
 
 public class Book extends Work {
     private String _author;

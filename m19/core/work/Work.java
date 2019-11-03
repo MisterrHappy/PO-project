@@ -1,5 +1,7 @@
 package m19.core.work;
 
+import m19.core.Category;
+
 public abstract class Work {
     private int _iD;
     private int _price;
@@ -29,7 +31,8 @@ public abstract class Work {
     abstract String getWorkType();
 
     String useCommonDescription(String workType) {
-        return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + _category;
+        return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + 
+            _category.toString();
     }
 
     public abstract String getDescription();
