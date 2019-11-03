@@ -3,15 +3,12 @@ package m19.app.users;
 import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
-import m19.app.exception.UserRegistrationFailedException;
-
-import m19.app.users.Message;
 import pt.tecnico.po.ui.Input;
-
+import m19.app.users.Message;
 /**
  * 4.2.1. Register new user.
  */
-public class DoRegisterUser extends Command<LibraryManager> {
+public class DoRegisterUser extends Command<LibraryManager> implements Message{
 
   private Input<String> _name;
   private Input<String> _email;
@@ -21,8 +18,8 @@ public class DoRegisterUser extends Command<LibraryManager> {
    */
   public DoRegisterUser(LibraryManager receiver) {
     super(Label.REGISTER_USER, receiver);
-    _name = _form.addStringInput(m19.app.users.Message.requestUserName());
-    _email = _form.addStringInput(m19.app.users.Message.requestUserEMail());
+    _name = _form.addStringInput(Message.requestUserName());
+    _email = _form.addStringInput(Message.requestUserEMail());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */

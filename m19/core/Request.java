@@ -1,7 +1,5 @@
 package m19.core;
 
-import java.util.Comparator;
-
 import m19.core.User;
 import m19.core.work.Work;;
 
@@ -21,8 +19,8 @@ public class Request{
         return _deadline;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return _user.getID() == other.getID() && 
-    }
+    // @Override
+    // public boolean equals(Object other) {
+    //     return _user.getID() == other.getID() && 
+    // }
 }

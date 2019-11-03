@@ -1,11 +1,11 @@
 package m19.core;
 
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.ImportFileException;
+import m19.core.exception.MissingFileAssociationException;
 
 // FIXME import other system types
 // FIXME import other project (core) types
