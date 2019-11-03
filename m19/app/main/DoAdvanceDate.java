@@ -2,10 +2,12 @@ package m19.app.main;
 
 import m19.core.LibraryManager;
 
-import pt.tecnico.po.ui.Command;
 
-// FIXME import iother core concepts
-// FIXME import ui concepts
+import pt.tecnico.po.io.CompositePrintStream;
+import pt.tecnico.po.io.RuntimeEOFException;
+
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.Form;
 
 /**
  * 4.1.3. Advance the current date.

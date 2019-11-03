@@ -17,9 +17,11 @@ public class Library implements Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201901101348L;
 
-  // FIXME define attributes
+  private int _currentDate;
+  private int _userNextID;
+  private int _workNextID;
 
-  // FIXME define contructor(s)
+  //public Library()
 
   // FIXME define methods
 
