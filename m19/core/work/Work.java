@@ -26,7 +26,9 @@ public abstract class Work {
         _numberOfCopiesAvailable--;
     }
 
-    String commonDescription(String workType) {
+    abstract String getWorkType();
+
+    String useCommonDescription(String workType) {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + _category;
     }
 

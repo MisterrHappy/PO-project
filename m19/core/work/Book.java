@@ -13,7 +13,12 @@ public class Book extends Work {
     }
 
     @Override
+    String getWorkType() {
+        return "Livro";
+    }
+
+    @Override
     public String getDescription() {
-        return commonDescription("Livro") + " - " + _author + " - " + _isbn;
+        return useCommonDescription(getWorkType())+ " - " + _author + " - " + _isbn;
     }
 }

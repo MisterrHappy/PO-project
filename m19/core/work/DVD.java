@@ -13,7 +13,12 @@ public class DVD extends Work {
     }
 
     @Override
+    String getWorkType() {
+        return "DVD";
+    }
+
+    @Override
     public String getDescription() {
-        return commonDescription("DVD") + " - " + _director+ " - " + _igac;
+        return useCommonDescription(getWorkType())+ " - " + _director+ " - " + _igac;
     }
 }
