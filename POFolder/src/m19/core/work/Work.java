@@ -19,6 +19,10 @@ public abstract class Work {
         _numberOfCopiesAvailable = numberOfCopies;
         _category = category;
     }
+    
+    public int getID() {
+        return _iD;
+    }
 
     public void increaseCopiesAvailable() {
         _numberOfCopiesAvailable++;
@@ -36,4 +40,5 @@ public abstract class Work {
     }
 
     public abstract String getDescription();
+
 }

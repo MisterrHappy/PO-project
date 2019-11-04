@@ -14,13 +14,23 @@ public class Request{
         _work = work;
     }
 
+    public User getUser() {
+        return _user;
+    }
+
+    public Work getWork() {
+        return _work;
+    }
+
     @Override
     public int hashCode() {
         return _deadline;
     }
 
-    // @Override
-    // public boolean equals(Object other) {
-    //     return _user.getID() == other.getID() && 
-    // }
+    @Override
+    public boolean equals(Object other) {
+        Request r = (Request) other;
+        return _user.getID() == r.getUser().getID() && _work.getID() == r.getWork().getID();
+    }
+
 }
