@@ -1,3 +1,4 @@
+
 package m19.core;
 
 import java.util.HashSet;
@@ -20,23 +21,23 @@ public class User {
         _email = email;
     }
 
-    public int getID() {
+    protected int getID() {
         return _iD;
     }
 
-    boolean isActive() {
+    protected boolean isActive() {
         return _isActive;
     }
 
-    public void changeStatus() {
+    protected void changeStatus() {
         _isActive = !_isActive;
     }
 
-    public void increaseFouls() {
+    protected void increaseFouls() {
         _countFouls++;
     }
 
-    public void decreaseFouls() {
+    protected void decreaseFouls() {
         _countFouls--;
     }
 

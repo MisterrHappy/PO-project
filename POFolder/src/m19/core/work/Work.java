@@ -1,6 +1,9 @@
 package m19.core.work;
 
+import java.util.HashSet;
+
 import m19.core.Category;
+import m19.core.Request;
 
 public abstract class Work {
     private int _iD;
@@ -9,7 +12,7 @@ public abstract class Work {
     private String _title;
     private int _numberOfCopiesAvailable;
     private Category _category;
-    //private TypeOfCollection<Request> _request = new TypeOfCollection<>();
+    private HashSet<Request> _requests = new HashSet<>();
 
     public Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -20,21 +23,25 @@ public abstract class Work {
         _category = category;
     }
     
-    public int getID() {
+    protected int getID() {
         return _iD;
     }
 
-    public void increaseCopiesAvailable() {
+    protected void increaseCopiesAvailable() {
         _numberOfCopiesAvailable++;
     }
 
-    public void decreaseCopiesAvailable() {
+    protected void decreaseCopiesAvailable() {
         _numberOfCopiesAvailable--;
+    }
+
+    public void addRequest(Request request) {
+        _requests
     }
 
     abstract String getWorkType();
 
-    String useCommonDescription(String workType) {
+    protected String useCommonDescription(String workType) {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + 
             _category.toString();
     }
