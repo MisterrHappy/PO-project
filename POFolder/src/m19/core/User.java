@@ -1,8 +1,8 @@
 
 package m19.core;
 
+import java.util.Set;
 import java.util.HashSet;
-
 import m19.core.Request;
 
 public class User {
@@ -13,16 +13,12 @@ public class User {
     private int _fine;
     private int _countFouls;
     //private Behaviour _behaviour;
-    private HashSet<Request> _requests = new HashSet<>();
+    private Set<Request> _requests = new HashSet<>();
 
     public User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
-    }
-
-    protected int getID() {
-        return _iD;
     }
 
     protected boolean isActive() {
@@ -51,6 +47,11 @@ public class User {
 
     public void changeBehaviour() {
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other.getClass() == getClass() && _iD == ((User) other)._iD;
     }
 
     public String getDescription() {

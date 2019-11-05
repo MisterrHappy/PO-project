@@ -7,8 +7,7 @@ import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 
-// FIXME import other system types
-// FIXME import other project (core) types
+import m19.core.Library;
 
 /**
  * The façade class.
@@ -21,7 +20,13 @@ public class LibraryManager {
 
   // FIXME define contructor(s)
   
-  // FIXME define methods
+  public int getCurrentDate() {
+    return _library.getCurrentDate();
+  }
+  
+  public void advanceDays(int nDays) {
+    _library.advanceDays(nDays);
+  }
 
   /**
    * Serialize the persistent state of this application.

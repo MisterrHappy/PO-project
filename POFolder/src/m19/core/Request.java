@@ -1,7 +1,7 @@
 package m19.core;
 
 import m19.core.User;
-import m19.core.work.Work;;
+import m19.core.work.Work;
 
 public class Request{
     private int _deadline;
@@ -28,12 +28,9 @@ public class Request{
     public int hashCode() {
         return _iD;
     }
-
+    
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Request))
-            return false;
-        Request newRequest = (Request) other;
-        return _user.getID() == newRequest.getUser().getID() && _work.getID() == newRequest.getWork().getID();
+        return other.getClass() == getClass() && _user.equals(((Request) other)._user) && _work.equals(((Request) other)._work);
     }
 }

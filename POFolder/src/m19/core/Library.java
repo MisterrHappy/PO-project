@@ -6,8 +6,7 @@ import java.io.IOException;
 import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.BadEntrySpecificationException;
 
-// FIXME import other system types
-// FIXME import project (core) types if needed
+import m19.core.Date;
 
 /**
  * Class that represents the library as a whole.
@@ -17,13 +16,19 @@ public class Library implements Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201901101348L;
 
-  private int _currentDate;
+  private Date _date;
   private int _userNextID;
   private int _workNextID;
 
   //public Library()
 
-  // FIXME define methods
+  protected int getCurrentDate() {
+    return _date.getCurrentDate();
+  }
+  
+  protected void advanceDays(int nDays) {
+    _date.advanceDay(nDays);
+  }
 
   /**
    * Read the text input file at the beginning of the program and populates the

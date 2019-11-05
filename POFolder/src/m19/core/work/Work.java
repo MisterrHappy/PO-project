@@ -1,5 +1,8 @@
 package m19.core.work;
 
+
+import java.util.Set;
+import java.lang.instrument.UnmodifiableClassException;
 import java.util.HashSet;
 
 import m19.core.Category;
@@ -12,7 +15,7 @@ public abstract class Work {
     private String _title;
     private int _numberOfCopiesAvailable;
     private Category _category;
-    private HashSet<Request> _requests = new HashSet<>();
+    private Set<Request> _requests = new HashSet<>();
 
     public Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -36,16 +39,24 @@ public abstract class Work {
     }
 
     public void addRequest(Request request) {
-        _requests
+        _requests.add(request);
+    }
+
+    public void removeRequest(Request request) {
+        _requests.remove(request);
     }
 
     abstract String getWorkType();
-
+    
     protected String useCommonDescription(String workType) {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + 
-            _category.toString();
+        _category.toString();
     }
-
+    
     public abstract String getDescription();
-
+    
+    @Override
+    public boolean equals(Object other) {
+        return other.getClass() == getClass() && _iD == ((Work) other)._iD;
+    }
 }
