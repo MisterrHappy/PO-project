@@ -4,6 +4,7 @@ package m19.core;
 import java.util.Set;
 import java.util.HashSet;
 import m19.core.Request;
+import m19.core.Behaviour;
 
 public class User {
     private int _iD;
@@ -12,7 +13,7 @@ public class User {
     private String _email;
     private int _fine;
     private int _countFouls;
-    //private Behaviour _behaviour;
+    private Behaviour _behaviour;
     private Set<Request> _requests = new HashSet<>();
 
     public User(int iD, String name, String email) {
@@ -55,7 +56,7 @@ public class User {
     }
 
     public String getDescription() {
-        String res = "" + _iD + " - " + _name + " - " + _email + " - ";
+        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behaviour.toString() + " - ";
         if (_isActive) 
             return res += "ACTIVO";
 
