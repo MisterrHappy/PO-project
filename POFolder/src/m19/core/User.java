@@ -1,10 +1,11 @@
 package m19.core;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import m19.core.Request;
 import m19.core.Behaviour;
+
+//import m19.core.exception.BadEntrySpecificationException;
 
 public class User {
     private int _iD;
@@ -71,14 +72,5 @@ public class User {
             return res += "ACTIVO";
 
         return res += "SUSPENSO" + " - EUR " + _fine; 
-    }
-}
-
-class UserComparator implements Comparator<User> {
-    @Override
-    public int compare(User a, User b) {
-        if (a.getName().compareTo(b.getName()) == 0)
-            return a.hashCode() - b.hashCode();
-        return a.getName().compareTo(b.getName());
     }
 }

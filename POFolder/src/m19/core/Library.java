@@ -1,19 +1,24 @@
 package m19.core;
 
 import java.io.Serializable;
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Comparator;
 
 import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.BadEntrySpecificationException;
 
 import m19.core.Date;
 import m19.core.User;
+import m19.core.UserComparator;
 import m19.core.work.Work;
+import m19.core.work.WorkComparator;
+import m19.core.Parser;
 
 /**
  * Class that represents the library as a whole.
@@ -26,8 +31,16 @@ public class Library implements Serializable {
   private Date _date;
   private int _userNextID;
   private int _workNextID;
-  private Set<User> _users = new HashSet<>();
-  private Set<Work> _works = new HashSet<>();
+  private Map<Integer, Work> _works = new HashMap<>();
+  private Map<Integer, User> _users = new HashMap<>();
+
+  protected int getUserNextID() {
+    return _userNextID;
+  }
+
+  protected int getWorkNextID() {
+    return _workNextID;
+  }
 
   protected int getCurrentDate() {
     return _date.getCurrentDate();
@@ -38,17 +51,25 @@ public class Library implements Serializable {
   }
 
   private List<User> getOrderedUsers() {
-    List<User> orderedUsers = new ArrayList<>(_users);
+    List<User> orderedUsers = new ArrayList<>(_users.values());
     Collections.sort(orderedUsers, new UserComparator());
     return orderedUsers;
   }
 
+  private List<Work> getOrderedWorks() {
+    List<Work> orderedWorks = new ArrayList<>(_works.values());
+    Collections.sort(orderedWorks, new WorkComparator());
+    return orderedWorks;
+  }
+
+  // private List<Type> getOrderedList(Map<Type, Type> hmap, Comparator comp) {
+  //   List<Type> orderedList = new ArrayList<>(hmap.values());
+  //   Collections.sort(orderedList, comp);
+  //   return orderedList;
+  // }
+
   protected String getUser(int iD) {
-    for (User temp: _users) {
-      if (temp.hashCode() == iD)
-        return temp.getDescription();
-    }
-    return null;
+    return (_users.get(iD)).getDescription();
   }
 
   protected String getAllUsers() {
@@ -59,11 +80,26 @@ public class Library implements Serializable {
     return res;
   }
 
-  protected int registerUser(String name, String email) {
+  protected int registerUser(String name, String email) { // isto tem que ser alterado
     User user = new User(_userNextID, name, email);
-    if (_users.add(user))
-      return _userNextID++;
-    return -1;
+    _users.put(_userNextID, user);
+    return _userNextID++;
+  }
+
+  protected void addWork(Work work) {
+    _works.put(_workNextID++, work);
+  }
+
+  protected String getWork(int iD) {
+    return (_works.get(iD)).getDescription();
+  }
+
+  protected String getAllWorks() {
+    List<Work> orderedWorks = getOrderedWorks();
+    String res = "";
+    for (Work temp: orderedWorks)
+      res += temp.getDescription() + "\n";
+    return res;
   }
 
   /**
@@ -76,7 +112,7 @@ public class Library implements Serializable {
    * @throws IOException
    */
   void importFile(String filename) throws BadEntrySpecificationException, IOException {
-    // FIXME implement method
+    Parser parser = new Parser(this);
+    parser.parseFile(filename);
   }
-
 }

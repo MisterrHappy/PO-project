@@ -42,7 +42,7 @@ public class Request{
 
 class RequestComparator implements Comparator<Request> {
     @Override
-    public int compare(Request a, Request b) {   // falta ver isto
+    public int compare(Request a, Request b) {
         return a.getDeadline() - b.getDeadline();
     }
 }

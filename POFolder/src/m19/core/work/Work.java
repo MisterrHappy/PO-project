@@ -1,7 +1,5 @@
 package m19.core.work;
 
-
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,13 +15,19 @@ public abstract class Work {
     private Category _category;
     private Set<Request> _requests = new HashSet<>();
 
-    public Work(int iD, int price, String title, int numberOfCopies, Category category) {
+    public Work(int iD, int price, String title, int numberOfCopies, String categoryValue) {
         _iD = iD;
         _price = price;
         _title = title;
         _numberOfCopies = numberOfCopies;
         _numberOfCopiesAvailable = numberOfCopies;
-        _category = category;
+
+        for (Category cat: Category.values()) {
+            if (cat.toString().equals(categoryValue)) {
+                _category = cat;
+                break;
+            }
+        }
     }
 
     public int hashCode() {
@@ -58,12 +62,5 @@ public abstract class Work {
     @Override
     public boolean equals(Object other) {
         return other.getClass() == getClass() && _iD == ((Work) other)._iD;
-    }
-}
-
-class WorkComparator implements Comparator<Work> {
-    @Override
-    public int compare(Work a, Work b) {
-        return a.hashCode() - b.hashCode();
     }
 }

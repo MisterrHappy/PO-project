@@ -16,12 +16,6 @@ public class LibraryManager {
 
   private Library _library = new Library();  // FIXME initialize this attribute
   private String _fileName;
-
-  // public LibraryManager() {}
-
-  // public LibraryManager(String filename) {
-  //   _fileName = filename;
-  // }
   
   public int getCurrentDate() {
     return _library.getCurrentDate();
@@ -41,6 +35,14 @@ public class LibraryManager {
 
   public int registerUser(String name, String email) {
     return _library.registerUser(name, email);
+  }
+
+  public String getWork(int iD) {
+    return _library.getWork(iD);
+  }
+
+  public String getAllWorks() {
+    return _library.getAllWorks();
   }
 
   /**
@@ -84,7 +86,7 @@ public class LibraryManager {
   /**
    * Set the state of this application from a textual representation stored into a file.
    * 
-   * @param datafile the filename of the file with the textual represntation of the state of this application.
+   * @param datafile the filename of the file with the textual representation of the state of this application.
    * @throws ImportFileException if it happens some error during the parsing of the textual representation.
    */
   public void importFile(String datafile) throws ImportFileException {

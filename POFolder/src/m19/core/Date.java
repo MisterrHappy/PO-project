@@ -8,6 +8,7 @@ public class Date {
     }
 
     protected void advanceDay(int nDays) {
-        _currentDate += nDays;
+        if (nDays > 0)
+            _currentDate += nDays;
     }
 }

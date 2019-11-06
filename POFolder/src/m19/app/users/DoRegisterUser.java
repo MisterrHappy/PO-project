@@ -28,12 +28,7 @@ public class DoRegisterUser extends Command<LibraryManager> {
     _form.parse();
 
     int iD = _receiver.registerUser(_name.value(), _email.value());
-    if (iD >= 0) {
-      _display.addLine(Message.userRegistrationSuccessful(iD));
-      _display.display();
-      return;
-    }
-    throw new UserRegistrationFailedException(_name.value(), _email.value());
+    _display.addLine(Message.userRegistrationSuccessful(iD));
+    _display.display();
   }
-
 }
