@@ -14,7 +14,7 @@ public class DVD extends Work {
     }
 
     @Override
-    String getWorkType() {
+    protected String getWorkType() {
         return "DVD";
     }
 

@@ -2,6 +2,7 @@ package m19.core;
 
 import m19.core.User;
 import m19.core.work.Work;
+import java.util.Comparator;
 
 public class Request{
     private int _deadline;
@@ -14,6 +15,10 @@ public class Request{
         _user = user;
         _work = work;
         _iD = iD;
+    }
+
+    protected int getDeadline() {
+        return _deadline;
     }
 
     protected User getUser() {
@@ -32,5 +37,12 @@ public class Request{
     @Override
     public boolean equals(Object other) {
         return other.getClass() == getClass() && _user.equals(((Request) other)._user) && _work.equals(((Request) other)._work);
+    }
+}
+
+class RequestComparator implements Comparator<Request> {
+    @Override
+    public int compare(Request a, Request b) {   // falta ver isto
+        return a.getDeadline() - b.getDeadline();
     }
 }

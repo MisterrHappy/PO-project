@@ -1,9 +1,9 @@
 package m19.core.work;
 
 
-import java.util.Set;
-import java.lang.instrument.UnmodifiableClassException;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Set;
 
 import m19.core.Category;
 import m19.core.Request;
@@ -25,8 +25,8 @@ public abstract class Work {
         _numberOfCopiesAvailable = numberOfCopies;
         _category = category;
     }
-    
-    protected int getID() {
+
+    public int hashCode() {
         return _iD;
     }
 
@@ -46,7 +46,7 @@ public abstract class Work {
         _requests.remove(request);
     }
 
-    abstract String getWorkType();
+    protected abstract String getWorkType();
     
     protected String useCommonDescription(String workType) {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + 
@@ -58,5 +58,12 @@ public abstract class Work {
     @Override
     public boolean equals(Object other) {
         return other.getClass() == getClass() && _iD == ((Work) other)._iD;
+    }
+}
+
+class WorkComparator implements Comparator<Work> {
+    @Override
+    public int compare(Work a, Work b) {
+        return a.hashCode() - b.hashCode();
     }
 }

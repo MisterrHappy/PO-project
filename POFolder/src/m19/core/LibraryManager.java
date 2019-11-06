@@ -14,11 +14,14 @@ import m19.core.Library;
  */
 public class LibraryManager {
 
-  private Library _library;  // FIXME initialize this attribute
+  private Library _library = new Library();  // FIXME initialize this attribute
+  private String _fileName;
 
-  // FIXME define other attributes
+  // public LibraryManager() {}
 
-  // FIXME define contructor(s)
+  // public LibraryManager(String filename) {
+  //   _fileName = filename;
+  // }
   
   public int getCurrentDate() {
     return _library.getCurrentDate();
@@ -26,6 +29,18 @@ public class LibraryManager {
   
   public void advanceDays(int nDays) {
     _library.advanceDays(nDays);
+  }
+
+  public String getUser(int iD) {
+    return _library.getUser(iD);
+  }
+
+  public String getAllUsers() {
+    return _library.getAllUsers();
+  }
+
+  public int registerUser(String name, String email) {
+    return _library.registerUser(name, email);
   }
 
   /**

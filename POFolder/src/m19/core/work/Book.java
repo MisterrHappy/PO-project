@@ -14,7 +14,7 @@ public class Book extends Work {
     }
 
     @Override
-    String getWorkType() {
+    protected String getWorkType() {
         return "Livro";
     }
 

@@ -1,14 +1,14 @@
 package m19.app.users;
 
+import m19.app.exception.UserRegistrationFailedException;
 import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import m19.app.users.Message;
 /**
  * 4.2.1. Register new user.
  */
-public class DoRegisterUser extends Command<LibraryManager> implements Message{
+public class DoRegisterUser extends Command<LibraryManager> {
 
   private Input<String> _name;
   private Input<String> _email;
@@ -27,7 +27,13 @@ public class DoRegisterUser extends Command<LibraryManager> implements Message{
   public final void execute() throws DialogException {
     _form.parse();
 
-    // chamar método da libray
+    int iD = _receiver.registerUser(_name.value(), _email.value());
+    if (iD >= 0) {
+      _display.addLine(Message.userRegistrationSuccessful(iD));
+      _display.display();
+      return;
+    }
+    throw new UserRegistrationFailedException(_name.value(), _email.value());
   }
 
 }

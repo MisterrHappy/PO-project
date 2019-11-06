@@ -1,8 +1,8 @@
-
 package m19.core;
 
+import java.util.Comparator;
 import java.util.Set;
-import java.util.HashSet;
+import java.util.TreeSet;
 import m19.core.Request;
 import m19.core.Behaviour;
 
@@ -14,12 +14,17 @@ public class User {
     private int _fine;
     private int _countFouls;
     private Behaviour _behaviour;
-    private Set<Request> _requests = new HashSet<>();
+    private Set<Request> _requests = new TreeSet<>(new RequestComparator());
 
     public User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
+        _behaviour = Behaviour.NORMAL;
+    }
+
+    protected String getName() {
+        return _name;
     }
 
     protected boolean isActive() {
@@ -46,8 +51,13 @@ public class User {
         _requests.remove(request);
     }
 
-    public void changeBehaviour() {
+    protected void changeBehaviour() {
 
+    }
+
+    @Override
+    public int hashCode() {
+        return _iD;
     }
 
     @Override
@@ -61,5 +71,14 @@ public class User {
             return res += "ACTIVO";
 
         return res += "SUSPENSO" + " - EUR " + _fine; 
+    }
+}
+
+class UserComparator implements Comparator<User> {
+    @Override
+    public int compare(User a, User b) {
+        if (a.getName().compareTo(b.getName()) == 0)
+            return a.hashCode() - b.hashCode();
+        return a.getName().compareTo(b.getName());
     }
 }
