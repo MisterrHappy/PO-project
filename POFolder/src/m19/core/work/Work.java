@@ -1,12 +1,13 @@
 package m19.core.work;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import m19.core.Category;
 import m19.core.Request;
 
-public abstract class Work {
+public abstract class Work implements Serializable {
     private int _iD;
     private int _price;
     private int _numberOfCopies;

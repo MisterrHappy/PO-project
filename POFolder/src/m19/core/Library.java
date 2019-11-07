@@ -1,7 +1,6 @@
 package m19.core;
 
 import java.io.Serializable;
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +9,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Comparator;
 
-import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.BadEntrySpecificationException;
 
 import m19.core.Date;
 import m19.core.User;
 import m19.core.UserComparator;
 import m19.core.work.Work;
-import m19.core.work.WorkComparator;
 import m19.core.Parser;
 
 /**
@@ -28,15 +25,11 @@ public class Library implements Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201901101348L;
 
-  private Date _date;
+  private Date _date = new Date();
   private int _userNextID;
   private int _workNextID;
-  private Map<Integer, Work> _works = new HashMap<>();
+  private List<Work> _works = new ArrayList<>();
   private Map<Integer, User> _users = new HashMap<>();
-
-  protected int getUserNextID() {
-    return _userNextID;
-  }
 
   protected int getWorkNextID() {
     return _workNextID;
@@ -55,18 +48,6 @@ public class Library implements Serializable {
     Collections.sort(orderedUsers, new UserComparator());
     return Collections.unmodifiableList(orderedUsers);
   }
-
-  private List<Work> getOrderedWorks() {
-    List<Work> orderedWorks = new ArrayList<>(_works.values());
-    Collections.sort(orderedWorks, new WorkComparator());
-    return Collections.unmodifiableList(orderedWorks);
-  }
-
-  // private List<Type> getOrderedList(Map<Type, Type> hmap, Comparator comp) {
-  //   List<Type> orderedList = new ArrayList<>(hmap.values());
-  //   Collections.sort(orderedList, comp);
-  //   return orderedList;
-  // }
 
   protected String getUser(int iD) {
     return (_users.get(iD)).getDescription();
@@ -87,7 +68,7 @@ public class Library implements Serializable {
   }
 
   protected void addWork(Work work) {
-    _works.put(_workNextID++, work);
+    _works.add(_workNextID++, work);   // perguntar ao stor
   }
 
   protected String getWork(int iD) {
@@ -95,9 +76,8 @@ public class Library implements Serializable {
   }
 
   protected String getAllWorks() {
-    List<Work> orderedWorks = getOrderedWorks();
     String res = "";
-    for (Work temp: orderedWorks)
+    for (Work temp: _works)
       res += temp.getDescription() + "\n";
     return res;
   }

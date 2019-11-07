@@ -1,6 +1,8 @@
 package m19.core;
 
-public class Date {
+import java.io.Serializable;
+
+public class Date implements Serializable {
     private int _currentDate;
 
     protected int getCurrentDate() {

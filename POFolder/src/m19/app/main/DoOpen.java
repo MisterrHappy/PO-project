@@ -27,8 +27,8 @@ public class DoOpen extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
-    _form.parse();
     try {
+      _form.parse();
       _receiver.load(_filename.value());
     } catch (FileNotFoundException fnfe) {
       throw new FileOpenFailedException(_filename.value());

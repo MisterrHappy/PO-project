@@ -1,5 +1,6 @@
 package m19.core;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 import m19.core.Request;
@@ -7,7 +8,7 @@ import m19.core.Behaviour;
 
 //import m19.core.exception.BadEntrySpecificationException;
 
-public class User {
+public class User implements Serializable {
     private int _iD;
     private boolean _isActive = true;
     private String _name;

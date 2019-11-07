@@ -1,13 +1,19 @@
 package m19.core;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
+import m19.core.exception.FailedToOpenFileException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
 
 import m19.core.Library;
@@ -59,9 +65,14 @@ public class LibraryManager {
   public void save() throws MissingFileAssociationException, IOException {
     if (_fileNameAssociation == null)
       throw new MissingFileAssociationException();
-    saveAs(_fileNameAssociation);
-  }
 
+    FileOutputStream file = new FileOutputStream(_fileNameAssociation);
+    ObjectOutputStream librarySave = new ObjectOutputStream(file);
+    librarySave.writeObject(_library);
+    librarySave.close();
+    file.close();
+  }
+  
   /**
    * Serialize the persistent state of this application into the specified file.
    * 
@@ -72,11 +83,11 @@ public class LibraryManager {
    * @throws IOException if some error happen during the serialization of the persistent state
    */
   public void saveAs(String filename) throws MissingFileAssociationException, IOException {
-    FileOutputStream fileOut =
-         new FileOutputStream("/tmp/employee.ser");
-         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(e);
-         out.close();
+    if (filename == null)
+      throw new MissingFileAssociationException();
+      
+    _fileNameAssociation = filename;
+    save();
   }
 
   /**
@@ -89,7 +100,17 @@ public class LibraryManager {
    * @throws ClassNotFoundException 
    */
   public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
-    // FIXME implement method
+    File fileToLoad = new File(filename);
+    if (!fileToLoad.isFile())
+      throw new FileNotFoundException();
+
+    ObjectInputStream libraryLoad = null;
+    FileInputStream file = new FileInputStream(filename);
+    libraryLoad = new ObjectInputStream(file);
+    Library library = (Library) libraryLoad.readObject();
+    _library = library;
+    libraryLoad.close();
+    file.close();
   }
 
   /**
