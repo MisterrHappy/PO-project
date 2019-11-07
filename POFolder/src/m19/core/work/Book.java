@@ -1,13 +1,14 @@
 package m19.core.work;
 
 import m19.core.work.Work;
+import m19.core.Category;
 
 public class Book extends Work {
     private String _author;
     private String _isbn;
 
-    public Book(int iD, int price, String title, int numberOfCopies, String categoryValue, String author, String isbn) {
-        super(iD, price, title, numberOfCopies, categoryValue);
+    public Book(int iD, int price, String title, int numberOfCopies, Category category, String author, String isbn) {
+        super(iD, price, title, numberOfCopies, category);
         _author = author;
         _isbn = isbn;
     }

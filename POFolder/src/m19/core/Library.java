@@ -53,13 +53,13 @@ public class Library implements Serializable {
   private List<User> getOrderedUsers() {
     List<User> orderedUsers = new ArrayList<>(_users.values());
     Collections.sort(orderedUsers, new UserComparator());
-    return orderedUsers;
+    return Collections.unmodifiableList(orderedUsers);
   }
 
   private List<Work> getOrderedWorks() {
     List<Work> orderedWorks = new ArrayList<>(_works.values());
     Collections.sort(orderedWorks, new WorkComparator());
-    return orderedWorks;
+    return Collections.unmodifiableList(orderedWorks);
   }
 
   // private List<Type> getOrderedList(Map<Type, Type> hmap, Comparator comp) {

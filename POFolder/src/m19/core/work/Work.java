@@ -15,19 +15,13 @@ public abstract class Work {
     private Category _category;
     private Set<Request> _requests = new HashSet<>();
 
-    public Work(int iD, int price, String title, int numberOfCopies, String categoryValue) {
+    public Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
         _price = price;
         _title = title;
         _numberOfCopies = numberOfCopies;
         _numberOfCopiesAvailable = numberOfCopies;
-
-        for (Category cat: Category.values()) {
-            if (cat.toString().equals(categoryValue)) {
-                _category = cat;
-                break;
-            }
-        }
+        _category = category;
     }
 
     public int hashCode() {
@@ -53,8 +47,8 @@ public abstract class Work {
     protected abstract String getWorkType();
     
     protected String useCommonDescription(String workType) {
-        return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " + _price + " - " + 
-        _category.toString();
+        return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " 
+        + _title + " - " + _price + " - " + _category.toString();
     }
     
     public abstract String getDescription();

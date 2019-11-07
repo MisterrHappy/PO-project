@@ -6,6 +6,9 @@ import java.io.IOException;
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.Serializable;
 
 import m19.core.Library;
 
@@ -15,7 +18,7 @@ import m19.core.Library;
 public class LibraryManager {
 
   private Library _library = new Library();  // FIXME initialize this attribute
-  private String _fileName;
+  private String _fileNameAssociation = null;
   
   public int getCurrentDate() {
     return _library.getCurrentDate();
@@ -54,7 +57,9 @@ public class LibraryManager {
 
    */
   public void save() throws MissingFileAssociationException, IOException {
-    // FIXME implement method
+    if (_fileNameAssociation == null)
+      throw new MissingFileAssociationException();
+    saveAs(_fileNameAssociation);
   }
 
   /**
@@ -67,7 +72,11 @@ public class LibraryManager {
    * @throws IOException if some error happen during the serialization of the persistent state
    */
   public void saveAs(String filename) throws MissingFileAssociationException, IOException {
-    // FIXME implement method
+    FileOutputStream fileOut =
+         new FileOutputStream("/tmp/employee.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(e);
+         out.close();
   }
 
   /**
