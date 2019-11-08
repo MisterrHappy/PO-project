@@ -2,9 +2,12 @@ package m19.core;
 
 import m19.core.User;
 import m19.core.work.Work;
+
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Request{
+public class Request implements Serializable{
+    private static final long serialVersionUID = -390459476484847035L;
     private int _deadline;
     private User _user;
     private Work _work;
@@ -40,7 +43,9 @@ public class Request{
     }
 }
 
-class RequestComparator implements Comparator<Request> {
+class RequestComparator implements Comparator<Request>, Serializable {
+    private static final long serialVersionUID = 5529668764911233646L;
+
     @Override
     public int compare(Request a, Request b) {
         return a.getDeadline() - b.getDeadline();

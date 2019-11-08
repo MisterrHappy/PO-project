@@ -3,6 +3,7 @@ package m19.core;
 import java.io.Serializable;
 
 public class Date implements Serializable {
+    private static final long serialVersionUID = 383907972717283888L;
     private int _currentDate;
 
     protected int getCurrentDate() {

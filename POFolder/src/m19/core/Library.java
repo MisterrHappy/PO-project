@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.app.exception.NoSuchWorkException;
 import m19.core.Date;
 import m19.core.User;
 import m19.core.UserComparator;
@@ -61,7 +60,7 @@ public class Library implements Serializable {
     return res;
   }
 
-  protected int registerUser(String name, String email) throws BadEntrySpecificationException { // isto tem que ser alterado
+  protected int registerUser(String name, String email) { // isto tem que ser alterado
     User user = new User(_userNextID, name, email);
     _users.put(_userNextID, user);
     return _userNextID++;

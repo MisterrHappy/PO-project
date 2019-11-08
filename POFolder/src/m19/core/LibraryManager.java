@@ -101,6 +101,8 @@ public class LibraryManager {
     if (!fileToLoad.isFile())
       throw new FileNotFoundException();
 
+    _fileNameAssociation = filename;
+
     ObjectInputStream libraryLoad = null;
     FileInputStream file = new FileInputStream(filename);
     libraryLoad = new ObjectInputStream(file);

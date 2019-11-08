@@ -8,6 +8,7 @@ import m19.core.Category;
 import m19.core.Request;
 
 public abstract class Work implements Serializable {
+    private static final long serialVersionUID = -4003574528951482147L;
     private int _iD;
     private int _price;
     private int _numberOfCopies;
