@@ -33,7 +33,7 @@ public class DoSave extends Command<LibraryManager> {
 				_form.parse();
 				_receiver.saveAs(_filename.value());
 			} catch (MissingFileAssociationException mfae) {
-				System.err.println("Missing file association error.");
+				System.err.println("The file given is not a valid one.");
 			}
 			catch (IOException e2) {
 				e2.printStackTrace();

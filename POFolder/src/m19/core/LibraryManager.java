@@ -61,6 +61,8 @@ public class LibraryManager {
 
     */
     public void save() throws MissingFileAssociationException, IOException {
+        if (_fileNameAssociation == null)
+            throw new MissingFileAssociationException();
         FileOutputStream file = new FileOutputStream(_fileNameAssociation);
         ObjectOutputStream librarySave = new ObjectOutputStream(file);
         librarySave.writeObject(_library);
@@ -80,7 +82,6 @@ public class LibraryManager {
     public void saveAs(String filename) throws MissingFileAssociationException, IOException {
         if (filename == null)
             throw new MissingFileAssociationException();
-
         _fileNameAssociation = filename;
         save();
     }
@@ -97,7 +98,7 @@ public class LibraryManager {
     public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
         File fileToLoad = new File(filename);
         if (!fileToLoad.isFile())
-        throw new FileNotFoundException();
+            throw new FileNotFoundException();
 
         _fileNameAssociation = filename;
 

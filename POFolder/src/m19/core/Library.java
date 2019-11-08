@@ -58,7 +58,7 @@ public class Library implements Serializable {
     protected String getUser(int iD) throws NoUserFoundException {
         User user = _users.get(iD);
         if ( user == null)
-            throw new NoUserFoundException();
+            throw new NoUserFoundException(iD);
         return user.getDescription();
     }
 
@@ -71,8 +71,8 @@ public class Library implements Serializable {
     }
 
     protected int registerUser(String name, String email) throws BadEntrySpecificationException {
-        if (name.isEmpty() || email.isEmpty())
-            throw new BadEntrySpecificationException("User name or email are empty strings: " + name + " " + email);
+        if (name.isEmpty() || email.isEmpty() || name.startsWith(" "))
+            throw new BadEntrySpecificationException("User name " + name + " or email " + email + " are empty strings.");
 
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
