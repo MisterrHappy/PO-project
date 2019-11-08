@@ -31,6 +31,7 @@ public class DoDisplayWork extends Command<LibraryManager> {
 
         _display.addLine(_receiver.getWork(_iD.value()));
         _display.display();
+        
         } catch (IndexOutOfBoundsException ioobe) {
             throw new NoSuchWorkException(_iD.value());
         }

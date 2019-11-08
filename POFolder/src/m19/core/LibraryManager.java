@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.NoUserFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import java.io.File;
@@ -32,7 +32,7 @@ public class LibraryManager {
         _library.advanceDays(nDays);
     }
 
-    public String getUser(int iD) {
+    public String getUser(int iD) throws NoUserFoundException {
         return _library.getUser(iD);
     }
 

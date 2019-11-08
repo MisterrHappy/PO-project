@@ -1,10 +1,11 @@
 package m19.app.users;
 
+import m19.app.exception.NoSuchUserException;
 import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
+import m19.core.exception.NoUserFoundException;
 /**
  * 4.2.2. Show specific user.
  */
@@ -23,9 +24,14 @@ public class DoShowUser extends Command<LibraryManager> {
     /** @see pt.tecnico.po.ui.Command#execute() */
     @Override
     public final void execute() throws DialogException {
+        try {
         _form.parse();
         _display.addLine(_receiver.getUser(_iD.value()));
         _display.display();
+        
+        } catch ( NoUserFoundException nufe ) {
+            throw new NoSuchUserException(_iD.value());
+        }
     }
     
 }

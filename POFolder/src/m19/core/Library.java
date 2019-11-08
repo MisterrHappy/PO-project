@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.NoUserFoundException;
 import m19.core.Date;
 import m19.core.User;
 import m19.core.work.Work;
@@ -55,8 +55,11 @@ public class Library implements Serializable {
         return Collections.unmodifiableList(orderedUsers);
     }
 
-    protected String getUser(int iD) {
-        return (_users.get(iD)).getDescription();
+    protected String getUser(int iD) throws NoUserFoundException {
+        User user = _users.get(iD);
+        if ( user == null)
+            throw new NoUserFoundException();
+        return user.getDescription();
     }
 
     protected String getAllUsers() {
