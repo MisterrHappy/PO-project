@@ -7,26 +7,26 @@ import pt.tecnico.po.ui.DialogException;
  */
 public class NoSuchWorkException extends DialogException {
   
-  /** Serial number for serialization. */
-  static final long serialVersionUID = 201901091828L;
+    /** Serial number for serialization. */
+    static final long serialVersionUID = 201901091828L;
 
-  /**
-   * Bad user id.
-   */
-  private int _id;
+    /**
+     * Bad user id.
+     */
+    private int _id;
 
-  /**
-   * @param id
-   */
-  public NoSuchWorkException(int id) {
-    _id = id;
-  }
+    /**
+     * @param id
+     */
+    public NoSuchWorkException(int id) {
+        _id = id;
+    }
 
 
-  /** @see pt.tecnico.po.ui.DialogException#getMessage() */
-  @Override
-  public String getMessage() {
-    return Message.noSuchWork(_id);
-  }
-  
+    /** @see pt.tecnico.po.ui.DialogException#getMessage() */
+    @Override
+    public String getMessage() {
+        return Message.noSuchWork(_id);
+    }
+    
 }

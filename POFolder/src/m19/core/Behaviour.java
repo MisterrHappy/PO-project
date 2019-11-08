@@ -4,4 +4,5 @@ public enum Behaviour {
     NORMAL,
     CUMPRIDOR,
     FALTOSO;
+    
 }

@@ -75,4 +75,5 @@ public class User implements Serializable {
 
         return res += "SUSPENSO" + " - EUR " + _fine; 
     }
+    
 }

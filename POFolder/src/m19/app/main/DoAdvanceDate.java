@@ -10,21 +10,22 @@ import m19.app.main.Message;
  */
 public class DoAdvanceDate extends Command<LibraryManager> implements Message{
 
-  private Input<Integer> _daysToAdvance;
+    private Input<Integer> _daysToAdvance;
 
-  /**
-   * @param receiver
-   */
-  public DoAdvanceDate(LibraryManager receiver) {
-    super(Label.ADVANCE_DATE, receiver);
-    _daysToAdvance = _form.addIntegerInput(Message.requestDaysToAdvance());
-  }
+    /**
+     * @param receiver
+     */
+    public DoAdvanceDate(LibraryManager receiver) {
+        super(Label.ADVANCE_DATE, receiver);
+        _daysToAdvance = _form.addIntegerInput(Message.requestDaysToAdvance());
+    }
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() {
-    _form.parse();
+    /** @see pt.tecnico.po.ui.Command#execute() */
+    @Override
+    public final void execute() {
+        _form.parse();
 
-    _receiver.advanceDays(_daysToAdvance.value());
-  }
+        _receiver.advanceDays(_daysToAdvance.value());
+    }
+    
 }

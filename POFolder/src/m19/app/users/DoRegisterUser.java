@@ -10,25 +10,26 @@ import pt.tecnico.po.ui.Input;
  */
 public class DoRegisterUser extends Command<LibraryManager> {
 
-  private Input<String> _name;
-  private Input<String> _email;
+    private Input<String> _name;
+    private Input<String> _email;
 
-  /**
-   * @param receiver
-   */
-  public DoRegisterUser(LibraryManager receiver) {
-    super(Label.REGISTER_USER, receiver);
-    _name = _form.addStringInput(Message.requestUserName());
-    _email = _form.addStringInput(Message.requestUserEMail());
-  }
+    /**
+     * @param receiver
+     */
+    public DoRegisterUser(LibraryManager receiver) {
+        super(Label.REGISTER_USER, receiver);
+        _name = _form.addStringInput(Message.requestUserName());
+        _email = _form.addStringInput(Message.requestUserEMail());
+    }
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
-    _form.parse();
+    /** @see pt.tecnico.po.ui.Command#execute() */
+    @Override
+    public final void execute() throws DialogException {
+        _form.parse();
 
-    int iD = _receiver.registerUser(_name.value(), _email.value());
-    _display.addLine(Message.userRegistrationSuccessful(iD));
-    _display.display();
-  }
+        int iD = _receiver.registerUser(_name.value(), _email.value());
+        _display.addLine(Message.userRegistrationSuccessful(iD));
+        _display.display();
+    }
+    
 }

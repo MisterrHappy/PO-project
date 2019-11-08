@@ -13,70 +13,63 @@ import m19.core.Category;
 
 public class Parser {
 
-  private Library _library;
+    private Library _library;
 
-  Parser(Library lib) {
-    _library = lib;
-  }
-
-  void parseFile(String filename) throws IOException, BadEntrySpecificationException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-      String line;
-
-      while ((line = reader.readLine()) != null)
-        parseLine(line);
+    Parser(Library lib) {
+        _library = lib;
     }
-  }
 
-  private void parseLine(String line) throws BadEntrySpecificationException {
-    String[] components = line.split(":");
+    void parseFile(String filename) throws IOException, BadEntrySpecificationException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
 
-    switch(components[0]) {
-      case "DVD":
-        parseDVD(components, line);
-        break;
+            while ((line = reader.readLine()) != null)
+                parseLine(line);
+        }
+    }
 
-      case "BOOK":
-        parseBook(components, line);
-        break;
-      case "USER":
-        parseUser(components, line);
-        break;
+    private void parseLine(String line) throws BadEntrySpecificationException {
+        String[] components = line.split(":");
+
+        switch(components[0]) {
+        case "DVD":
+            parseDVD(components, line);
+            break;
+
+        case "BOOK":
+            parseBook(components, line);
+            break;
+        case "USER":
+            parseUser(components, line);
+            break;
+            
+        default:
+            throw new BadEntrySpecificationException("Invalid type " + components[0] +
+                                                    " in line " + line);
+        }
+    }
+
+    private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
+        if (components.length != 7)
+            throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
+        DVD dvd = new DVD(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
+        _library.addWork(dvd);
+    }
+
+    private void parseBook(String[] components, String line) throws BadEntrySpecificationException {
+        if (components.length != 7)
+            throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
+
+        Book book = new Book(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1],
+                            Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
         
-      default:
-        throw new BadEntrySpecificationException("Invalid type " + components[0] +
-                                                " in line " + line);
+        _library.addWork(book);
     }
-  }
 
-  private boolean checkEmptyStrings(String[] components) {
-    for (int i = 0; i < components.length; i++) {
-      if (components[i].isEmpty())
-        return true;
+    private void parseUser(String[] components, String line) throws BadEntrySpecificationException {
+        if (components.length != 3)
+            throw new BadEntrySpecificationException("Wrong number of fields (2) in " + line);
+        _library.registerUser(components[1], components[2]);
     }
-    return false;
-  }
-
-  private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
-    if (components.length != 7)
-      throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
-    DVD dvd = new DVD(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
-    _library.addWork(dvd);
-  }
-
-  private void parseBook(String[] components, String line) throws BadEntrySpecificationException {
-    if (components.length != 7)
-      throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
-
-    Book book = new Book(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1],
-                        Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
     
-    _library.addWork(book);
-  }
-
-  private void parseUser(String[] components, String line) throws BadEntrySpecificationException {
-    if (components.length != 3)
-      throw new BadEntrySpecificationException("Wrong number of fields (2) in " + line);
-    _library.registerUser(components[1], components[2]);
-  }
 }
