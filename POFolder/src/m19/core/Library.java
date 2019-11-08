@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
+import m19.core.exception.BadUserEntryException;
 import m19.core.Date;
 import m19.core.User;
 import m19.core.work.Work;
@@ -66,14 +67,17 @@ public class Library implements Serializable {
         return res;
     }
 
-    protected int registerUser(String name, String email) { // isto tem que ser alterado
+    protected int registerUser(String name, String email) throws BadUserEntryException {
+        if (name.isEmpty() || email.isEmpty())
+            throw new BadUserEntryException("User name or email are empty strings: " + name + " " + email);
+
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
         return _userNextID++;
     }
 
     protected void addWork(Work work) {
-        _works.add(_workNextID++, work);   // perguntar ao stor
+        _works.add(_workNextID++, work);
     }
 
     protected String getWork(int iD) throws IndexOutOfBoundsException {

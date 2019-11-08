@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
+import m19.core.exception.BadUserEntryException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import java.io.File;
@@ -39,7 +40,7 @@ public class LibraryManager {
         return _library.getAllUsers();
     }
 
-    public int registerUser(String name, String email) {
+    public int registerUser(String name, String email) throws BadUserEntryException {
         return _library.registerUser(name, email);
     }
 
