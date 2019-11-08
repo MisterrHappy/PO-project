@@ -26,10 +26,6 @@ public abstract class Work implements Serializable {
         _category = category;
     }
 
-    public int hashCode() {
-        return _iD;
-    }
-
     protected void increaseCopiesAvailable() {
         _numberOfCopiesAvailable++;
     }
@@ -38,11 +34,11 @@ public abstract class Work implements Serializable {
         _numberOfCopiesAvailable--;
     }
 
-    public void addRequest(Request request) {
+    protected void addRequest(Request request) {
         _requests.add(request);
     }
 
-    public void removeRequest(Request request) {
+    protected void removeRequest(Request request) {
         _requests.remove(request);
     }
 
@@ -50,13 +46,8 @@ public abstract class Work implements Serializable {
     
     protected String useCommonDescription(String workType) {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + workType + " - " 
-        + _title + " - " + _price + " - " + _category.toString();
+                + _title + " - " + _price + " - " + _category.toString();
     }
     
     public abstract String getDescription();
-    
-    @Override
-    public boolean equals(Object other) {
-        return other.getClass() == getClass() && _iD == ((Work) other)._iD;
-    }
 }
