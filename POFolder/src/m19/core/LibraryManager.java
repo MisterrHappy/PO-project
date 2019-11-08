@@ -40,7 +40,7 @@ public class LibraryManager {
         return _library.getAllUsers();
     }
 
-    public int registerUser(String name, String email) throws BadUserEntryException {
+    public int registerUser(String name, String email) throws BadEntrySpecificationException {
         return _library.registerUser(name, email);
     }
 

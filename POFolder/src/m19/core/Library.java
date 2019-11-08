@@ -67,9 +67,9 @@ public class Library implements Serializable {
         return res;
     }
 
-    protected int registerUser(String name, String email) throws BadUserEntryException {
+    protected int registerUser(String name, String email) throws BadEntrySpecificationException {
         if (name.isEmpty() || email.isEmpty())
-            throw new BadUserEntryException("User name or email are empty strings: " + name + " " + email);
+            throw new BadEntrySpecificationException("User name or email are empty strings: " + name + " " + email);
 
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);

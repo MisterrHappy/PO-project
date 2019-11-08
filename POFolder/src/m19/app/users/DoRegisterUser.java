@@ -2,7 +2,7 @@ package m19.app.users;
 
 import m19.app.exception.UserRegistrationFailedException;
 import m19.core.LibraryManager;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.BadEntrySpecificationException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
@@ -31,7 +31,8 @@ public class DoRegisterUser extends Command<LibraryManager> {
             int iD = _receiver.registerUser(_name.value(), _email.value());
             _display.addLine(Message.userRegistrationSuccessful(iD));
             _display.display();
-        } catch (BadUserEntryException buee) {
+
+        } catch (BadEntrySpecificationException bese) {
             throw new UserRegistrationFailedException(_name.value(), _email.value());
         }
     }
