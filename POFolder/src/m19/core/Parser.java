@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.FileReader;
 
 import m19.core.exception.BadEntrySpecificationException;
-
+import m19.core.exception.BadUserEntryException;
 import m19.core.Library;
 import m19.core.work.DVD;
 import m19.core.work.Book;
@@ -69,7 +69,13 @@ public class Parser {
     private void parseUser(String[] components, String line) throws BadEntrySpecificationException {
         if (components.length != 3)
             throw new BadEntrySpecificationException("Wrong number of fields (2) in " + line);
-        _library.registerUser(components[1], components[2]);
+        
+        try {
+            _library.registerUser(components[1], components[2]);
+        }
+        catch (BadUserEntryException buee) { // this is never going to happen here
+            
+        }
     }
     
 }

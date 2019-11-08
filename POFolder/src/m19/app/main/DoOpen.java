@@ -30,6 +30,7 @@ public class DoOpen extends Command<LibraryManager> {
         try {
             _form.parse();
             _receiver.load(_filename.value());
+            
         } catch (FileNotFoundException fnfe) {
             throw new FileOpenFailedException(_filename.value());
         } catch (ClassNotFoundException | IOException e) {

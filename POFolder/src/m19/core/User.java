@@ -6,8 +6,6 @@ import java.util.TreeSet;
 import m19.core.Request;
 import m19.core.Behaviour;
 
-//import m19.core.exception.BadEntrySpecificationException;
-
 public class User implements Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
     private int _iD;

@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
+import m19.core.exception.BadUserEntryException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
@@ -40,7 +41,7 @@ public class LibraryManager {
         return _library.getAllUsers();
     }
 
-    public int registerUser(String name, String email) throws BadEntrySpecificationException {
+    public int registerUser(String name, String email) throws BadUserEntryException {
         return _library.registerUser(name, email);
     }
 
@@ -63,6 +64,7 @@ public class LibraryManager {
     public void save() throws MissingFileAssociationException, IOException {
         if (_fileNameAssociation == null)
             throw new MissingFileAssociationException();
+
         FileOutputStream file = new FileOutputStream(_fileNameAssociation);
         ObjectOutputStream librarySave = new ObjectOutputStream(file);
         librarySave.writeObject(_library);
@@ -80,8 +82,9 @@ public class LibraryManager {
      * @throws IOException if some error happen during the serialization of the persistent state
      */
     public void saveAs(String filename) throws MissingFileAssociationException, IOException {
-        if (filename == null)
+        if (filename.isEmpty())
             throw new MissingFileAssociationException();
+
         _fileNameAssociation = filename;
         save();
     }

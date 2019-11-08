@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
+import m19.core.exception.BadUserEntryException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.Date;
 import m19.core.User;
@@ -70,9 +71,9 @@ public class Library implements Serializable {
         return res;
     }
 
-    protected int registerUser(String name, String email) throws BadEntrySpecificationException {
-        if (name.isEmpty() || email.isEmpty() || name.startsWith(" "))
-            throw new BadEntrySpecificationException("User name " + name + " or email " + email + " are empty strings.");
+    protected int registerUser(String name, String email) throws BadUserEntryException {
+        if (name.isEmpty() || email.isEmpty() )
+            throw new BadUserEntryException("User name " + name + " or email " + email + " are empty strings.");
 
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
