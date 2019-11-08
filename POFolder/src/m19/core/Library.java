@@ -12,7 +12,6 @@ import java.util.Comparator;
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.Date;
 import m19.core.User;
-import m19.core.UserComparator;
 import m19.core.work.Work;
 import m19.core.Parser;
 
@@ -44,7 +43,14 @@ public class Library implements Serializable {
 
   private List<User> getOrderedUsers() {
     List<User> orderedUsers = new ArrayList<>(_users.values());
-    Collections.sort(orderedUsers, new UserComparator());
+    Collections.sort(orderedUsers, new Comparator<User>() {
+      @Override
+      public int compare(User a, User b) {
+        if (a.getName().compareTo(b.getName()) == 0)
+            return a.hashCode() - b.hashCode();
+        return a.getName().compareTo(b.getName());
+      }
+    });
     return Collections.unmodifiableList(orderedUsers);
   }
 
