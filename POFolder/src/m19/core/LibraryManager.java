@@ -7,14 +7,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.FailedToOpenFileException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.Serializable;
+
 
 import m19.core.Library;
 
@@ -23,7 +20,7 @@ import m19.core.Library;
  */
 public class LibraryManager {
 
-  private Library _library = new Library();  // FIXME initialize this attribute
+  private Library _library = new Library(); 
   private String _fileNameAssociation = null;
   
   public int getCurrentDate() {
@@ -85,7 +82,7 @@ public class LibraryManager {
   public void saveAs(String filename) throws MissingFileAssociationException, IOException {
     if (filename == null)
       throw new MissingFileAssociationException();
-      
+
     _fileNameAssociation = filename;
     save();
   }

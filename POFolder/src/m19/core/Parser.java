@@ -49,6 +49,14 @@ public class Parser {
     }
   }
 
+  private boolean checkEmptyStrings(String[] components) {
+    for (int i = 0; i < components.length; i++) {
+      if (components[i].isEmpty())
+        return true;
+    }
+    return false;
+  }
+
   private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
     if (components.length != 7)
       throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
