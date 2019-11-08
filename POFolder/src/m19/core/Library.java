@@ -31,18 +31,52 @@ public class Library implements Serializable {
     private List<Work> _works = new ArrayList<>();
     private Map<Integer, User> _users = new HashMap<>();
 
+    
+    /** 
+     * 
+     * @return int
+     */
     protected int getWorkNextID() {
         return _workNextID;
     }
 
+    
+    /** 
+     * 
+     * @return int
+     */
     protected int getCurrentDate() {
         return _date.getCurrentDate();
     }
     
+    
+    /** 
+     * 
+     * @param nDays
+     */
     protected void advanceDays(int nDays) {
         _date.advanceDay(nDays);
     }
 
+    
+    /** 
+     * 
+     * @param iD
+     * @return String
+     * @throws NoUserFoundException
+     */
+    protected String getUser(int iD) throws NoUserFoundException {
+        User user = _users.get(iD);
+        if ( user == null)
+            throw new NoUserFoundException(iD);
+        return user.getDescription();
+    }
+
+    
+    /** 
+     * 
+     * @return List<User>
+     */
     private List<User> getOrderedUsers() {
         List<User> orderedUsers = new ArrayList<>(_users.values());
         Collections.sort(orderedUsers, new Comparator<User>() {
@@ -56,13 +90,11 @@ public class Library implements Serializable {
         return Collections.unmodifiableList(orderedUsers);
     }
 
-    protected String getUser(int iD) throws NoUserFoundException {
-        User user = _users.get(iD);
-        if ( user == null)
-            throw new NoUserFoundException(iD);
-        return user.getDescription();
-    }
-
+    
+    /** 
+     * 
+     * @return String
+     */
     protected String getAllUsers() {
         List<User> orderedUsers = getOrderedUsers();
         String res = "";
@@ -71,6 +103,13 @@ public class Library implements Serializable {
         return res;
     }
 
+    /**
+     * 
+     * @param name
+     * @param email
+     * @return
+     * @throws BadUserEntryException
+     */
     protected int registerUser(String name, String email) throws BadUserEntryException {
         if (name.isEmpty() || email.isEmpty() )
             throw new BadUserEntryException("User name " + name + " or email " + email + " are empty strings.");
@@ -80,14 +119,30 @@ public class Library implements Serializable {
         return _userNextID++;
     }
 
+    
+    /** 
+     * 
+     * @param work
+     */
     protected void addWork(Work work) {
         _works.add(_workNextID++, work);
     }
 
+    
+    /** 
+     * 
+     * @param iD
+     * @return String
+     * @throws IndexOutOfBoundsException
+     */
     protected String getWork(int iD) throws IndexOutOfBoundsException {
         return (_works.get(iD)).getDescription();
     }
 
+    /**
+     * 
+     * @return
+     */
     protected String getAllWorks() {
         String res = "";
         for (Work temp: _works)
@@ -99,8 +154,7 @@ public class Library implements Serializable {
      * Read the text input file at the beginning of the program and populates the
      * instances of the various possible types (books, DVDs, users).
      * 
-     * @param filename
-     *          name of the file to load
+     * @param filename name of the file to load
      * @throws BadEntrySpecificationException
      * @throws IOException
      */

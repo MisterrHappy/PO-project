@@ -73,8 +73,8 @@ public class Parser {
         try {
             _library.registerUser(components[1], components[2]);
         }
-        catch (BadUserEntryException buee) { // this is never going to happen here
-            
+        catch (BadUserEntryException buee) { 
+            // nothing to do, this is never going to happen here
         }
     }
     
