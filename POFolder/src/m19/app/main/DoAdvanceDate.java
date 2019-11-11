@@ -3,12 +3,11 @@ package m19.app.main;
 import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
-import m19.app.main.Message;
 
 /**
  * 4.1.3. Advance the current date.
  */
-public class DoAdvanceDate extends Command<LibraryManager> implements Message{
+public class DoAdvanceDate extends Command<LibraryManager> {
 
     private Input<Integer> _daysToAdvance;
 
