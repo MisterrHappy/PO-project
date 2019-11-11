@@ -11,14 +11,14 @@ import m19.core.exception.BadUserEntryException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
-import java.io.File;
 import java.io.FileInputStream;
 
 
 import m19.core.Library;
 
 /**
- * The façade class.
+ * The façade class that holds a library and a file which can be initially loaded.
+ * Authors: André Marinho and João Domingos
  */
 public class LibraryManager {
 
@@ -58,6 +58,7 @@ public class LibraryManager {
      * 
      * @throws MissingFileAssociationException if the name of the file to store the persistent
      *         state has not been set yet.
+     * 
      * @throws IOException if some error happen during the serialization of the persistent state
 
     */
@@ -79,6 +80,7 @@ public class LibraryManager {
      *
      * @throws MissingFileAssociationException if the name of the file to store the persistent
      *         is not a valid one.
+     * 
      * @throws IOException if some error happen during the serialization of the persistent state
      */
     public void saveAs(String filename) throws MissingFileAssociationException, IOException {
@@ -95,16 +97,12 @@ public class LibraryManager {
      * @param filename the name of the file containing the perssitente state to recover
      *
      * @throws IOException if there is a reading error while processing the file
+     * 
      * @throws FileNotFoundException if the file does not exist
-     * @throws ClassNotFoundException 
+     * 
+     * @throws ClassNotFoundException if the class from readObject is not a library.
      */
     public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
-        File fileToLoad = new File(filename);
-        if (!fileToLoad.isFile())
-            throw new FileNotFoundException();
-
-        _fileNameAssociation = filename;
-
         ObjectInputStream libraryLoad = null;
         FileInputStream file = new FileInputStream(filename);
         libraryLoad = new ObjectInputStream(file);
@@ -112,12 +110,14 @@ public class LibraryManager {
         _library = library;
         libraryLoad.close();
         file.close();
+        _fileNameAssociation = filename;
     }
 
     /**
      * Set the state of this application from a textual representation stored into a file.
      * 
      * @param datafile the filename of the file with the textual representation of the state of this application.
+     * 
      * @throws ImportFileException if it happens some error during the parsing of the textual representation.
      */
     public void importFile(String datafile) throws ImportFileException {
