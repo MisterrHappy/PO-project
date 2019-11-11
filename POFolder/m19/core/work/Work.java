@@ -1,8 +1,11 @@
 package m19.core.work;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import m19.core.Category;
+import m19.core.Request;
 
 public abstract class Work implements Serializable {
     private static final long serialVersionUID = -4003574528951482147L;
@@ -12,6 +15,7 @@ public abstract class Work implements Serializable {
     private String _title;
     private int _numberOfCopiesAvailable;
     private Category _category;
+    private Set<Request> _requests = new HashSet<>();
 
     public Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -28,6 +32,14 @@ public abstract class Work implements Serializable {
 
     protected void decreaseCopiesAvailable() {
         _numberOfCopiesAvailable--;
+    }
+
+    protected void addRequest(Request request) {
+        _requests.add(request);
+    }
+
+    protected void removeRequest(Request request) {
+        _requests.remove(request);
     }
 
     protected abstract String getWorkType();

@@ -1,6 +1,9 @@
 package m19.core;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.TreeSet;
+import m19.core.Request;
 import m19.core.Behaviour;
 
 public class User implements Serializable {
@@ -10,7 +13,9 @@ public class User implements Serializable {
     private String _name;
     private String _email;
     private int _fine;
+    private int _countFouls;
     private Behaviour _behaviour;
+    private Set<Request> _requests = new TreeSet<>(new RequestComparator());
 
     public User(int iD, String name, String email) {
         _iD = iD;
@@ -29,6 +34,26 @@ public class User implements Serializable {
 
     protected void changeStatus() {
         _isActive = !_isActive;
+    }
+
+    protected void increaseFouls() {
+        _countFouls++;
+    }
+
+    protected void decreaseFouls() {
+        _countFouls--;
+    }
+
+    public void makeRequest(Request request) {
+        _requests.add(request);
+    }
+
+    public void returnWork(Request request) { 
+        _requests.remove(request);
+    }
+
+    protected void changeBehaviour() {
+
     }
 
     @Override
