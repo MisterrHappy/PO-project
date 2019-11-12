@@ -12,14 +12,14 @@ public class User implements Serializable {
     private int _fine;
     private Behaviour _behaviour;
 
-    public User(int iD, String name, String email) {
+    protected User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
         _behaviour = Behaviour.NORMAL;
     }
 
-    protected String getName() {
+    public String getName() {
         return _name;
     }
 

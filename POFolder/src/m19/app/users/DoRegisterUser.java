@@ -2,7 +2,7 @@ package m19.app.users;
 
 import m19.app.exception.UserRegistrationFailedException;
 import m19.core.LibraryManager;
-import m19.core.exception.EmptyUserNameOrEmail;
+import m19.core.exception.EmptyUserNameOrEmailException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
@@ -32,7 +32,7 @@ public class DoRegisterUser extends Command<LibraryManager> {
             _display.addLine(Message.userRegistrationSuccessful(iD));
             _display.display();
 
-        } catch (EmptyUserNameOrEmail buee) {
+        } catch (EmptyUserNameOrEmailException bueee) {
             throw new UserRegistrationFailedException(_name.value(), _email.value());
         }
     }

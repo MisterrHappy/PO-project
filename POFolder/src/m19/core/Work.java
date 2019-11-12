@@ -22,6 +22,16 @@ public abstract class Work implements Serializable {
         _category = category;
     }
 
+    @Override
+    public int hashCode() {
+        return _iD;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof Work && _iD == ((Work) other)._iD;
+    }
+
     protected void increaseCopiesAvailable() {
         _numberOfCopiesAvailable++;
     }

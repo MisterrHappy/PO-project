@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.FileReader;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.EmptyUserNameOrEmail;
+import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.Library;
 import m19.core.DVD;
 import m19.core.Book;
@@ -75,7 +75,7 @@ public class Parser {
         try {
             _library.registerUser(components[1], components[2]);
         }
-        catch (EmptyUserNameOrEmail eunoe) { 
+        catch (EmptyUserNameOrEmailException eunoee) { 
             throw new BadEntrySpecificationException("User name " + components[1] + " or email " + components[2] + " are empty.");
         }
     }

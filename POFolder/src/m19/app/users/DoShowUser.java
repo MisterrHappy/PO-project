@@ -6,6 +6,8 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import m19.core.exception.NoUserFoundException;
+
+import m19.core.User;
 /**
  * 4.2.2. Show specific user.
  */
@@ -26,7 +28,8 @@ public class DoShowUser extends Command<LibraryManager> {
     public final void execute() throws DialogException {
         try {
         _form.parse();
-        _display.addLine(_receiver.getUser(_iD.value()));
+        User user = _receiver.getUser(_iD.value());
+        _display.addLine(user.getDescription());
         _display.display();
         
         } catch ( NoUserFoundException nufe ) {

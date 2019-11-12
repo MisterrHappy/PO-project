@@ -7,12 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.EmptyUserNameOrEmail;
+import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.NoUserFoundException;
+import m19.core.exception.NoWorkFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import java.io.FileInputStream;
 
+import java.util.Map;
 
 import m19.core.Library;
 
@@ -33,23 +35,23 @@ public class LibraryManager {
         _library.advanceDays(nDays);
     }
 
-    public String getUser(int iD) throws NoUserFoundException {
+    public User getUser(int iD) throws NoUserFoundException {
         return _library.getUser(iD);
     }
 
-    public String getAllUsers() {
+    public Map<Integer, User> getAllUsers() {
         return _library.getAllUsers();
     }
 
-    public int registerUser(String name, String email) throws EmptyUserNameOrEmail {
+    public int registerUser(String name, String email) throws EmptyUserNameOrEmailException {
         return _library.registerUser(name, email);
     }
 
-    public String getWork(int iD) {
+    public Work getWork(int iD) throws NoWorkFoundException {
         return _library.getWork(iD);
     }
 
-    public String getAllWorks() {
+    public Map<Integer, Work> getAllWorks() {
         return _library.getAllWorks();
     }
 

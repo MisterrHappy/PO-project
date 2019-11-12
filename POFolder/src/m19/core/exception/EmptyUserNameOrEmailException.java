@@ -1,16 +1,16 @@
 package m19.core.exception;
 
-public class EmptyUserNameOrEmail extends Exception {
+public class EmptyUserNameOrEmailException extends Exception {
 
     private static final long serialVersionUID = 54338595437L;
 
     private String _entrySpecification;
 
-    public EmptyUserNameOrEmail(String entrySpecification) {
+    public EmptyUserNameOrEmailException(String entrySpecification) {
         _entrySpecification = entrySpecification;
     }
 
-    public EmptyUserNameOrEmail(String entrySpecification, Exception cause) {
+    public EmptyUserNameOrEmailException(String entrySpecification, Exception cause) {
         super("User name or email are empty.", cause);
         _entrySpecification = entrySpecification;
     }

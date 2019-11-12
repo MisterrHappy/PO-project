@@ -2,16 +2,14 @@ package m19.core;
 
 import java.io.Serializable;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.EmptyUserNameOrEmail;
+import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.NoUserFoundException;
+import m19.core.exception.NoWorkFoundException;
 import m19.core.Date;
 import m19.core.User;
 import m19.core.Work;
@@ -43,9 +41,9 @@ public class Library implements Serializable {
     private int _workNextID;
 
     /**
-	* A list of all assigned works (directly initialized).
+	* A map of all assigned works (directly initialized).
 	*/
-    private List<Work> _works = new ArrayList<>();
+    private Map<Integer, Work> _works = new HashMap<>();
 
     /**
 	* A map of all registed users (directly initialized).
@@ -84,53 +82,28 @@ public class Library implements Serializable {
 
     
     /** 
-     * Shows the user description with the given ID.
+     * Gives the user with the given ID.
      * 
-     * @param iD User ID which description is requested.
+     * @param iD User ID.
      * 
-     * @return User description.
+     * @return Wanted user.
      * 
      * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
      */
-    protected String getUser(int iD) throws NoUserFoundException {
+    protected User getUser(int iD) throws NoUserFoundException {
         User user = _users.get(iD);
         if ( user == null)
             throw new NoUserFoundException(iD);
-        return user.getDescription();
+        return user;
     }
-
     
     /** 
-     * Orders the users Collection maintained in this class alphabetically. When users have an equal name, 
-     * they are ordered by ascending IDs.
+     * Gives all users in the library users collection.
      * 
-     * @return A List with all library users ordered.
+     * @return A map with all users assigned.
      */
-    private List<User> getOrderedUsers() {
-        List<User> orderedUsers = new ArrayList<>(_users.values());
-        Collections.sort(orderedUsers, new Comparator<User>() {
-        @Override
-        public int compare(User a, User b) {
-            if (a.getName().compareTo(b.getName()) == 0)
-                return a.hashCode() - b.hashCode();
-            return a.getName().compareTo(b.getName());
-        }
-        });
-        return Collections.unmodifiableList(orderedUsers);
-    }
-
-    
-    /** 
-     * Gives all users descriptions in the library users collection.
-     * 
-     * @return All users descriptions.
-     */
-    protected String getAllUsers() {
-        List<User> orderedUsers = getOrderedUsers();
-        String res = "";
-        for (User temp: orderedUsers) 
-        res += temp.getDescription() + "\n";
-        return res;
+    protected Map<Integer, User> getAllUsers() {
+        return Collections.unmodifiableMap(_users);
     }
 
     /**
@@ -142,17 +115,16 @@ public class Library implements Serializable {
      * 
      * @return The ID of the assigned user if successful.
      * 
-     * @throws EmptyUserNameOrEmail Is thrown if user name or email are empty strings.
+     * @throws EmptyUserNameOrEmailException Is thrown if user name or email are empty strings.
      */
-    protected int registerUser(String name, String email) throws EmptyUserNameOrEmail {
+    protected int registerUser(String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty() )
-            throw new EmptyUserNameOrEmail("User name " + name + " or email " + email + " are empty strings.");
+            throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
 
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
         return _userNextID++;
     }
-
     
     /** 
      * Adds a work in the respective collection.
@@ -160,33 +132,33 @@ public class Library implements Serializable {
      * @param work Work to be added.
      */
     protected void addWork(Work work) {
-        _works.add(_workNextID++, work);
+        _works.put(_workNextID++, work);
     }
 
     
     /** 
-     * Gives the work description with the given ID.
+     * Gives the work with the given ID.
      * 
      * @param iD ID of the work to be searched.
      * 
-     * @return The wanted work description.
+     * @return The wanted work.
      * 
-     * @throws IndexOutOfBoundsException Is thrown if the work to be searched does not exist. Therefore, works collection is ordered by IDs.
+     * @throws NoWorkFoundException Is thrown if the work to be searched does not exist.
      */
-    protected String getWork(int iD) throws IndexOutOfBoundsException {
-        return (_works.get(iD)).getDescription();
+    protected Work getWork(int iD) throws NoWorkFoundException {
+        Work work = _works.get(iD);
+        if (work == null)
+            throw new NoWorkFoundException(iD);
+        return work;
     }
 
     /**
-     * Gives all works descriptions in the library works collection.
+     * Gives the works collection.
      * 
-     * @return All works descriptions.
+     * @return A map with all works assigned.
      */
-    protected String getAllWorks() {
-        String res = "";
-        for (Work temp: _works)
-        res += temp.getDescription() + "\n";
-        return res;
+    protected  Map<Integer, Work> getAllWorks() {
+        return Collections.unmodifiableMap(_works);
     }
 
     /**
