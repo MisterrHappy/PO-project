@@ -4,6 +4,7 @@ import m19.core.Work;
 import m19.core.Category;
 
 public class Book extends Work {
+    private static final long serialVersionUID = -7947582672361225393L;
     private String _author;
     private String _isbn;
 

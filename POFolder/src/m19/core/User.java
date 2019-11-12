@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object other) {
-        return other.getClass() == getClass() && _iD == ((User) other)._iD;
+        return other instanceof User && _iD == ((User) other)._iD;
     }
 
     public String getDescription() {
