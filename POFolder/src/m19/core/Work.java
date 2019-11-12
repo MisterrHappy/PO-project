@@ -13,7 +13,7 @@ public abstract class Work implements Serializable {
     private int _numberOfCopiesAvailable;
     private Category _category;
 
-    public Work(int iD, int price, String title, int numberOfCopies, Category category) {
+    protected Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
         _price = price;
         _title = title;
