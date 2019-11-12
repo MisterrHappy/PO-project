@@ -25,7 +25,6 @@ public class UserRegistrationFailedException extends DialogException {
         _email = email;
     }
 
-
     /** @see pt.tecnico.po.ui.DialogException#getMessage() */
     @Override
     public String getMessage() {

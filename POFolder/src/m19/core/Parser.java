@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.FileReader;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.EmptyUserNameOrEmail;
 import m19.core.Library;
-import m19.core.work.DVD;
-import m19.core.work.Book;
+import m19.core.DVD;
+import m19.core.Book;
 import m19.core.Category;
 
 public class Parser {
@@ -39,6 +39,7 @@ public class Parser {
         case "BOOK":
             parseBook(components, line);
             break;
+
         case "USER":
             parseUser(components, line);
             break;
@@ -52,7 +53,8 @@ public class Parser {
     private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
         if (components.length != 7)
             throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
-        DVD dvd = new DVD(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
+        DVD dvd = new DVD(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]),
+                         Category.valueOf(components[4]), components[2], components[5]);
         _library.addWork(dvd);
     }
 
@@ -73,8 +75,8 @@ public class Parser {
         try {
             _library.registerUser(components[1], components[2]);
         }
-        catch (BadUserEntryException buee) { 
-            // nothing to do, this is never going to happen here
+        catch (EmptyUserNameOrEmail eunoe) { 
+            throw new BadEntrySpecificationException("User name " + components[1] + " or email " + components[2] + " are empty.");
         }
     }
     

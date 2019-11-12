@@ -11,7 +11,7 @@ public class NoUserFoundException extends Exception {
     }
 
     public NoUserFoundException(int iD, Exception cause) {
-        super(cause);
+        super("User not found.", cause);
         _iD = iD;
     }
 

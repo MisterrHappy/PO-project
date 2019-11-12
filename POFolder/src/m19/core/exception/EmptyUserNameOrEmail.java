@@ -1,17 +1,17 @@
 package m19.core.exception;
 
-public class BadUserEntryException extends Exception {
+public class EmptyUserNameOrEmail extends Exception {
 
     private static final long serialVersionUID = 54338595437L;
 
     private String _entrySpecification;
 
-    public BadUserEntryException(String entrySpecification) {
+    public EmptyUserNameOrEmail(String entrySpecification) {
         _entrySpecification = entrySpecification;
     }
 
-    public BadUserEntryException(String entrySpecification, Exception cause) {
-        super(cause);
+    public EmptyUserNameOrEmail(String entrySpecification, Exception cause) {
+        super("User name or email are empty.", cause);
         _entrySpecification = entrySpecification;
     }
 

@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.EmptyUserNameOrEmail;
 import m19.core.exception.NoUserFoundException;
 import m19.core.Date;
 import m19.core.User;
-import m19.core.work.Work;
+import m19.core.Work;
 import m19.core.Parser;
 
 /**
@@ -142,11 +142,11 @@ public class Library implements Serializable {
      * 
      * @return The ID of the assigned user if successful.
      * 
-     * @throws BadUserEntryException Is thrown if user name or email are empty strings.
+     * @throws EmptyUserNameOrEmail Is thrown if user name or email are empty strings.
      */
-    protected int registerUser(String name, String email) throws BadUserEntryException {
+    protected int registerUser(String name, String email) throws EmptyUserNameOrEmail {
         if (name.isEmpty() || email.isEmpty() )
-            throw new BadUserEntryException("User name " + name + " or email " + email + " are empty strings.");
+            throw new EmptyUserNameOrEmail("User name " + name + " or email " + email + " are empty strings.");
 
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);

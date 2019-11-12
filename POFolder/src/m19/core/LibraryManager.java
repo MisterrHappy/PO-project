@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import m19.core.exception.BadEntrySpecificationException;
-import m19.core.exception.BadUserEntryException;
+import m19.core.exception.EmptyUserNameOrEmail;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
@@ -41,7 +41,7 @@ public class LibraryManager {
         return _library.getAllUsers();
     }
 
-    public int registerUser(String name, String email) throws BadUserEntryException {
+    public int registerUser(String name, String email) throws EmptyUserNameOrEmail {
         return _library.registerUser(name, email);
     }
 

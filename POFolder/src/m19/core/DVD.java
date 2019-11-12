@@ -1,6 +1,6 @@
-package m19.core.work;
+package m19.core;
 
-import m19.core.work.Work;
+import m19.core.Work;
 import m19.core.Category;
 
 public class DVD extends Work {

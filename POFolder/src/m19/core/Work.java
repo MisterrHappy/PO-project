@@ -1,4 +1,4 @@
-package m19.core.work;
+package m19.core;
 
 import java.io.Serializable;
 
