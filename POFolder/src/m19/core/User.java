@@ -10,13 +10,12 @@ public class User implements Serializable {
     private String _name;
     private String _email;
     private int _fine;
-    private Behavior _behavior;
+    private Behavior _behavior = Behavior.NORMAL;
 
     protected User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
-        _behavior = Behavior.NORMAL;
     }
 
     public String getName() {
