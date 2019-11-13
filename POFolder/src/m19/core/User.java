@@ -1,7 +1,7 @@
 package m19.core;
 
 import java.io.Serializable;
-import m19.core.Behaviour;
+import m19.core.Behavior;
 
 public class User implements Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
@@ -10,13 +10,13 @@ public class User implements Serializable {
     private String _name;
     private String _email;
     private int _fine;
-    private Behaviour _behaviour;
+    private Behavior _behavior;
 
     protected User(int iD, String name, String email) {
         _iD = iD;
         _name = name;
         _email = email;
-        _behaviour = Behaviour.NORMAL;
+        _behavior = Behavior.NORMAL;
     }
 
     public String getName() {
@@ -42,7 +42,7 @@ public class User implements Serializable {
     }
 
     public String getDescription() {
-        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behaviour.toString() + " - ";
+        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.toString() + " - ";
         if (_isActive) 
             return res += "ACTIVO";
 

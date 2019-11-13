@@ -1,6 +1,6 @@
 package m19.core;
 
-public enum Behaviour {
+public enum Behavior {
     NORMAL,
     CUMPRIDOR,
     FALTOSO;
