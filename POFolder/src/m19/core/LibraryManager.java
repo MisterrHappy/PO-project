@@ -25,7 +25,7 @@ import m19.core.Library;
 public class LibraryManager {
 
     private Library _library = new Library(); 
-    private String _fileNameAssociation = null;
+    private String _fileNameAssociation;
     
     public int getCurrentDate() {
         return _library.getCurrentDate();
