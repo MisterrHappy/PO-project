@@ -25,14 +25,6 @@ public class User implements Serializable {
         return _name;
     }
 
-    protected boolean isActive() {
-        return _isActive;
-    }
-
-    protected void changeStatus() {
-        _isActive = !_isActive;
-    }
-
     @Override
     public int hashCode() {
         return _iD;
