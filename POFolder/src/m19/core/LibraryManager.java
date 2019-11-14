@@ -107,10 +107,10 @@ public class LibraryManager {
      */
     public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
         try (ObjectInputStream libraryLoad = new ObjectInputStream(new FileInputStream(filename));) {
-        Library library = (Library) libraryLoad.readObject();
-        _library = library;
+            Library library = (Library) libraryLoad.readObject();
+            _library = library;
 
-        _fileNameAssociation = filename;
+            _fileNameAssociation = filename;
         }
     }
 

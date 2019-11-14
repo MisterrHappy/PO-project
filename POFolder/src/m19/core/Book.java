@@ -5,6 +5,7 @@ import m19.core.Category;
 
 public class Book extends Work {
     private static final long serialVersionUID = -7947582672361225393L;
+    private static final String WORK_TYPE = "Livro";
     private String _author;
     private String _isbn;
 
@@ -16,7 +17,7 @@ public class Book extends Work {
 
     @Override
     protected String getWorkType() {
-        return "Livro";
+        return WORK_TYPE;
     }
 
     @Override

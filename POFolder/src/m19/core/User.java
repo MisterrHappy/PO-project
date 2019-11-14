@@ -2,6 +2,7 @@ package m19.core;
 
 import java.io.Serializable;
 import m19.core.Behavior;
+import m19.core.exception.EmptyUserNameOrEmailException;
 
 public class User implements Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
@@ -12,7 +13,9 @@ public class User implements Serializable {
     private int _fine;
     private Behavior _behavior = Behavior.NORMAL;
 
-    protected User(int iD, String name, String email) {
+    protected User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
+        if (name.isEmpty() || email.isEmpty())
+            throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
         _iD = iD;
         _name = name;
         _email = email;

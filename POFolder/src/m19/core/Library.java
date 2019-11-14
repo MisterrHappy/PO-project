@@ -118,9 +118,6 @@ public class Library implements Serializable {
      * @throws EmptyUserNameOrEmailException Is thrown if user name or email are empty strings.
      */
     protected int registerUser(String name, String email) throws EmptyUserNameOrEmailException {
-        if (name.isEmpty() || email.isEmpty() )
-            throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
-
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
         return _userNextID++;
