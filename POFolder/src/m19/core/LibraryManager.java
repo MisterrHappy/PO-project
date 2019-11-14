@@ -68,11 +68,12 @@ public class LibraryManager {
         if (_fileNameAssociation == null)
             throw new MissingFileAssociationException();
 
-        FileOutputStream file = new FileOutputStream(_fileNameAssociation);
-        ObjectOutputStream librarySave = new ObjectOutputStream(file);
+        try (ObjectOutputStream librarySave = new ObjectOutputStream(new FileOutputStream(_fileNameAssociation))) {
+    
         librarySave.writeObject(_library);
-        librarySave.close();
-        file.close();
+        
+        }
+    
     }
     
     /**
@@ -105,14 +106,12 @@ public class LibraryManager {
      * @throws ClassNotFoundException if the class from readObject is not a library.
      */
     public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
-        ObjectInputStream libraryLoad = null;
-        FileInputStream file = new FileInputStream(filename);
-        libraryLoad = new ObjectInputStream(file);
+        try (ObjectInputStream libraryLoad = new ObjectInputStream(new FileInputStream(filename));) {
         Library library = (Library) libraryLoad.readObject();
         _library = library;
-        libraryLoad.close();
-        file.close();
+
         _fileNameAssociation = filename;
+        }
     }
 
     /**
