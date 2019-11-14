@@ -70,8 +70,8 @@ public class LibraryManager {
 
         try (ObjectOutputStream librarySave = new ObjectOutputStream(new FileOutputStream(_fileNameAssociation))) {
     
-        librarySave.writeObject(_library);
-        
+            librarySave.writeObject(_library);
+
         }
     
     }
