@@ -32,14 +32,6 @@ public abstract class Work implements Serializable {
         return other instanceof Work && _iD == ((Work) other)._iD;
     }
 
-    protected void increaseCopiesAvailable() {
-        _numberOfCopiesAvailable++;
-    }
-
-    protected void decreaseCopiesAvailable() {
-        _numberOfCopiesAvailable--;
-    }
-
     protected abstract String getWorkType();
     
     protected String useCommonDescription(String workType) {
