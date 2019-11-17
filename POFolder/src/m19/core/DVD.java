@@ -22,6 +22,6 @@ public class DVD extends Work {
 
     @Override
     public String getDescription() {
-        return useCommonDescription(getWorkType())+ " - " + _director+ " - " + _igac;
+        return super.getDescription() +  " - " + _director + " - " + _igac;
     }
 }
