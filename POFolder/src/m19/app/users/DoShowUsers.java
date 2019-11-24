@@ -33,10 +33,8 @@ public class DoShowUsers extends Command<LibraryManager> {
         Collections.sort(orderedUsers, new Comparator<User>() {
         @Override
         public int compare(User a, User b) {
-            if (a.getName().compareTo(b.getName()) == 0)
-                return a.hashCode() - b.hashCode();
-            return a.getName().compareTo(b.getName());
-        }
+          return a.getName().compareTo(b.getName()) == 0 ? a.hashCode() - b.hashCode() : a.getName().compareTo(b.getName());
+        }	
         });
 
         for (User temp: orderedUsers)
