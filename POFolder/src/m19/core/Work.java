@@ -33,9 +33,11 @@ public abstract class Work implements Serializable {
     }
 
     protected abstract String getWorkType();
+
+    protected abstract String addDescription();
     
-    public String getDescription() {
+    public final String getDescription() {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + getWorkType() + " - " 
-                + _title + " - " + _price + " - " + _category.toString();
+                + _title + " - " + _price + " - " + _category.toString() + addDescription();
     }
 }

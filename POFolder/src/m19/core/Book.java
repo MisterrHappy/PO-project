@@ -21,7 +21,7 @@ public class Book extends Work {
     }
 
     @Override
-    public String getDescription() {
-        return super.getDescription() + " - " + _author + " - " + _isbn;
+    protected String addDescription() {
+        return " - " + _author + " - " + _isbn;
     }
 }
