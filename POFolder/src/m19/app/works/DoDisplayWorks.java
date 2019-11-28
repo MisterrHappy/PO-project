@@ -4,10 +4,10 @@ import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 
 import m19.core.Work;
-import java.util.Map;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Collections;
 
@@ -26,13 +26,13 @@ public class DoDisplayWorks extends Command<LibraryManager> {
     /** @see pt.tecnico.po.ui.Command#execute() */
     @Override
     public final void execute() {
-        Map<Integer, Work> works = _receiver.getAllWorks();
+        Collection<Work> works = _receiver.getAllWorks();
 
         if (works.isEmpty())
             _display.addLine("");
         else {
         
-            List<Work> orderedWorks = new ArrayList<>(works.values());
+            List<Work> orderedWorks = new ArrayList<>(works);
             Collections.sort(orderedWorks, new Comparator<Work>() {
             @Override
             public int compare(Work a, Work b) {

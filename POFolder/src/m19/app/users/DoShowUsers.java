@@ -3,9 +3,9 @@ package m19.app.users;
 import m19.core.LibraryManager;
 import pt.tecnico.po.ui.Command;
 import m19.core.User;
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Collections;
 /**
@@ -23,13 +23,13 @@ public class DoShowUsers extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    Map<Integer, User> users = _receiver.getAllUsers();
+    Collection<User> users = _receiver.getAllUsers();
 
     if (users.isEmpty())
       _display.addLine("");
     else {
 
-        List<User> orderedUsers = new ArrayList<>(users.values());
+        List<User> orderedUsers = new ArrayList<>(users);
         Collections.sort(orderedUsers, new Comparator<User>() {
         @Override
         public int compare(User a, User b) {

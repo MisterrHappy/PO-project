@@ -1,19 +1,16 @@
 package m19.core;
 
-import java.io.Serializable;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
-import m19.core.Date;
-import m19.core.User;
-import m19.core.Work;
-import m19.core.Parser;
 
 /**
  * Class that represents the library as a whole. It contains all works users and the date.
@@ -56,7 +53,7 @@ public class Library implements Serializable {
      * 
      * @return The ID of the next work to be added.
      */
-    protected int getWorkNextID() {
+    int getWorkNextID() {
         return _workNextID;
     }
 
@@ -66,7 +63,7 @@ public class Library implements Serializable {
      * 
      * @return The value (int) of the current date.
      */
-    protected int getCurrentDate() {
+    int getCurrentDate() {
         return _date.getCurrentDate();
     }
     
@@ -76,7 +73,7 @@ public class Library implements Serializable {
      * 
      * @param nDays The number os days (int) to advance the date. It must be a positive non-zero value.
      */
-    protected void advanceDays(int nDays) {
+    void advanceDays(int nDays) {
         _date.advanceDay(nDays);
     }
 
@@ -90,7 +87,7 @@ public class Library implements Serializable {
      * 
      * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
      */
-    protected User getUser(int iD) throws NoUserFoundException {
+    User getUser(int iD) throws NoUserFoundException {
         User user = _users.get(iD);
         if ( user == null)
             throw new NoUserFoundException(iD);
@@ -100,10 +97,10 @@ public class Library implements Serializable {
     /** 
      * Gives all users in the library users collection.
      * 
-     * @return A map with all users assigned.
+     * @return A collection with all users assigned.
      */
-    protected Map<Integer, User> getAllUsers() {
-        return Collections.unmodifiableMap(_users);
+    Collection<User> getAllUsers() {
+        return Collections.unmodifiableCollection(_users.values());
     }
 
     /**
@@ -117,7 +114,7 @@ public class Library implements Serializable {
      * 
      * @throws EmptyUserNameOrEmailException Is thrown if user name or email are empty strings.
      */
-    protected int registerUser(String name, String email) throws EmptyUserNameOrEmailException {
+    int registerUser(String name, String email) throws EmptyUserNameOrEmailException {
         User user = new User(_userNextID, name, email);
         _users.put(_userNextID, user);
         return _userNextID++;
@@ -128,7 +125,7 @@ public class Library implements Serializable {
      * 
      * @param work Work to be added.
      */
-    protected void addWork(Work work) {
+    void addWork(Work work) {
         _works.put(_workNextID++, work);
     }
 
@@ -142,7 +139,7 @@ public class Library implements Serializable {
      * 
      * @throws NoWorkFoundException Is thrown if the work to be searched does not exist.
      */
-    protected Work getWork(int iD) throws NoWorkFoundException {
+    Work getWork(int iD) throws NoWorkFoundException {
         Work work = _works.get(iD);
         if (work == null)
             throw new NoWorkFoundException(iD);
@@ -152,10 +149,10 @@ public class Library implements Serializable {
     /**
      * Gives the works collection.
      * 
-     * @return A map with all works assigned.
+     * @return A collection with all works assigned.
      */
-    protected  Map<Integer, Work> getAllWorks() {
-        return Collections.unmodifiableMap(_works);
+    Collection<Work> getAllWorks() {
+        return Collections.unmodifiableCollection(_works.values());
     }
 
     /**

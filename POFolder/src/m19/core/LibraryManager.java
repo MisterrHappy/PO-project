@@ -1,22 +1,19 @@
 package m19.core;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collection;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
-import m19.core.exception.NoUserFoundException;
-import m19.core.exception.NoWorkFoundException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
-import java.io.FileInputStream;
-
-import java.util.Map;
-
-import m19.core.Library;
+import m19.core.exception.NoUserFoundException;
+import m19.core.exception.NoWorkFoundException;
 
 /**
  * The façade class that holds a library and a file which can be initially loaded.
@@ -39,7 +36,7 @@ public class LibraryManager {
         return _library.getUser(iD);
     }
 
-    public Map<Integer, User> getAllUsers() {
+    public Collection<User> getAllUsers() {
         return _library.getAllUsers();
     }
 
@@ -51,7 +48,7 @@ public class LibraryManager {
         return _library.getWork(iD);
     }
 
-    public Map<Integer, Work> getAllWorks() {
+    public Collection<Work> getAllWorks() {
         return _library.getAllWorks();
     }
 
@@ -73,7 +70,6 @@ public class LibraryManager {
             librarySave.writeObject(_library);
 
         }
-    
     }
     
     /**

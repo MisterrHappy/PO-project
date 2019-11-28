@@ -13,7 +13,7 @@ public class User implements Serializable {
     private int _fine;
     private Behavior _behavior = Behavior.NORMAL;
 
-    protected User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
+    User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
             throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
         _iD = iD;

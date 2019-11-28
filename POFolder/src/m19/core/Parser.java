@@ -7,7 +7,7 @@ import java.io.FileReader;
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.Library;
-import m19.core.DVD;
+import m19.core.Dvd;
 import m19.core.Book;
 import m19.core.Category;
 
@@ -53,7 +53,7 @@ public class Parser {
     private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
         if (components.length != 7)
             throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
-        DVD dvd = new DVD(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]),
+        Dvd dvd = new Dvd(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]),
                          Category.valueOf(components[4]), components[2], components[5]);
         _library.addWork(dvd);
     }
