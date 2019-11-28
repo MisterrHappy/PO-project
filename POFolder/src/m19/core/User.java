@@ -7,7 +7,7 @@ import m19.core.exception.EmptyUserNameOrEmailException;
 public class User implements Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
     private int _iD;
-    private boolean _isActive = true;
+    private ActiveStatus _isActive = new UserIsActive();
     private String _name;
     private String _email;
     private int _fine;
@@ -19,6 +19,10 @@ public class User implements Serializable {
         _iD = iD;
         _name = name;
         _email = email;
+    }
+
+    int getFine() {
+        return _fine;
     }
 
     public String getName() {
@@ -36,11 +40,7 @@ public class User implements Serializable {
     }
 
     public String getDescription() {
-        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.toString() + " - ";
-        if (_isActive) 
-            return res += "ACTIVO";
-
-        return res += "SUSPENSO" + " - EUR " + _fine; 
+        return "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.toString() + " - " + _isActive.getStatusDescription(this);
     }
     
 }
