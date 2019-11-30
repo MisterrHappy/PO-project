@@ -11,7 +11,7 @@ public class User implements Serializable {
     private String _name;
     private String _email;
     private int _fine;
-    private Behavior _behavior = Behavior.NORMAL;
+    private Behavior _behavior = new NormalBehavior();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
@@ -40,7 +40,7 @@ public class User implements Serializable {
     }
 
     public String getDescription() {
-        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.toString() + " - ";
+        String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.getBehavior() + " - ";
         return _isActive ? res + "ACTIVO" : res + "SUSPENSO - EUR " + _fine;
     }
     

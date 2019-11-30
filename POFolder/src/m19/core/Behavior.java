@@ -1,8 +1,6 @@
 package m19.core;
 
-public enum Behavior {
-    NORMAL,
-    CUMPRIDOR,
-    FALTOSO;
-    
+public abstract class Behavior {
+
+    protected abstract String getBehavior();
 }
