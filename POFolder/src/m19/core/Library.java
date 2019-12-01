@@ -47,7 +47,8 @@ public class Library implements Serializable {
 	*/
     private Map<Integer, User> _users = new HashMap<>();
 
-    
+    private Map<Integer, Request> _requests = new HashMap<>();
+
     /** 
      * Used in class Parser to register works with the correct ID.
      * 
@@ -55,6 +56,14 @@ public class Library implements Serializable {
      */
     int getWorkNextID() {
         return _workNextID;
+    }
+
+    void requestWork(User user, Work work) {
+                                                    // verficar regras
+        //int deadline =                             calcular deadline
+        int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();
+        //Request request = new Request(user, work, deadline)  criar requisição
+        //_requests.put()                            meter no hashmap
     }
 
     

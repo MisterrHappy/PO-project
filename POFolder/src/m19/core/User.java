@@ -1,7 +1,10 @@
 package m19.core;
 
 import java.io.Serializable;
-import m19.core.Behavior;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import m19.core.exception.EmptyUserNameOrEmailException;
 
 public class User implements Serializable {
@@ -12,6 +15,7 @@ public class User implements Serializable {
     private String _email;
     private int _fine;
     private Behavior _behavior = new NormalBehavior();
+    private Map<Integer, Request> _requests = new HashMap<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
@@ -21,8 +25,24 @@ public class User implements Serializable {
         _email = email;
     }
 
-    int getFine() {
-        return _fine;
+    Behavior getBehavior() {
+        return _behavior;
+    }
+
+    boolean checkStatus() {
+        return _isActive;
+    }
+
+    void addRequest(int key, Request r) {
+        _requests.put(key, r);
+    }
+
+    void removeRequest(int key) {
+        _requests.remove(key);
+    }
+
+    Map<Integer, Request> getUserRequests() {
+        return Collections.unmodifiableMap(_requests);
     }
 
     public String getName() {

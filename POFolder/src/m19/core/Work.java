@@ -1,8 +1,8 @@
 package m19.core;
 
 import java.io.Serializable;
-
-import m19.core.Category;
+import java.util.Map;
+import java.util.HashMap;
 
 public abstract class Work implements Serializable {
     private static final long serialVersionUID = -4003574528951482147L;
@@ -12,6 +12,7 @@ public abstract class Work implements Serializable {
     private String _title;
     private int _numberOfCopiesAvailable;
     private Category _category;
+    private Map<Integer, Request> _requests = new HashMap<>();
 
     protected Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -20,6 +21,22 @@ public abstract class Work implements Serializable {
         _numberOfCopies = numberOfCopies;
         _numberOfCopiesAvailable = numberOfCopies;
         _category = category;
+    }
+
+    int getPrice() {
+        return _price;
+    }
+
+    int getNumberOfCopiesAvailable() {
+        return _numberOfCopiesAvailable;
+    }
+
+    void addRequest(int key, Request r) {
+        _requests.put(key, r);
+    }
+
+    void removeRequest(int key) {
+        _requests.remove(key);
     }
 
     @Override
