@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import m19.core.exception.EmptyUserNameOrEmailException;
+import m19.core.exception.UserIsNotSuspendedException;
 
 public class User implements Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
@@ -23,6 +24,13 @@ public class User implements Serializable {
         _iD = iD;
         _name = name;
         _email = email;
+    }
+
+    void payFine() throws UserIsNotSuspendedException {
+        if (_isActive)
+            throw new UserIsNotSuspendedException(_iD);
+        _fine = 0;
+        // falta perguntar ao stor cenas
     }
 
     Behavior getBehavior() {

@@ -11,6 +11,7 @@ import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
+import m19.core.exception.UserIsNotSuspendedException;
 
 /**
  * Class that represents the library as a whole. It contains all works users and the date.
@@ -56,6 +57,10 @@ public class Library implements Serializable {
      */
     int getWorkNextID() {
         return _workNextID;
+    }
+
+    void payUserFine(User user) throws UserIsNotSuspendedException {
+        user.payFine();
     }
 
     void requestWork(User user, Work work) {

@@ -14,6 +14,7 @@ import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
+import m19.core.exception.UserIsNotSuspendedException;
 
 /**
  * The façade class that holds a library and a file which can be initially loaded.
@@ -50,6 +51,10 @@ public class LibraryManager {
 
     public Collection<Work> getAllWorks() {
         return _library.getAllWorks();
+    }
+
+    public void payUserFine(User user) throws UserIsNotSuspendedException {
+        _library.payUserFine(user);
     }
 
     /**
