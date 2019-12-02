@@ -1,5 +1,7 @@
 package m19.core;
 
+import m19.core.exception.RuleBrokenException;
+
 public abstract class Rule {
     private int _iD;
     
@@ -7,5 +9,9 @@ public abstract class Rule {
         _iD = iD;
     }
 
-    protected abstract boolean checkRule(User user, Work work);
+    protected abstract void checkRule(User user, Work work) throws RuleBrokenException;
+
+    protected int getId() {
+        return _iD;
+    }
 }

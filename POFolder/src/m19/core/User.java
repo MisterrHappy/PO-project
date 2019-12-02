@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String _name;
     private String _email;
     private int _fine;
-    private Behavior _behavior = new NormalBehavior();
+    private Behavior _behavior = NormalBehavior._normalBehavior;
     private Map<Integer, Request> _requests = new HashMap<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
@@ -30,7 +30,7 @@ public class User implements Serializable {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
-        // _behavior = new NormalBehavior()  ???? falta perguntar ao stor cenas
+        _isActive = true;
     }
 
     Behavior getBehavior() {

@@ -1,12 +1,15 @@
 package m19.core;
 
+import m19.core.exception.RuleBrokenException;
+
 public class CheckNumberOfRequests extends Rule {
     
     CheckNumberOfRequests(int iD) {
         super(iD);
     }
 
-    protected boolean checkRule(User user, Work work) {
-        return user.getUserRequests().size() >= user.getBehavior().getMaxRequests() ? false : true;
+    protected void checkRule(User user, Work work) throws RuleBrokenException {
+        if (user.getUserRequests().size() >= user.getBehavior().getMaxRequests())
+            throw new RuleBrokenException(getId());
     }
 }

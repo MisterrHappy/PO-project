@@ -5,6 +5,8 @@ public class FaultyBehavior extends Behavior {
     private static final String FAULTY = "FALTOSO";
     private static final int MAX_REQUESTS = 1;
 
+    private FaultyBehavior() {}
+
     protected String getBehavior() {
         return FAULTY;
     }

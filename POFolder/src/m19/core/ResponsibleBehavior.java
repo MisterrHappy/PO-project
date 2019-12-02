@@ -5,6 +5,8 @@ public class ResponsibleBehavior extends Behavior {
     private static final String RESPONSIBLE = "CUMPRIDOR";
     private static final int MAX_REQUESTS = 5;
 
+    private ResponsibleBehavior() {}
+
     protected String getBehavior() {
         return RESPONSIBLE;
     }

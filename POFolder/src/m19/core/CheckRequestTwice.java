@@ -2,16 +2,19 @@ package m19.core;
 
 import java.util.Map;
 
+import m19.core.exception.RuleBrokenException;
+
 public class CheckRequestTwice extends Rule {
 
-    protected CheckRequestTwice(int iD) {
+    CheckRequestTwice(int iD) {
         super(iD);
     }
 
-    protected boolean checkRule(User user, Work work) {
+    protected void checkRule(User user, Work work) throws RuleBrokenException {
         Map<Integer, Request> requests = user.getUserRequests();
         int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();
-        return requests.get(key) == null ? false : true;
+        if (requests.get(key) != null)
+            throw new RuleBrokenException(getId());
     }
     
 }

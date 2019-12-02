@@ -5,6 +5,8 @@ public class NormalBehavior extends Behavior {
     private static final String NORMAL = "NORMAL";
     private static final int MAX_REQUESTS = 3;
 
+    private NormalBehavior() {}
+
     protected String getBehavior() {
         return NORMAL;
     }
