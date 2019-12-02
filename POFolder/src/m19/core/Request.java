@@ -1,7 +1,5 @@
 package m19.core;
 
-import java.util.Comparator;
-
 public class Request {
     private static final int PRIME_NUMBER = 233;
     private User _user;
@@ -28,14 +26,4 @@ public class Request {
         return other instanceof Request && ((Request) other)._work == _work && ((Request) other)._user == _user;
     }
 
-    public static Comparator<Request> getComparatorByDeadline() {
-        return COMPARE_BY_DEADLINE;
-    }
-
-    private static final Comparator<Request> COMPARE_BY_DEADLINE = new Comparator<Request>() {
-        @Override
-        public int compare(Request a, Request b) {
-            return a._deadline == b._deadline ? 1 : a._deadline - b._deadline;
-        }
-    };
 }
