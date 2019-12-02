@@ -30,7 +30,7 @@ public class User implements Serializable {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
-        // falta perguntar ao stor cenas
+        // _behavior = new NormalBehavior()  ???? falta perguntar ao stor cenas
     }
 
     Behavior getBehavior() {

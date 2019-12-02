@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
+import java.util.List;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
@@ -24,7 +25,15 @@ public class LibraryManager {
 
     private Library _library = new Library(); 
     private String _fileNameAssociation;
+
+    public List<Work> performSearch(String term) {
+        return _library.performSearch(term);
+    }
     
+    public void payUserFine(User user) throws UserIsNotSuspendedException {
+        _library.payUserFine(user);
+    }
+
     public int getCurrentDate() {
         return _library.getCurrentDate();
     }
@@ -53,9 +62,6 @@ public class LibraryManager {
         return _library.getAllWorks();
     }
 
-    public void payUserFine(User user) throws UserIsNotSuspendedException {
-        _library.payUserFine(user);
-    }
 
     /**
      * Serialize the persistent state of this application.

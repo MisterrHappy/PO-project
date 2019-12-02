@@ -2,10 +2,12 @@ package m19.core;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
@@ -57,6 +59,16 @@ public class Library implements Serializable {
      */
     int getWorkNextID() {
         return _workNextID;
+    }
+
+    List<Work> performSearch(String term) {
+        List<Work> worksSearched = new ArrayList<>();
+        term = term.toLowerCase();
+        for (Work work: _works.values()) {
+            if (work.getWorkByTerm(term) != null)
+                worksSearched.add(work);
+        }
+        return Collections.unmodifiableList(worksSearched);
     }
 
     void payUserFine(User user) throws UserIsNotSuspendedException {

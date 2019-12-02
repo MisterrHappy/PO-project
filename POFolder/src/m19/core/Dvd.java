@@ -1,6 +1,7 @@
 package m19.core;
 
 import m19.core.Work;
+
 import m19.core.Category;
 
 public class Dvd extends Work {
@@ -23,5 +24,13 @@ public class Dvd extends Work {
     @Override
     protected String addDescription() {
         return " - " + _director + " - " + _igac;
+    }
+
+    @Override
+    protected Work checkSpecificField(String term) {
+       String lowerCaseDirector = _director.toLowerCase();
+       if (lowerCaseDirector.contains(term))
+		return this;
+       return null; 
     }
 }

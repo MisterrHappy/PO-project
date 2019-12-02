@@ -24,4 +24,12 @@ public class Book extends Work {
     protected String addDescription() {
         return " - " + _author + " - " + _isbn;
     }
+
+    @Override
+    protected Work checkSpecificField(String term) {
+        String lowerCaseAuthor = _author.toLowerCase();
+        if (lowerCaseAuthor.contains(term))
+            return this;
+        return null; 
+    }
 }

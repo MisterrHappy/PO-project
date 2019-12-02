@@ -8,7 +8,6 @@ import m19.core.Work;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Collections;
 
 /**
@@ -33,15 +32,10 @@ public class DoDisplayWorks extends Command<LibraryManager> {
         else {
         
             List<Work> orderedWorks = new ArrayList<>(works);
-            Collections.sort(orderedWorks, new Comparator<Work>() {
-            @Override
-            public int compare(Work a, Work b) {
-                return a.hashCode() - b.hashCode();
-            }
-            });
+            Collections.sort(orderedWorks, Work.getComparatorById());
 
             for (Work temp: orderedWorks)
-            _display.addLine(temp.getDescription());
+                _display.addLine(temp.getDescription());
         }
         _display.display();
     }
