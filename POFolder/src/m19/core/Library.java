@@ -58,12 +58,12 @@ public class Library implements Serializable {
     private List<Rule> _rules = new ArrayList<>();
 
     Library() {
-        _rules.add(new CheckRequestTwice(1));
-        _rules.add(new CheckUserIsSuspended(2));
-        _rules.add(new CheckNumberOfCopies(3));
-        _rules.add(new CheckNumberOfRequests(4));
-        _rules.add(new CheckWorkCategory(5));
-        _rules.add(new CheckWorkPrice(6));
+        _rules.add(CHECK_REQUEST_TWICE);
+        _rules.add(CHECK_USER_IS_SUSPENDED);
+        _rules.add(CHECK_NUMBER_OF_COPIES);
+        _rules.add(CHECK_NUMBER_OF_REQUESTS);
+        _rules.add(CHECK_WORK_CATEGORY);
+        _rules.add(CHECK_WORK_PRICE);
     }
 
     /** 
@@ -97,6 +97,54 @@ public class Library implements Serializable {
         //_requests.put()                            meter no hashmap
     }
 
+    private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (user.checkUserRequest(work.hashCode()))
+                throw new RuleBrokenException(getId());
+            
+        }
+    };
+
+    private final Rule CHECK_USER_IS_SUSPENDED = new Rule(2) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (!user.checkStatus())
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    private final Rule CHECK_NUMBER_OF_COPIES = new Rule(3) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (work.getNumberOfCopiesAvailable() == 0)
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    private final Rule CHECK_NUMBER_OF_REQUESTS = new Rule(4) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (user.getUserRequestsNumber() >= user.getBehavior().getMaxRequests())
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    private final Rule CHECK_WORK_CATEGORY = new Rule(5) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (work.getCategory().toString().equals("Referência"))
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    private final Rule CHECK_WORK_PRICE = new Rule(6) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (!user.getBehavior().checkWorkPrice(work))
+                throw new RuleBrokenException(getId());
+        }
+    };
     
     /** 
      * Shows the value of the current date.

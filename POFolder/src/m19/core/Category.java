@@ -1,6 +1,18 @@
 package m19.core;
-interface Category {
 
-    String getCategory();
-    boolean isReference();
+public enum Category {
+    REFERENCE("Referência"),
+    SCITECH("Ciência e Tecnológica"),
+    FICTION("Ficção");
+
+    private String _category;
+
+    private Category(String category) {
+        _category = category;
+    }
+
+    @Override
+    public String toString() {
+        return _category;
+    }
 }

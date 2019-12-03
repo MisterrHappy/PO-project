@@ -69,7 +69,7 @@ public abstract class Work implements Serializable {
     
     public final String getDescription() {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + getWorkType() + " - " 
-                + _title + " - " + _price + " - " + _category.getCategory() + addDescription();
+                + _title + " - " + _price + " - " + _category.toString() + addDescription();
     }
 
     public static Comparator<Work> getComparatorById() {

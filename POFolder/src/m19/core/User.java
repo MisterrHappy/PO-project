@@ -16,6 +16,7 @@ public class User implements Serializable {
     private String _email;
     private int _fine;
     private Behavior _behavior = NormalBehavior._normalBehavior;
+    private int _score;
     private List<Request> _requests = new ArrayList<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
