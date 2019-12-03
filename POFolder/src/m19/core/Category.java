@@ -2,7 +2,7 @@ package m19.core;
 
 public enum Category {
     REFERENCE("Referência"),
-    SCITECH("Ciência e Tecnológica"),
+    SCITECH("Técnica e Científica"),
     FICTION("Ficção");
 
     private String _category;

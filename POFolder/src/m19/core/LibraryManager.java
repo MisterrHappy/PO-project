@@ -35,8 +35,8 @@ public class LibraryManager {
         _library.payUserFine(user);
     }
 
-    public void requestWork(User user, Work work) throws RuleBrokenException{
-        _library.requestWork(user, work);
+    public int requestWork(User user, Work work) throws RuleBrokenException{
+        return _library.requestWork(user, work);
     }
 
     public int getCurrentDate() {

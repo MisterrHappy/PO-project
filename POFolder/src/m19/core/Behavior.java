@@ -5,4 +5,5 @@ public abstract class Behavior {
     protected abstract String getBehavior();
     protected abstract int getMaxRequests();
     protected abstract boolean checkWorkPrice(Work work);
+    protected abstract int getRequestTerm(int workCopiesAvailable);
 }

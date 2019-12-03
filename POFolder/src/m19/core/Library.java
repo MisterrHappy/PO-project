@@ -89,12 +89,16 @@ public class Library implements Serializable {
         user.payFine();
     }
 
-    void requestWork(User user, Work work) throws RuleBrokenException {
+    int requestWork(User user, Work work) throws RuleBrokenException {
         for (Rule rule: _rules)
             rule.checkRule(user, work);
-        //int deadline =                             calcular deadline
-        //Request request = new Request(user, work, deadline)  criar requisição
-        //_requests.put()                            meter no hashmap
+        int currentDate = getCurrentDate();
+        int deadline = user.getBehavior().getRequestTerm(work.getNumberOfCopiesAvailable()) + currentDate;
+        Request request = new Request(user, work, deadline);
+        _requests.add(request);
+        user.addRequest(request);
+        work.addRequest(request);
+        return deadline;
     }
 
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
