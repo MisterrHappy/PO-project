@@ -14,4 +14,8 @@ public class Request {
     Work getWork() {
         return _work;
     }
+
+    int getDeadline() {
+        return _deadline;
+    }
 }

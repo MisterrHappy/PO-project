@@ -27,10 +27,15 @@ public class User implements Serializable {
         _email = email;
     }
 
+    void fineUser(int fine) {
+        _fine = fine;
+    }
+
     void payFine() throws UserIsNotSuspendedException {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
+        // faltam cenas
         _isActive = true;
     }
 
@@ -50,12 +55,12 @@ public class User implements Serializable {
         _requests.remove(r);
     }
 
-    boolean checkUserRequest(int workId) {
+    Request checkUserRequest(int workId) {
         for (Request r: _requests) {
             if (r.getWork().hashCode() == workId)
-                return true;
+                return r;
         }
-        return false;
+        return null;
     }
 
     int getUserRequestsNumber() {

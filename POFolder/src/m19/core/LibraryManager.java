@@ -13,6 +13,7 @@ import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
+import m19.core.exception.NoSuchWorkRequestedByUserException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
 import m19.core.exception.RuleBrokenException;
@@ -37,6 +38,10 @@ public class LibraryManager {
 
     public int requestWork(User user, Work work) throws RuleBrokenException{
         return _library.requestWork(user, work);
+    }
+
+    public int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
+        return _library.returnWork(user, work);
     }
 
     public int getCurrentDate() {

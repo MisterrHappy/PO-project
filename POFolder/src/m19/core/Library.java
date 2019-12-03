@@ -13,6 +13,7 @@ import java.util.Set;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
+import m19.core.exception.NoSuchWorkRequestedByUserException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
 import m19.core.exception.RuleBrokenException;
@@ -27,6 +28,8 @@ public class Library implements Serializable {
 
     /** Serial number for serialization. */
     private static final long serialVersionUID = 201901101348L;
+
+    private static final int FINE_PER_DAY = 5;
 
     /**
 	* The current date is represented by Date class in this variable (directly initialized).
@@ -101,10 +104,24 @@ public class Library implements Serializable {
         return deadline;
     }
 
+    int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
+        Request request = user.checkUserRequest(work.hashCode());
+        if (request == null)
+            throw new NoSuchWorkRequestedByUserException(work.hashCode());
+            
+        int fine = (getCurrentDate() - request.getDeadline()) * FINE_PER_DAY;
+        _requests.remove(request);
+        user.removeRequest(request);
+        work.removeRequest(request);
+        fine = fine <= 0 ? 0 : fine;
+        user.fineUser(fine);
+        return fine;
+    }
+
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (user.checkUserRequest(work.hashCode()))
+            if (user.checkUserRequest(work.hashCode()) != null)
                 throw new RuleBrokenException(getId());
             
         }
