@@ -8,9 +8,15 @@ public class CheckWorkPrice extends Rule {
         super(iD);
     }
 
-    @Override
-    protected void checkRule(User user, Work work) throws RuleBrokenException {
-        if (!user.getBehavior().checkWorkPrice(work))
-            throw new RuleBrokenException(getId());
+    private static final CheckWorkPrice CHECK_WORK_PRICE = new CheckWorkPrice(6) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (!user.getBehavior().checkWorkPrice(work))
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    public static Rule getCheckWorkPrice() {
+        return CHECK_WORK_PRICE;
     }
 }

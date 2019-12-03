@@ -1,7 +1,5 @@
 package m19.core;
 
-import java.util.Map;
-
 import m19.core.exception.RuleBrokenException;
 
 public class CheckRequestTwice extends Rule {
@@ -9,13 +7,17 @@ public class CheckRequestTwice extends Rule {
     CheckRequestTwice(int iD) {
         super(iD);
     }
-
-    @Override
-    protected void checkRule(User user, Work work) throws RuleBrokenException {
-        Map<Integer, Request> requests = user.getUserRequests();
-        int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();
-        if (requests.get(key) != null)
-            throw new RuleBrokenException(getId());
-    }
     
+    private static final Rule CHECK_REQUEST_TWICE = new Rule(1){
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (user.checkUserRequest(work.hashCode()))
+                throw new RuleBrokenException(getId());
+            
+        }
+    };
+
+    public static Rule getCheckRequestTwice() {
+        return CHECK_REQUEST_TWICE;
+    }
 }

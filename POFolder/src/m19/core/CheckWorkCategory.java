@@ -8,9 +8,15 @@ public class CheckWorkCategory extends Rule {
         super(iD);
     }
 
-    @Override
-    protected void checkRule(User user, Work work) throws RuleBrokenException {
-        if (!work.getCategory().isReference())
-            throw new RuleBrokenException(getId());
+    private static final CheckWorkCategory CHECK_WORK_CATEGORY = new CheckWorkCategory(5) {
+        @Override
+        protected void checkRule(User user, Work work) throws RuleBrokenException {
+            if (!work.getCategory().isReference())
+                throw new RuleBrokenException(getId());
+        }
+    };
+
+    public static Rule getCheckWorkCategory() {
+        return CHECK_WORK_CATEGORY;
     }
 }

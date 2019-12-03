@@ -1,8 +1,8 @@
 package m19.core;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public abstract class Work implements Serializable {
@@ -13,7 +13,7 @@ public abstract class Work implements Serializable {
     private String _title;
     private int _numberOfCopiesAvailable;
     private Category _category;
-    private Map<Integer, Request> _requests = new HashMap<>();
+    private List<Request> _requests = new ArrayList<>();
 
     protected Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -36,12 +36,12 @@ public abstract class Work implements Serializable {
         return _numberOfCopiesAvailable;
     }
 
-    void addRequest(int key, Request r) {
-        _requests.put(key, r);
+    void addRequest(Request r) {
+        _requests.add(r);
     }
 
-    void removeRequest(int key) {
-        _requests.remove(key);
+    void removeRequest(Request r) {
+        _requests.remove(r);
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class Work implements Serializable {
     
     public final String getDescription() {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + getWorkType() + " - " 
-                + _title + " - " + _price + " - " + _category.toString() + addDescription();
+                + _title + " - " + _price + " - " + _category.getCategory() + addDescription();
     }
 
     public static Comparator<Work> getComparatorById() {

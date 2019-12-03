@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
@@ -51,7 +53,7 @@ public class Library implements Serializable {
 	*/
     private Map<Integer, User> _users = new HashMap<>();
 
-    private Map<Integer, Request> _requests = new HashMap<>();
+    private Set<Request> _requests = new HashSet<>();
 
     private List<Rule> _rules = new ArrayList<>();
 
@@ -91,7 +93,6 @@ public class Library implements Serializable {
         for (Rule rule: _rules)
             rule.checkRule(user, work);
         //int deadline =                             calcular deadline
-        int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();
         //Request request = new Request(user, work, deadline)  criar requisição
         //_requests.put()                            meter no hashmap
     }

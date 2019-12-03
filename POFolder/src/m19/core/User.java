@@ -2,8 +2,8 @@ package m19.core;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.UserIsNotSuspendedException;
@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String _email;
     private int _fine;
     private Behavior _behavior = NormalBehavior._normalBehavior;
-    private Map<Integer, Request> _requests = new HashMap<>();
+    private List<Request> _requests = new ArrayList<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
@@ -41,16 +41,24 @@ public class User implements Serializable {
         return _isActive;
     }
 
-    void addRequest(int key, Request r) {
-        _requests.put(key, r);
+    void addRequest(Request r) {
+        _requests.add(r);
     }
 
-    void removeRequest(int key) {
-        _requests.remove(key);
+    void removeRequest(Request r) {
+        _requests.remove(r);
     }
 
-    Map<Integer, Request> getUserRequests() {
-        return Collections.unmodifiableMap(_requests);
+    boolean checkUserRequest(int workId) {
+        for (Request r: _requests) {
+            if (r.getWork().hashCode() == workId)
+                return true;
+        }
+        return false;
+    }
+
+    int getUserRequestsNumber() {
+        return _requests.size();
     }
 
     public String getName() {

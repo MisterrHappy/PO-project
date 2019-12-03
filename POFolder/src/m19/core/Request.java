@@ -1,7 +1,6 @@
 package m19.core;
 
 public class Request {
-    private static final int PRIME_NUMBER = 233;
     private User _user;
     private Work _work;
     private int _deadline;
@@ -12,18 +11,7 @@ public class Request {
         _deadline = deadline;
     }
 
-    static final int getPrimeNumber() {
-        return PRIME_NUMBER;
+    Work getWork() {
+        return _work;
     }
-
-    @Override
-    public int hashCode() {
-        return _user.hashCode() * PRIME_NUMBER + _work.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other instanceof Request && ((Request) other)._work == _work && ((Request) other)._user == _user;
-    }
-
 }
