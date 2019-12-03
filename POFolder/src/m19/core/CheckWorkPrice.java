@@ -8,6 +8,7 @@ public class CheckWorkPrice extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
         if (!user.getBehavior().checkWorkPrice(work))
             throw new RuleBrokenException(getId());

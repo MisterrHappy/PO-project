@@ -13,4 +13,8 @@ public class RuleBrokenException extends Exception {
         super("Rule number " + ruleIndex + " broken", cause);
         _ruleIndex = ruleIndex;
     }
+
+    public int getRuleIndex() {
+        return _ruleIndex;
+    }
 }

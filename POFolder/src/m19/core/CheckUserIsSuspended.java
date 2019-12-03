@@ -8,6 +8,7 @@ public class CheckUserIsSuspended extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
         if (!user.checkStatus())
             throw new RuleBrokenException(getId());

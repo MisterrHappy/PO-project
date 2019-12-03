@@ -11,6 +11,7 @@ import m19.core.User;
 import m19.core.Work;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
+import m19.core.exception.RuleBrokenException;
 
 /**
  * 4.4.1. Request work.
@@ -19,6 +20,7 @@ public class DoRequestWork extends Command<LibraryManager> {
 
     private Input<Integer> _userId;
     private Input<Integer> _workId;
+    private Input<String> _notificationPreference;
 
     /**
      * @param receiver
@@ -36,7 +38,9 @@ public class DoRequestWork extends Command<LibraryManager> {
             _form.parse();
             User user = _receiver.getUser(_userId.value());
             Work work = _receiver.getWork(_workId.value());
-            _receiver.request
+            int deadline = _receiver.requestWork(user, work);
+            _display.addLine(Message.workReturnDay(_workId.value(), deadline));
+            _display.display();
 
         } catch (NoUserFoundException nufe) {
             throw new NoSuchUserException(_userId.value());
@@ -44,8 +48,14 @@ public class DoRequestWork extends Command<LibraryManager> {
         } catch (NoWorkFoundException nwfe) {
             throw new NoSuchWorkException(_workId.value());
 
-        } catch ()
-            throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex)
+        } catch (RuleBrokenException rbe) {
+            int ruleIndex = rbe.getRuleIndex();
+            if (ruleIndex != 3)
+                throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex);
+            _notificationPreference = _form.addStringInput(Message.requestReturnNotificationPreference());
+            _form.parse();
+            // add observer
+        }
     
     }
 

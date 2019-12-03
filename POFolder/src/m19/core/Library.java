@@ -13,6 +13,7 @@ import m19.core.exception.BadEntrySpecificationException;
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
+import m19.core.exception.RuleBrokenException;
 import m19.core.exception.UserIsNotSuspendedException;
 
 /**
@@ -52,6 +53,17 @@ public class Library implements Serializable {
 
     private Map<Integer, Request> _requests = new HashMap<>();
 
+    private List<Rule> _rules = new ArrayList<>();
+
+    Library() {
+        _rules.add(new CheckRequestTwice(1));
+        _rules.add(new CheckUserIsSuspended(2));
+        _rules.add(new CheckNumberOfCopies(3));
+        _rules.add(new CheckNumberOfRequests(4));
+        _rules.add(new CheckWorkCategory(5));
+        _rules.add(new CheckWorkPrice(6));
+    }
+
     /** 
      * Used in class Parser to register works with the correct ID.
      * 
@@ -75,8 +87,9 @@ public class Library implements Serializable {
         user.payFine();
     }
 
-    void requestWork(User user, Work work) {
-                                                    // verficar regras
+    void requestWork(User user, Work work) throws RuleBrokenException {
+        for (Rule rule: _rules)
+            rule.checkRule(user, work);
         //int deadline =                             calcular deadline
         int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();
         //Request request = new Request(user, work, deadline)  criar requisição

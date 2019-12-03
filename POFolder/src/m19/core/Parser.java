@@ -50,11 +50,29 @@ public class Parser {
         }
     }
 
+    private Category filterCategory(String component) {
+        Category category = null;
+        switch(component) {
+            case "FICTION" :
+                category = new FictionCategory();
+                break;
+            case "REFERENCE":
+                category = new ReferenceCategory();
+                break;
+            case "SCITECH":
+                category = new ScitechCategory();
+                break;
+        }
+        return category;
+    }
+
     private void parseDVD(String[] components, String line) throws BadEntrySpecificationException {
         if (components.length != 7)
             throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
+
+        Category category = filterCategory(components[4]);
         Dvd dvd = new Dvd(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1], Integer.parseInt(components[6]),
-                         Category.valueOf(components[4]), components[2], components[5]);
+                         category, components[2], components[5]);
         _library.addWork(dvd);
     }
 
@@ -62,8 +80,9 @@ public class Parser {
         if (components.length != 7)
             throw new BadEntrySpecificationException("Wrong number of fields (6) in " + line);
 
+        Category category = filterCategory(components[4]);
         Book book = new Book(_library.getWorkNextID(), Integer.parseInt(components[3]), components[1],
-                            Integer.parseInt(components[6]), Category.valueOf(components[4]), components[2], components[5]);
+                            Integer.parseInt(components[6]), category, components[2], components[5]);
         
         _library.addWork(book);
     }

@@ -8,7 +8,9 @@ public class CheckWorkCategory extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
-        
+        if (!work.getCategory().isReference())
+            throw new RuleBrokenException(getId());
     }
 }

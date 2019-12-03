@@ -8,6 +8,7 @@ public class CheckNumberOfCopies extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
         if (work.getNumberOfCopiesAvailable() == 0)
             throw new RuleBrokenException(getId());

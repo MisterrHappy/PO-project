@@ -15,6 +15,7 @@ import m19.core.exception.ImportFileException;
 import m19.core.exception.MissingFileAssociationException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
+import m19.core.exception.RuleBrokenException;
 import m19.core.exception.UserIsNotSuspendedException;
 
 /**
@@ -32,6 +33,10 @@ public class LibraryManager {
     
     public void payUserFine(User user) throws UserIsNotSuspendedException {
         _library.payUserFine(user);
+    }
+
+    public void requestWork(User user, Work work) throws RuleBrokenException{
+        _library.requestWork(user, work);
     }
 
     public int getCurrentDate() {

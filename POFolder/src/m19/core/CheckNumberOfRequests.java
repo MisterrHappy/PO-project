@@ -8,6 +8,7 @@ public class CheckNumberOfRequests extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
         if (user.getUserRequests().size() >= user.getBehavior().getMaxRequests())
             throw new RuleBrokenException(getId());

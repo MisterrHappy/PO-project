@@ -10,6 +10,7 @@ public class CheckRequestTwice extends Rule {
         super(iD);
     }
 
+    @Override
     protected void checkRule(User user, Work work) throws RuleBrokenException {
         Map<Integer, Request> requests = user.getUserRequests();
         int key = user.hashCode() * Request.getPrimeNumber() + work.hashCode();

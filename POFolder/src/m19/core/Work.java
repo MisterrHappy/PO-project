@@ -3,7 +3,6 @@ package m19.core;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Collection;
 import java.util.Comparator;
 
 public abstract class Work implements Serializable {
@@ -23,6 +22,10 @@ public abstract class Work implements Serializable {
         _numberOfCopies = numberOfCopies;
         _numberOfCopiesAvailable = numberOfCopies;
         _category = category;
+    }
+
+    Category getCategory() {
+        return _category;
     }
 
     int getPrice() {
