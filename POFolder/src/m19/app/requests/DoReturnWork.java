@@ -46,7 +46,7 @@ public class DoReturnWork extends Command<LibraryManager> {
                 _display.display();
                 _requestFinePaymentChoice = _form.addStringInput(Message.requestFinePaymentChoice());
                 _form.parse();
-                //faltam cenas
+                _receiver.userPaymentChoice(user, _requestFinePaymentChoice.value(), fine);
             }
 
         } catch (NoUserFoundException nufe) {

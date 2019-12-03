@@ -114,8 +114,14 @@ public class Library implements Serializable {
         user.removeRequest(request);
         work.removeRequest(request);
         fine = fine <= 0 ? 0 : fine;
-        user.fineUser(fine);
+        //falta ir ao score do utente para lhe dar update
         return fine;
+    }
+
+    void userPaymentChoice(User user, String choice, int fine) {
+        if (choice.equals("n")) 
+            user.fineUser(fine);
+        //update ao user: ver se ha requisições em atraso
     }
 
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {

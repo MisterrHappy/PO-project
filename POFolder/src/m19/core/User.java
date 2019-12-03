@@ -1,7 +1,6 @@
 package m19.core;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +27,14 @@ public class User implements Serializable {
     }
 
     void fineUser(int fine) {
-        _fine = fine;
+        _fine += fine;
+        _isActive = false;
     }
 
     void payFine() throws UserIsNotSuspendedException {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
-        // faltam cenas
         _isActive = true;
     }
 

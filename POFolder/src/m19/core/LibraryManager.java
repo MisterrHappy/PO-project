@@ -44,6 +44,10 @@ public class LibraryManager {
         return _library.returnWork(user, work);
     }
 
+    public void userPaymentChoice(User user, String choice, int fine) {
+        _library.userPaymentChoice(user, choice, fine);
+    }
+
     public int getCurrentDate() {
         return _library.getCurrentDate();
     }
