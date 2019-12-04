@@ -90,13 +90,14 @@ public class Library implements Serializable {
 
     void payUserFine(User user) throws UserIsNotSuspendedException {
         user.payFine();
+        user.updateUser(getCurrentDate());
     }
 
     int requestWork(User user, Work work) throws RuleBrokenException {
         for (Rule rule: _rules)
             rule.checkRule(user, work);
         int currentDate = getCurrentDate();
-        int deadline = user.getBehavior().getRequestTerm(work.getNumberOfCopiesAvailable()) + currentDate;
+        int deadline = user.getBehavior().getRequestTerm(work.getNumberOfCopies()) + currentDate;
         Request request = new Request(user, work, deadline);
         _requests.add(request);
         user.addRequest(request);
@@ -127,22 +128,24 @@ public class Library implements Serializable {
             fine = 0;
         }
         user.getBehavior().updateBehavior(user);
-        return fine;
+        user.fineUser(fine);
+        return user.getFine();
     }
 
     void userPaymentChoice(User user, String choice, int fine) {
-        if (choice.equals("n")) {
-            user.fineUser(fine);
+        if (choice.equals("n"))
             return;
-        }
 
-        user.updateUser(getCurrentDate());
+        try {
+            payUserFine(user);
+            
+        } catch (UserIsNotSuspendedException uinse) {
+            System.err.println("User was active");
+        }
     }
 
     List<Notification> showUserNotifications(User user) {
-        List<Notification> notifications = user.getUserNotifications();
-        user.clearUserNotifications();
-        return notifications;
+        return user.getUserNotifications();
     }
 
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {

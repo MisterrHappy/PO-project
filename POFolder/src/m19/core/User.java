@@ -39,12 +39,10 @@ public class User implements Observer, Serializable {
         });
     }
 
-    void clearUserNotifications() {
-        _notifications.clear();
-    }
-
     List<Notification> getUserNotifications() {
-        return Collections.unmodifiableList(_notifications);
+        List<Notification> nots = new ArrayList<>(_notifications);
+        _notifications.clear();
+        return Collections.unmodifiableList(nots);
     }
 
     int getLateStreak() {
@@ -67,6 +65,10 @@ public class User implements Observer, Serializable {
         _behavior = behavior;
     }
 
+    int getFine() {
+        return _fine;
+    }
+
     void fineUser(int fine) {
         _fine += fine;
     }
@@ -75,17 +77,17 @@ public class User implements Observer, Serializable {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
-        _isActive = true;
     }
 
     void updateUser(int currentDate) {
         for (Request r: _requests) {
             if (r.getDeadline() < currentDate) {
                 _isActive = false;
-                break;
+                return;
             }
         }
-        _isActive = true;
+        if (_fine == 0)
+            _isActive = true;
     }
 
     Behavior getBehavior() {

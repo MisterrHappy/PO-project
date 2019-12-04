@@ -45,6 +45,10 @@ public abstract class Work implements Serializable {
         return _numberOfCopiesAvailable;
     }
 
+    int getNumberOfCopies() {
+        return _numberOfCopies;
+    }
+
     void addRequest(Request r) {
         _requests.add(r);
         _numberOfCopiesAvailable--;
