@@ -47,6 +47,7 @@ public abstract class Work implements Serializable {
 
     void addRequest(Request r) {
         _requests.add(r);
+        _numberOfCopiesAvailable--;
     }
 
     void removeRequest(Request r) {
@@ -56,6 +57,7 @@ public abstract class Work implements Serializable {
             o.notifyObserver(this);
 
         _observers.clear(); // perguntar ao stor
+        _numberOfCopiesAvailable++;
     }
 
     @Override

@@ -28,14 +28,14 @@ public class DoReturnWork extends Command<LibraryManager> {
      */
     public DoReturnWork(LibraryManager receiver) {
         super(Label.RETURN_WORK, receiver);
-        _userId = _form.addIntegerInput(Message.requestUserId());
-        _workId = _form.addIntegerInput(Message.requestWorkId());
     }
-
+    
     /** @see pt.tecnico.po.ui.Command#execute() */
     @Override
     public final void execute() throws DialogException {
         try {
+            _userId = _form.addIntegerInput(Message.requestUserId());
+            _workId = _form.addIntegerInput(Message.requestWorkId());
             _form.parse();
             User user = _receiver.getUser(_userId.value());
             Work work = _receiver.getWork(_workId.value());
@@ -48,6 +48,7 @@ public class DoReturnWork extends Command<LibraryManager> {
                 _requestFinePaymentChoice = _form.addStringInput(Message.requestFinePaymentChoice());
                 _form.parse();
                 _receiver.userPaymentChoice(user, _requestFinePaymentChoice.value(), fine);
+                _form.clear();
             }
 
         } catch (NoUserFoundException nufe) {
@@ -58,6 +59,8 @@ public class DoReturnWork extends Command<LibraryManager> {
 
         } catch (NoSuchWorkRequestedByUserException nswrbue) {
             throw new WorkNotBorrowedByUserException(_workId.value(), _userId.value());
+        } finally {
+            _form.clear();
         }
     }
 

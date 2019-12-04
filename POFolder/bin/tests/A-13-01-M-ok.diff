@@ -1,56 +1,5 @@
 *** tests/A-13-01-M-ok.out	2019-11-20 22:26:59.000000000 +0000
---- tests/A-13-01-M-ok.outhyp	2019-12-04 22:36:41.085859896 +0000
-***************
-*** 20,26 ****
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: A obra 1 deve ser devolvida no dia 22.
-  Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
---- 20,26 ----
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: A obra 1 deve ser devolvida no dia 28.
-  Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-***************
-*** 62,74 ****
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: O utente 1 deve pagar uma multa de EUR 90.
-  O utente deseja pagar multa (s/n)? Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: O utente 2 deve pagar uma multa de EUR 25.
-! O utente deseja pagar multa (s/n)? Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
---- 62,79 ----
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: O utente 1 deve pagar uma multa de EUR 60.
-  O utente deseja pagar multa (s/n)? Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: O utente deseja pagar multa (s/n)? Devolver obra: Operação inválida: A obra 1 não foi requisitada pelo utente 1.
-! Menu de Gestão de Requisições
-! 1 - Requisitar obra
-! 2 - Devolver obra
-! 0 - Sair
-! Escolha uma opção: O utente deseja pagar multa (s/n)? Devolver obra: Operação inválida: A obra 1 não foi requisitada pelo utente 1.
-! Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
+--- tests/A-13-01-M-ok.outhyp	2019-12-04 23:06:42.409110630 +0000
 ***************
 *** 89,96 ****
   5 - Saldar multa de utente
@@ -61,7 +10,7 @@
   Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
---- 94,101 ----
+--- 89,96 ----
   5 - Saldar multa de utente
   0 - Sair
   Escolha uma opção: 0 - Chewbacca - chewbacca@milenium.falcon.org - NORMAL - ACTIVO
@@ -79,7 +28,7 @@
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes
---- 103,110 ----
+--- 98,105 ----
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair
@@ -97,7 +46,7 @@
   Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
---- 113,119 ----
+--- 108,114 ----
   0 - Sair
   Escolha uma opção: 0 - Chewbacca - chewbacca@milenium.falcon.org - NORMAL - ACTIVO
   1 - Darth Vader - darth@dark.force.coAm - FALTOSO - ACTIVO
@@ -114,7 +63,7 @@
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes
---- 121,128 ----
+--- 116,123 ----
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair

@@ -1,29 +1,5 @@
 *** tests/A-11-07-M-ok.out	2019-11-20 22:26:19.000000000 +0000
---- tests/A-11-07-M-ok.outhyp	2019-12-04 22:36:40.269863799 +0000
-***************
-*** 69,76 ****
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: O utente 1 deve pagar uma multa de EUR 25.
-! O utente deseja pagar multa (s/n)? Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
---- 69,81 ----
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: O utente deseja pagar multa (s/n)? Devolver obra: Operação inválida: A obra 1 não foi requisitada pelo utente 1.
-! Menu de Gestão de Requisições
-! 1 - Requisitar obra
-! 2 - Devolver obra
-! 0 - Sair
-! Escolha uma opção: O utente deseja pagar multa (s/n)? Devolver obra: Operação inválida: A obra 1 não foi requisitada pelo utente 1.
-! Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
+--- tests/A-11-07-M-ok.outhyp	2019-12-04 23:06:41.657109548 +0000
 ***************
 *** 90,96 ****
   4 - Mostrar notificações de utente
@@ -33,24 +9,7 @@
   Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
---- 95,101 ----
-  4 - Mostrar notificações de utente
-  5 - Saldar multa de utente
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: 1 - Darth Vader - darth@dark.force.coAm - NORMAL - ACTIVO
-  Menu de Gestão de Utentes
-  1 - Registar utente
-  2 - Mostrar utente
-***************
-*** 132,138 ****
-  4 - Mostrar notificações de utente
-  5 - Saldar multa de utente
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: 1 - Darth Vader - darth@dark.force.coAm - FALTOSO - ACTIVO
-  Menu de Gestão de Utentes
-  1 - Registar utente
-  2 - Mostrar utente
---- 137,143 ----
+--- 90,96 ----
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair

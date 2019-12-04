@@ -1,30 +1,5 @@
 *** tests/A-09-02-M-ok.out	2019-11-20 22:21:27.000000000 +0000
---- tests/A-09-02-M-ok.outhyp	2019-12-04 22:36:39.377868075 +0000
-***************
-*** 16,25 ****
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: Deseja ser avisado quando algum exemplar for devolvido (s/n)? Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-  Escolha uma opção: Menu Principal
-  1 - Abrir dados
-  2 - Guardar dados
---- 16,27 ----
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-! Escolha uma opção: Introduza o número de utente: Introduza o número da obra: A obra 7 deve ser devolvida no dia 3.
-! Menu de Gestão de Requisições
-  1 - Requisitar obra
-  2 - Devolver obra
-  0 - Sair
-+ Escolha uma opção: Número inválido!
-  Escolha uma opção: Menu Principal
-  1 - Abrir dados
-  2 - Guardar dados
+--- tests/A-09-02-M-ok.outhyp	2019-12-04 23:06:40.753108244 +0000
 ***************
 *** 60,67 ****
   4 - Mostrar notificações de utente
@@ -35,7 +10,7 @@
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes
---- 62,68 ----
+--- 60,66 ----
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair

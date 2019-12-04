@@ -140,7 +140,9 @@ public class Library implements Serializable {
     }
 
     List<Notification> showUserNotifications(User user) {
-        return user.getUserNotifications();
+        List<Notification> notifications = user.getUserNotifications();
+        user.clearUserNotifications();
+        return notifications;
     }
 
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
