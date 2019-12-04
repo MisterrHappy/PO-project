@@ -15,7 +15,8 @@ public class User implements Serializable {
     private String _email;
     private int _fine;
     private Behavior _behavior = NormalBehavior._normalBehavior;
-    private int _score;
+    private int _lateStreak;
+    private int _onTimeStreak;
     private List<Request> _requests = new ArrayList<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
@@ -26,9 +27,28 @@ public class User implements Serializable {
         _email = email;
     }
 
+    int getLateStreak() {
+        return _lateStreak;
+    }
+
+    int getOnTimeStreak() {
+        return _onTimeStreak;
+    }
+
+    void setOnTimeStreak(int onTimeStreak) {
+        _onTimeStreak = onTimeStreak;
+    }
+
+    void setLateStreak(int lateStreak) {
+        _lateStreak = lateStreak;
+    }
+
+    void changeBehavior(Behavior behavior) {
+        _behavior = behavior;
+    }
+
     void fineUser(int fine) {
         _fine += fine;
-        _isActive = false;
     }
 
     void payFine() throws UserIsNotSuspendedException {
@@ -36,6 +56,15 @@ public class User implements Serializable {
             throw new UserIsNotSuspendedException(_iD);
         _fine = 0;
         _isActive = true;
+    }
+
+    void updateUser(int currentDate) {
+        for (Request r: _requests) {
+            if (r.getDeadline() < currentDate) {
+                _isActive = false;
+                break;
+            }
+        }
     }
 
     Behavior getBehavior() {

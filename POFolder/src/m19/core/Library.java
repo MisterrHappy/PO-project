@@ -104,6 +104,8 @@ public class Library implements Serializable {
         return deadline;
     }
 
+    // função de adicionar observer
+
     int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
         Request request = user.checkUserRequest(work.hashCode());
         if (request == null)
@@ -113,15 +115,22 @@ public class Library implements Serializable {
         _requests.remove(request);
         user.removeRequest(request);
         work.removeRequest(request);
-        fine = fine <= 0 ? 0 : fine;
-        //falta ir ao score do utente para lhe dar update
+
+        if (fine > 0) 
+            user.setLateStreak(user.getLateStreak() + 1);
+        
+        else {
+            user.setOnTimeStreak(user.getOnTimeStreak() + 1);
+            fine = 0;
+        }
+        user.getBehavior().updateBehavior(user);
         return fine;
     }
 
     void userPaymentChoice(User user, String choice, int fine) {
         if (choice.equals("n")) 
             user.fineUser(fine);
-        //update ao user: ver se ha requisições em atraso
+        user.updateUser(getCurrentDate());
     }
 
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
@@ -190,6 +199,8 @@ public class Library implements Serializable {
      */
     void advanceDays(int nDays) {
         _date.advanceDay(nDays);
+        for (User u: _users.values())
+            u.updateUser(getCurrentDate());
     }
 
     

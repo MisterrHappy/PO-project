@@ -1,9 +1,12 @@
 package m19.core;
 
-public abstract class Behavior {
+interface Behavior {
+    int RESPONSIBLE_STREAK = 5;
+    int FAULTY_STREAK = 3;
 
-    protected abstract String getBehavior();
-    protected abstract int getMaxRequests();
-    protected abstract boolean checkWorkPrice(Work work);
-    protected abstract int getRequestTerm(int workCopiesAvailable);
+    String getBehavior();
+    int getMaxRequests();
+    boolean checkWorkPrice(Work work);
+    int getRequestTerm(int workCopiesAvailable);
+    void updateBehavior(User user);
 }

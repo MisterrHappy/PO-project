@@ -1,30 +1,39 @@
 package m19.core;
 
-public class FaultyBehavior extends Behavior {
-    public static final FaultyBehavior _faultyBehavior = new FaultyBehavior();
+public class FaultyBehavior implements Behavior {
+    static final FaultyBehavior _faultyBehavior = new FaultyBehavior();
     private static final String FAULTY = "FALTOSO";
     private static final int MAX_REQUESTS = 1;
     private static final int FAULTY_REQUEST_TERM = 2;
+    private static final int REACH_NORMAL_BEHAVIOR = 3;
 
     private FaultyBehavior() {}
 
     @Override
-    protected String getBehavior() {
+    public String getBehavior() {
         return FAULTY;
     }
 
     @Override
-    protected int getMaxRequests() {
+    public int getMaxRequests() {
         return MAX_REQUESTS;
     }
 
     @Override
-    protected boolean checkWorkPrice(Work work) {
+    public boolean checkWorkPrice(Work work) {
         return work.getPrice() > 25 ? false : true;
     }
 
     @Override
-    protected int getRequestTerm(int workCopiesAvailable) {
+    public int getRequestTerm(int workCopiesAvailable) {
         return FAULTY_REQUEST_TERM;
+    }
+
+    @Override
+    public void updateBehavior(User user) {
+        if (user.getOnTimeStreak() == REACH_NORMAL_BEHAVIOR) {
+            user.setLateStreak(0);
+            user.changeBehavior(NormalBehavior._normalBehavior);
+        }
     }
 }
