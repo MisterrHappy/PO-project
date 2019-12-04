@@ -121,7 +121,7 @@ public class Library implements Serializable {
         work.removeRequest(request);
 
         if (fine > 0) 
-            user.setLateStreak(user.getLateStreak() + 1);
+            user.setLateStreak(user.getLateStreak() + 1);  // perguntar ao stor
         
         else {
             user.setOnTimeStreak(user.getOnTimeStreak() + 1);
@@ -138,8 +138,8 @@ public class Library implements Serializable {
 
         try {
             payUserFine(user);
-            
-        } catch (UserIsNotSuspendedException uinse) {
+
+        } catch (UserIsNotSuspendedException uinse) {  // perguntar ao stor
             System.err.println("User was active");
         }
     }
