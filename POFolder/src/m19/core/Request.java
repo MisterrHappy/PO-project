@@ -1,6 +1,10 @@
 package m19.core;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable {
+
+    private static final long serialVersionUID = 924724959569305842L;
     private User _user;
     private Work _work;
     private int _deadline;

@@ -44,6 +44,7 @@ public class DoReturnWork extends Command<LibraryManager> {
             if (fine != 0) {
                 _display.addLine(Message.showFine(_userId.value(), fine));
                 _display.display();
+                _form.clear();
                 _requestFinePaymentChoice = _form.addStringInput(Message.requestFinePaymentChoice());
                 _form.parse();
                 _receiver.userPaymentChoice(user, _requestFinePaymentChoice.value(), fine);

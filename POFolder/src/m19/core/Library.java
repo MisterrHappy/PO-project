@@ -104,7 +104,10 @@ public class Library implements Serializable {
         return deadline;
     }
 
-    // função de adicionar observer
+    void addObserver(String notificationPreference, int userId, int workId) {
+        if (notificationPreference.equals("s")) 
+            _works.get(workId).addObserver(_users.get(userId)); // perguntar ao stor
+    }
 
     int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
         Request request = user.checkUserRequest(work.hashCode());
@@ -128,12 +131,20 @@ public class Library implements Serializable {
     }
 
     void userPaymentChoice(User user, String choice, int fine) {
-        if (choice.equals("n")) 
+        if (choice.equals("n")) {
             user.fineUser(fine);
+            return;
+        }
+
         user.updateUser(getCurrentDate());
     }
 
+    List<Notification> showUserNotifications(User user) {
+        return user.getUserNotifications();
+    }
+
     private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
+        private static final long serialVersionUID = -5482980888028590048L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (user.checkUserRequest(work.hashCode()) != null)
@@ -143,6 +154,7 @@ public class Library implements Serializable {
     };
 
     private final Rule CHECK_USER_IS_SUSPENDED = new Rule(2) {
+        private static final long serialVersionUID = -3483165919640302712L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (!user.checkStatus())
@@ -151,6 +163,7 @@ public class Library implements Serializable {
     };
 
     private final Rule CHECK_NUMBER_OF_COPIES = new Rule(3) {
+        private static final long serialVersionUID = -752046526405581894L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (work.getNumberOfCopiesAvailable() == 0)
@@ -159,6 +172,7 @@ public class Library implements Serializable {
     };
 
     private final Rule CHECK_NUMBER_OF_REQUESTS = new Rule(4) {
+        private static final long serialVersionUID = -381909310264088567L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (user.getUserRequestsNumber() >= user.getBehavior().getMaxRequests())
@@ -167,6 +181,7 @@ public class Library implements Serializable {
     };
 
     private final Rule CHECK_WORK_CATEGORY = new Rule(5) {
+        private static final long serialVersionUID = 1882428612380599667L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (work.getCategory().toString().equals("Referência"))
@@ -175,6 +190,7 @@ public class Library implements Serializable {
     };
 
     private final Rule CHECK_WORK_PRICE = new Rule(6) {
+        private static final long serialVersionUID = 5496472887415212091L;
         @Override
         protected void checkRule(User user, Work work) throws RuleBrokenException {
             if (!user.getBehavior().checkWorkPrice(work))

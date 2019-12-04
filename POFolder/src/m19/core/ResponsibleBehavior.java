@@ -1,6 +1,7 @@
 package m19.core;
 
 public class ResponsibleBehavior implements Behavior {
+    private static final long serialVersionUID = 7582192625501192734L;
     static final ResponsibleBehavior _responsibleBehavior = new ResponsibleBehavior();
     private static final String RESPONSIBLE = "CUMPRIDOR";
     private static final int MAX_REQUESTS = 5;

@@ -1,6 +1,7 @@
 package m19.core;
 
 public class FaultyBehavior implements Behavior {
+    private static final long serialVersionUID = -4479798849466650700L;
     static final FaultyBehavior _faultyBehavior = new FaultyBehavior();
     private static final String FAULTY = "FALTOSO";
     private static final int MAX_REQUESTS = 1;

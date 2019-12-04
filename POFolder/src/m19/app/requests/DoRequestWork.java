@@ -52,9 +52,10 @@ public class DoRequestWork extends Command<LibraryManager> {
             int ruleIndex = rbe.getRuleIndex();
             if (ruleIndex != 3)
                 throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex);
+            _form.clear();
             _notificationPreference = _form.addStringInput(Message.requestReturnNotificationPreference());
             _form.parse();
-            // add observer
+            _receiver.addObserver(_notificationPreference.value(), _userId.value(), _workId.value());
         }
     
     }

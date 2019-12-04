@@ -2,12 +2,13 @@ package m19.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import m19.core.exception.EmptyUserNameOrEmailException;
 import m19.core.exception.UserIsNotSuspendedException;
 
-public class User implements Serializable {
+public class User implements Observer, Serializable {
     private static final long serialVersionUID = -5342790251379291184L;
     private int _iD;
     private boolean _isActive = true;
@@ -18,6 +19,7 @@ public class User implements Serializable {
     private int _lateStreak;
     private int _onTimeStreak;
     private List<Request> _requests = new ArrayList<>();
+    private List<Notification> _notifications = new ArrayList<>();
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
@@ -25,6 +27,23 @@ public class User implements Serializable {
         _iD = iD;
         _name = name;
         _email = email;
+    }
+
+    public void notifyObserver(Work work) {
+        _notifications.add(new Notification(){
+            @Override
+            public String getMessage() {
+                return "ENTREGA: " + work.getDescription();
+            }
+        });
+    }
+
+    void clearUserNotifications() {
+        _notifications.clear();
+    }
+
+    List<Notification> getUserNotifications() {
+        return Collections.unmodifiableList(_notifications);
     }
 
     int getLateStreak() {
@@ -65,6 +84,7 @@ public class User implements Serializable {
                 break;
             }
         }
+        _isActive = true;
     }
 
     Behavior getBehavior() {

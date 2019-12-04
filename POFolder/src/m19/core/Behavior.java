@@ -1,6 +1,9 @@
 package m19.core;
 
-interface Behavior {
+import java.io.Serializable;
+
+interface Behavior extends Serializable {
+    long serialVersionUID = 205824520580534L;
     int RESPONSIBLE_STREAK = 5;
     int FAULTY_STREAK = 3;
 

@@ -40,12 +40,20 @@ public class LibraryManager {
         return _library.requestWork(user, work);
     }
 
+    public void addObserver(String notificationPreference, int userId, int workId) {
+        _library.addObserver(notificationPreference, userId, workId);
+    }
+
     public int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
         return _library.returnWork(user, work);
     }
 
     public void userPaymentChoice(User user, String choice, int fine) {
         _library.userPaymentChoice(user, choice, fine);
+    }
+
+    public List<Notification> showUserNotifications(User user) {
+        return _library.showUserNotifications(user);
     }
 
     public int getCurrentDate() {

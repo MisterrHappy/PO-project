@@ -1,6 +1,7 @@
 package m19.core;
 
 public class NormalBehavior implements Behavior {
+    private static final long serialVersionUID = -3353775589244593141L;
     static final NormalBehavior _normalBehavior = new NormalBehavior();
     private static final String NORMAL = "NORMAL";
     private static final int MAX_REQUESTS = 3;

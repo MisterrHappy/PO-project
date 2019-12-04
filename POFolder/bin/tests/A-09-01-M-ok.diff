@@ -1,0 +1,82 @@
+*** tests/A-09-01-M-ok.out	2019-11-20 22:21:24.000000000 +0000
+--- tests/A-09-01-M-ok.outhyp	2019-12-04 21:30:43.609471295 +0000
+***************
+*** 14,41 ****
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Mostrar notificações de utente: Operação inválida: O utente 5 não existe.
+  Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+--- 14,50 ----
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o nome do utente: Introduza o endereço de correio do utente: Novo utente criado com o número 4.
+! Menu de Gestão de Utentes
+! 1 - Registar utente
+! 2 - Mostrar utente
+! 3 - Listar utentes
+! 4 - Mostrar notificações de utente
+! 5 - Saldar multa de utente
+! 0 - Sair
+! Escolha uma opção: Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: 4 - 4 - 0 - NORMAL - ACTIVO
+! Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Saldar multa de utente: Operação inválida: O utente 0 não se encontra suspenso.
+  Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+***************
+*** 52,55 ****
+  6 - Menu de gestão de obras
+  7 - Menu de gestão de requisições
+  0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 61,64 ----
+  6 - Menu de gestão de obras
+  7 - Menu de gestão de requisições
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada

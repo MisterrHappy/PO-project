@@ -5,6 +5,7 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import m19.core.Work;
@@ -27,7 +28,7 @@ public class DoPerformSearch extends Command<LibraryManager> {
     @Override
     public final void execute() {
         _form.parse();
-        List<Work> works = _receiver.performSearch(_term.value());
+        List<Work> works = new ArrayList<>(_receiver.performSearch(_term.value()));
         if (works.isEmpty())
             _display.addLine("");
         else {
