@@ -1,5 +1,5 @@
 *** tests/A-07-10-M-ok.out	2019-11-20 22:20:39.000000000 +0000
---- tests/A-07-10-M-ok.outhyp	2019-12-04 21:30:43.273464340 +0000
+--- tests/A-07-10-M-ok.outhyp	2019-12-04 22:36:38.945870146 +0000
 ***************
 *** 16,25 ****
   1 - Requisitar obra
@@ -64,7 +64,7 @@
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair
-! Escolha uma opção: Menu de Gestão de Utentes
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes

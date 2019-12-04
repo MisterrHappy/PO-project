@@ -31,6 +31,7 @@ public class User implements Observer, Serializable {
 
     public void notifyObserver(Work work) {
         _notifications.add(new Notification(){
+            private static final long serialVersionUID = 6695828542505125766L;
             @Override
             public String getMessage() {
                 return "ENTREGA: " + work.getDescription();

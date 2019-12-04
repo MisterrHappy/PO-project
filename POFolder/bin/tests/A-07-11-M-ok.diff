@@ -1,7 +1,7 @@
 *** tests/A-07-11-M-ok.out	2019-11-20 22:20:39.000000000 +0000
---- tests/A-07-11-M-ok.outhyp	2019-12-04 21:30:43.493468892 +0000
+--- tests/A-07-11-M-ok.outhyp	2019-12-04 22:36:39.141869206 +0000
 ***************
-*** 40,58 ****
+*** 40,55 ****
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair
@@ -14,39 +14,22 @@
   5 - Saldar multa de utente
   0 - Sair
 ! Escolha uma opção: Introduza o número de utente: ENTREGA: 7 - 1 de  1 - DVD - The rise of Skywalker - 20 - Técnica e Científica - J. J. Abrams - 200505551
-  Menu de Gestão de Utentes
+! Menu de Gestão de Utentes
+  1 - Registar utente
+  2 - Mostrar utente
+  3 - Listar utentes
+--- 40,53 ----
+  4 - Mostrar notificações de utente
+  5 - Saldar multa de utente
+  0 - Sair
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes
   4 - Mostrar notificações de utente
   5 - Saldar multa de utente
   0 - Sair
---- 40,67 ----
-  4 - Mostrar notificações de utente
-  5 - Saldar multa de utente
-  0 - Sair
-! Escolha uma opção: Menu de Gestão de Utentes
+! Escolha uma opção: Introduza o número de utente: Menu de Gestão de Utentes
   1 - Registar utente
   2 - Mostrar utente
   3 - Listar utentes
-  4 - Mostrar notificações de utente
-  5 - Saldar multa de utente
-  0 - Sair
-! Escolha uma opção: 1 - Darth Vader - darth@dark.force.coAm - NORMAL - ACTIVO
-! 3 - Luke Skywalker - last.jedi@universe.com - NORMAL - ACTIVO
-! 0 - Obi-Wan Kenobi - obiwan@jedi.org - NORMAL - ACTIVO
-! 2 - Rey - real.last.jedi@universe.com - NORMAL - ACTIVO
-  Menu de Gestão de Utentes
-  1 - Registar utente
-  2 - Mostrar utente
-  3 - Listar utentes
-+ 4 - Mostrar notificações de utente
-+ 5 - Saldar multa de utente
-+ 0 - Sair
-+ Escolha uma opção: Menu de Gestão de Utentes
-+ 1 - Registar utente
-+ 2 - Mostrar utente
-+ 3 - Listar utentes
-  4 - Mostrar notificações de utente
-  5 - Saldar multa de utente
-  0 - Sair
