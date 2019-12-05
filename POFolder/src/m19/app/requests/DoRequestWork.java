@@ -21,7 +21,7 @@ public class DoRequestWork extends Command<LibraryManager> {
 
     private Input<Integer> _userId;
     private Input<Integer> _workId;
-    private Input<String> _notificationPreference;
+    private Input<Boolean> _notificationPreference;
 
     /**
      * @param receiver
@@ -55,7 +55,7 @@ public class DoRequestWork extends Command<LibraryManager> {
                 throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex);
             
             Form formChoice = new Form();
-            _notificationPreference = formChoice.addStringInput(Message.requestReturnNotificationPreference());
+            _notificationPreference = formChoice.addBooleanInput(Message.requestReturnNotificationPreference());
             formChoice.parse();
             _receiver.addObserver(_notificationPreference.value(), _userId.value(), _workId.value());
 

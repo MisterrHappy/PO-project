@@ -105,8 +105,8 @@ public class Library implements Serializable {
         return deadline;
     }
 
-    void addObserver(String notificationPreference, int userId, int workId) {
-        if (notificationPreference.equals("s")) 
+    void addObserver(Boolean notificationPreference, int userId, int workId) {
+        if (notificationPreference) 
             _works.get(workId).addObserver(_users.get(userId)); // perguntar ao stor
     }
 
@@ -132,8 +132,8 @@ public class Library implements Serializable {
         return user.getFine();
     }
 
-    void userPaymentChoice(User user, String choice, int fine) {
-        if (choice.equals("n"))
+    void userPaymentChoice(User user, Boolean choice, int fine) {
+        if (!choice)
             return;
 
         try {

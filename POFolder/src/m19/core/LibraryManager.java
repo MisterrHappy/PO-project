@@ -40,7 +40,7 @@ public class LibraryManager {
         return _library.requestWork(user, work);
     }
 
-    public void addObserver(String notificationPreference, int userId, int workId) {
+    public void addObserver(Boolean notificationPreference, int userId, int workId) {
         _library.addObserver(notificationPreference, userId, workId);
     }
 
@@ -48,7 +48,7 @@ public class LibraryManager {
         return _library.returnWork(user, work);
     }
 
-    public void userPaymentChoice(User user, String choice, int fine) {
+    public void userPaymentChoice(User user, Boolean choice, int fine) {
         _library.userPaymentChoice(user, choice, fine);
     }
 

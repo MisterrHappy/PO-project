@@ -20,7 +20,7 @@ public class DoReturnWork extends Command<LibraryManager> {
 
     private Input<Integer> _userId;
     private Input<Integer> _workId;
-    private Input<String> _requestFinePaymentChoice;
+    private Input<Boolean> _requestFinePaymentChoice;
 
     /**
      * @param receiver
@@ -44,7 +44,7 @@ public class DoReturnWork extends Command<LibraryManager> {
                 _display.addLine(Message.showFine(_userId.value(), fine));
                 _display.display();
                 Form formChoice = new Form();
-                _requestFinePaymentChoice = formChoice.addStringInput(Message.requestFinePaymentChoice());
+                _requestFinePaymentChoice = formChoice.addBooleanInput(Message.requestFinePaymentChoice());
                 formChoice.parse();
                 _receiver.userPaymentChoice(user, _requestFinePaymentChoice.value(), fine);
             }
