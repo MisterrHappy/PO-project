@@ -1,14 +1,12 @@
 package m19.app.works;
 
+import m19.app.exception.NoSuchWorkException;
 import m19.core.LibraryManager;
+import m19.core.Work;
 import m19.core.exception.NoWorkFoundException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import m19.app.exception.NoSuchWorkException;
-import m19.app.works.Message;
-
-import m19.core.Work;
 
 /**
  * 4.3.1. Display work.

@@ -1,14 +1,13 @@
 package m19.app.works;
 
-import m19.core.LibraryManager;
-import pt.tecnico.po.ui.Command;
-
-import m19.core.Work;
-
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+
+import m19.core.LibraryManager;
+import m19.core.Work;
+import pt.tecnico.po.ui.Command;
 
 /**
  * 4.3.2. Display all works.

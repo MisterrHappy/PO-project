@@ -1,14 +1,15 @@
 package m19.app.users;
 
+import java.util.List;
+
 import m19.app.exception.NoSuchUserException;
 import m19.core.LibraryManager;
+import m19.core.Notification;
+import m19.core.User;
+import m19.core.exception.NoUserFoundException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import m19.core.exception.NoUserFoundException;
-import m19.core.User;
-import m19.core.Notification;
-import java.util.List;
 
 /**
  * 4.2.3. Show notifications of a specific user.
