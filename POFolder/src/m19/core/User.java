@@ -92,7 +92,6 @@ public class User implements Observer, Serializable {
         return Collections.unmodifiableList(nots);
     }
 
-
     void payFine() throws UserIsNotSuspendedException {
         if (_isActive)
             throw new UserIsNotSuspendedException(_iD);
@@ -109,7 +108,6 @@ public class User implements Observer, Serializable {
         if (_fine == 0)
             _isActive = true;
     }
-
 
     void addRequest(Request r) {
         _requests.add(r);

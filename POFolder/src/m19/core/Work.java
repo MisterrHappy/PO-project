@@ -1,9 +1,9 @@
 package m19.core;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public abstract class Work implements Serializable {
     private static final long serialVersionUID = -4003574528951482147L;
@@ -25,14 +25,6 @@ public abstract class Work implements Serializable {
         _category = category;
     }
 
-    void addObserver(Observer o) {
-        _observers.add(o);
-    }
-
-    void removeObserver(Observer o) {
-        _observers.remove(o);
-    }
-
     Category getCategory() {
         return _category;
     }
@@ -47,6 +39,14 @@ public abstract class Work implements Serializable {
 
     int getNumberOfCopies() {
         return _numberOfCopies;
+    }
+
+    void addObserver(Observer o) {
+        _observers.add(o);
+    }
+
+    void removeObserver(Observer o) {
+        _observers.remove(o);
     }
 
     void addRequest(Request r) {
@@ -74,18 +74,18 @@ public abstract class Work implements Serializable {
         return other instanceof Work && _iD == ((Work) other)._iD;
     }
 
-    protected abstract String getWorkType();
-
-    protected abstract String addDescription();
-
     protected abstract Work checkSpecificField(String term);
-
+    
     protected final Work getWorkByTerm(String term) {
         String lowerCaseTitle = _title.toLowerCase();
         if (lowerCaseTitle.contains(term))
-            return this;
+        return this;
         return checkSpecificField(term);
     }
+
+    protected abstract String getWorkType();
+
+    protected abstract String addDescription();
     
     public final String getDescription() {
         return "" + _iD + " - " + _numberOfCopiesAvailable + " de " + _numberOfCopies + " - " + getWorkType() + " - " 
