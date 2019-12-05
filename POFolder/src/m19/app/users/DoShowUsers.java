@@ -31,15 +31,10 @@ public class DoShowUsers extends Command<LibraryManager> {
     else {
 
         List<User> orderedUsers = new ArrayList<>(users);
-        Collections.sort(orderedUsers, new Comparator<User>() {
-        @Override
-        public int compare(User a, User b) {
-          return a.getName().compareTo(b.getName()) == 0 ? a.hashCode() - b.hashCode() : a.getName().compareTo(b.getName());
-        }	
-        });
+        Collections.sort(orderedUsers, User.getComparatorByName());
 
-        for (User temp: orderedUsers)
-          _display.addLine(temp.getDescription());
+        for (User user: orderedUsers)
+          _display.addLine(user.getDescription());
     }
     _display.display();
   }

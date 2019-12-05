@@ -58,7 +58,7 @@ public abstract class Work implements Serializable {
         _requests.remove(r);
 
         for (Observer o: _observers)
-            o.notifyObserver(this);
+            o.notifyObserverDelivery(this);
 
         _observers.clear(); // perguntar ao stor
         _numberOfCopiesAvailable++;

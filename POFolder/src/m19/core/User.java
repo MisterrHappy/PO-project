@@ -3,6 +3,7 @@ package m19.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import m19.core.exception.EmptyUserNameOrEmailException;
@@ -23,18 +24,64 @@ public class User implements Observer, Serializable {
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
-            throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
+        throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
         _iD = iD;
         _name = name;
         _email = email;
     }
+    
+    int getLateStreak() {
+        return _lateStreak;
+    }
+    
+    int getOnTimeStreak() {
+        return _onTimeStreak;
+    }
+    
+    void setOnTimeStreak(int onTimeStreak) {
+        _onTimeStreak = onTimeStreak;
+    }
+    
+    void setLateStreak(int lateStreak) {
+        _lateStreak = lateStreak;
+    }
+    
+    void changeBehavior(Behavior behavior) {
+        _behavior = behavior;
+    }
+    
+    int getFine() {
+        return _fine;
+    }
+    
+    void fineUser(int fine) {
+        _fine += fine;
+    }
+    
+    Behavior getBehavior() {
+        return _behavior;
+    }
 
-    public void notifyObserver(Work work) {
+    boolean checkStatus() {
+        return _isActive;
+    }
+
+    public void notifyObserverDelivery(Work work) {
         _notifications.add(new Notification(){
             private static final long serialVersionUID = 6695828542505125766L;
             @Override
             public String getMessage() {
                 return "ENTREGA: " + work.getDescription();
+            }
+        });
+    }
+
+    public void notifyObserverRequest(Work work) {
+        _notifications.add(new Notification(){
+            private static final long serialVersionUID = 1434939583493493486L;
+            @Override
+            public String getMessage() {
+                return "REQUESIÇÃO " + work.getDescription();
             }
         });
     }
@@ -45,33 +92,6 @@ public class User implements Observer, Serializable {
         return Collections.unmodifiableList(nots);
     }
 
-    int getLateStreak() {
-        return _lateStreak;
-    }
-
-    int getOnTimeStreak() {
-        return _onTimeStreak;
-    }
-
-    void setOnTimeStreak(int onTimeStreak) {
-        _onTimeStreak = onTimeStreak;
-    }
-
-    void setLateStreak(int lateStreak) {
-        _lateStreak = lateStreak;
-    }
-
-    void changeBehavior(Behavior behavior) {
-        _behavior = behavior;
-    }
-
-    int getFine() {
-        return _fine;
-    }
-
-    void fineUser(int fine) {
-        _fine += fine;
-    }
 
     void payFine() throws UserIsNotSuspendedException {
         if (_isActive)
@@ -90,13 +110,6 @@ public class User implements Observer, Serializable {
             _isActive = true;
     }
 
-    Behavior getBehavior() {
-        return _behavior;
-    }
-
-    boolean checkStatus() {
-        return _isActive;
-    }
 
     void addRequest(Request r) {
         _requests.add(r);
@@ -118,10 +131,6 @@ public class User implements Observer, Serializable {
         return _requests.size();
     }
 
-    public String getName() {
-        return _name;
-    }
-
     @Override
     public int hashCode() {
         return _iD;
@@ -136,5 +145,16 @@ public class User implements Observer, Serializable {
         String res = "" + _iD + " - " + _name + " - " + _email + " - " + _behavior.getBehavior() + " - ";
         return _isActive ? res + "ACTIVO" : res + "SUSPENSO - EUR " + _fine;
     }
+
+    public static Comparator<User> getComparatorByName() {
+        return COMPARE_BY_NAME;
+    }
+    
+    private static final Comparator<User> COMPARE_BY_NAME = new Comparator<User>() {
+        @Override
+        public int compare(User a, User b) {
+          return a._name.compareTo(b._name) == 0 ? a.hashCode() - b.hashCode() : a._name.compareTo(b._name);
+        }
+    };
     
 }
