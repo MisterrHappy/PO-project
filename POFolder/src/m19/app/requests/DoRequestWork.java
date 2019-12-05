@@ -11,6 +11,7 @@ import m19.core.exception.NoWorkFoundException;
 import m19.core.exception.RuleBrokenException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
+import pt.tecnico.po.ui.Form;
 import pt.tecnico.po.ui.Input;
 
 /**
@@ -27,14 +28,14 @@ public class DoRequestWork extends Command<LibraryManager> {
      */
     public DoRequestWork(LibraryManager receiver) {
         super(Label.REQUEST_WORK, receiver);
+        _userId = _form.addIntegerInput(Message.requestUserId());
+        _workId = _form.addIntegerInput(Message.requestWorkId());
     }
     
     /** @see pt.tecnico.po.ui.Command#execute() */
     @Override
     public final void execute() throws DialogException {
         try {
-            _userId = _form.addIntegerInput(Message.requestUserId());
-            _workId = _form.addIntegerInput(Message.requestWorkId());
             _form.parse();
             User user = _receiver.getUser(_userId.value());
             Work work = _receiver.getWork(_workId.value());
@@ -52,13 +53,12 @@ public class DoRequestWork extends Command<LibraryManager> {
             int ruleIndex = rbe.getRuleIndex();
             if (ruleIndex != 3)
                 throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex);
-            _form.clear();
-            _notificationPreference = _form.addStringInput(Message.requestReturnNotificationPreference());
-            _form.parse();
+            
+            Form formChoice = new Form();
+            _notificationPreference = formChoice.addStringInput(Message.requestReturnNotificationPreference());
+            formChoice.parse();
             _receiver.addObserver(_notificationPreference.value(), _userId.value(), _workId.value());
 
-        } finally {
-            _form.clear();
         }
     
     }
