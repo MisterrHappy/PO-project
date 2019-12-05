@@ -1,7 +1,6 @@
 package m19.app.main;
 
 import m19.core.LibraryManager;
-
 import pt.tecnico.po.ui.Command;
 /**
  * 4.1.2. Display the current date.

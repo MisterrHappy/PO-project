@@ -1,14 +1,13 @@
 package m19.app.works;
 
-import m19.core.LibraryManager;
-import pt.tecnico.po.ui.Command;
-import pt.tecnico.po.ui.Input;
-
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import m19.core.LibraryManager;
 import m19.core.Work;
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.Input;
 /**
  * 4.3.3. Perform search according to miscellaneous criteria.
  */

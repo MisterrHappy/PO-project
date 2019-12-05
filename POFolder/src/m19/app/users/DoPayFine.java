@@ -3,13 +3,12 @@ package m19.app.users;
 import m19.app.exception.NoSuchUserException;
 import m19.app.exception.UserIsActiveException;
 import m19.core.LibraryManager;
-import pt.tecnico.po.ui.Command;
-import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Input;
-
 import m19.core.User;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.UserIsNotSuspendedException;
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
+import pt.tecnico.po.ui.Input;
 
 /**
  * 4.2.5. Settle a fine.

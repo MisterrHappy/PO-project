@@ -4,15 +4,14 @@ import m19.app.exception.NoSuchUserException;
 import m19.app.exception.NoSuchWorkException;
 import m19.app.exception.WorkNotBorrowedByUserException;
 import m19.core.LibraryManager;
+import m19.core.User;
+import m19.core.Work;
+import m19.core.exception.NoSuchWorkRequestedByUserException;
+import m19.core.exception.NoUserFoundException;
+import m19.core.exception.NoWorkFoundException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
-import m19.core.User;
-import m19.core.Work;
-import m19.core.exception.NoUserFoundException;
-import m19.core.exception.NoWorkFoundException;
-import m19.core.exception.NoSuchWorkRequestedByUserException;
 
 /**
  * 4.4.2. Return a work.

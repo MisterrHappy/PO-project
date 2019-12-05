@@ -1,13 +1,14 @@
 package m19.app.users;
 
-import m19.core.LibraryManager;
-import pt.tecnico.po.ui.Command;
-import m19.core.User;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import m19.core.LibraryManager;
+import m19.core.User;
+import pt.tecnico.po.ui.Command;
 /**
  * 4.2.4. Show all users.
  */
