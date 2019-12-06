@@ -48,8 +48,8 @@ public class LibraryManager {
         return _library.returnWork(userId, workId);
     }
 
-    public void userPaymentChoice(int userId, boolean choice, int fine) {
-        _library.userPaymentChoice(userId, choice, fine);
+    public void userPaymentChoice(int userId, boolean choice) {
+        _library.userPaymentChoice(userId, choice);
     }
 
     public List<Notification> showUserNotifications(int userId) throws NoUserFoundException {

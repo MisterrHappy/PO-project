@@ -29,6 +29,9 @@ public class Library implements Serializable {
     /** Serial number for serialization. */
     private static final long serialVersionUID = 201901101348L;
 
+    /**
+     * The ammount of money (int) which penalizes users with late requests per day.
+     */
     private static final int FINE_PER_DAY = 5;
 
     /**
@@ -56,10 +59,19 @@ public class Library implements Serializable {
 	*/
     private Map<Integer, User> _users = new HashMap<>();
 
+    /**
+     * A Set with all request done by users (directly initialized).
+     */
     private Set<Request> _requests = new HashSet<>();
 
+    /**
+     * A List with all library rules (directly initialized).
+     */
     private List<Rule> _rules = new ArrayList<>();
 
+    /**
+     * Constructor: adds the rules to the respective library list.
+     */
     Library() {
         _rules.add(new Rule(1) {
             private static final long serialVersionUID = -5482980888028590048L;
@@ -120,6 +132,14 @@ public class Library implements Serializable {
         return _workNextID;
     }
 
+    /**
+     * Used to give all the works with the term given in the argument.
+     * The term is converted in lower cases to perform the search.
+     * 
+     * @param term The string from where works are searched.
+     * 
+     * @return The list with all works found.
+     */
     List<Work> performSearch(String term) {
         List<Work> worksSearched = new ArrayList<>();
         term = term.toLowerCase();
@@ -130,12 +150,38 @@ public class Library implements Serializable {
         return Collections.unmodifiableList(worksSearched);
     }
 
+    /**
+     * Used when the client wants to pay a user fine (pays all the fine).
+     * Updates the user after the payment.
+     * 
+     * @param userId Id of the user whoses fine is to be payed.
+     * 
+     * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
+     * 
+     * @throws UserIsNotSuspendedException Is thrown when the user found is active.
+     */
     void payUserFine(int userId) throws NoUserFoundException, UserIsNotSuspendedException {
         User user = getUser(userId);
         user.payFine();
         user.updateUser(getCurrentDate());
     }
 
+    /**
+     * Used to regist a request asked by the user of a certain work.
+     * Calculates de request deadline using the current date and checks all library rules.
+     * 
+     * @param userId Id of the user whose wants to request the work.
+     * 
+     * @param workId Id of the work to be requested.
+     * 
+     * @return The deadline of the work requested.
+     * 
+     * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
+     * 
+     * @throws NoWorkFoundException Is thrown if the work to be searched does not exist.
+     * 
+     * @throws RuleBrokenException Is thrown when a library rule is broken by the user who wants to request a work.
+     */
     int requestWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, RuleBrokenException {
         User user = getUser(userId);
         Work work = getWork(workId);
@@ -150,11 +196,30 @@ public class Library implements Serializable {
         return deadline;
     }
 
+    /**
+     * 
+     */
     void addObserver(boolean notificationPreference, int userId, int workId) {
         if (notificationPreference) 
             _works.get(workId).addObserver(_users.get(userId)); // perguntar ao stor
     }
 
+    /**
+     * Used to return a request registed in the library.
+     * Calculates the fine to be payed and updates user behavior and his deliveries streaks.
+     * 
+     * @param userId Id of the user whose wants to return the work.
+     * 
+     * @param workId Id of the work to be returned.
+     * 
+     * @return The fine to be payed.
+     * 
+     * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
+     * 
+     * @throws NoWorkFoundException Is thrown if the work to be searched does not exist.
+     * 
+     * @throws NoSuchWorkRequestedByUserException Is thrown when the user given did not request the work in the argument.
+     */
     int returnWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, NoSuchWorkRequestedByUserException {
         User user = getUser(userId);
         Work work = getWork(workId);
@@ -179,7 +244,14 @@ public class Library implements Serializable {
         return user.getFine();
     }
 
-    void userPaymentChoice(int userId, Boolean choice, int fine) {
+    /**
+     * Used to treat the decision of paying (or not) the user fine.
+     * 
+     * @param userId Id of the user whose fine will be (or not) payed.
+     * 
+     * @param choice Client choice about paying the user fine
+     */
+    void userPaymentChoice(int userId, boolean choice) {
         if (!choice)
             return;
 
@@ -191,6 +263,9 @@ public class Library implements Serializable {
         } // this never happens here, it is only to code reuse and to not have empty catch
     }
 
+    /**
+     * 
+     */
     List<Notification> showUserNotifications(int userId) throws NoUserFoundException {
         User user = getUser(userId);
         return user.getUserNotifications();
