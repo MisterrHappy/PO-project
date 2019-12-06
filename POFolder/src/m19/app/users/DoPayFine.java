@@ -30,8 +30,7 @@ public class DoPayFine extends Command<LibraryManager> {
     public final void execute() throws DialogException {
         try {
             _form.parse();
-            User user = _receiver.getUser(_userId.value());
-            _receiver.payUserFine(user);
+            _receiver.payUserFine(_userId.value());
 
         } catch (NoUserFoundException nufe) {
             throw new NoSuchUserException(_userId.value());

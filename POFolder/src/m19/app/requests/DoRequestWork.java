@@ -37,9 +37,7 @@ public class DoRequestWork extends Command<LibraryManager> {
     public final void execute() throws DialogException {
         try {
             _form.parse();
-            User user = _receiver.getUser(_userId.value());
-            Work work = _receiver.getWork(_workId.value());
-            int deadline = _receiver.requestWork(user, work);
+            int deadline = _receiver.requestWork(_userId.value(), _workId.value());
             _display.addLine(Message.workReturnDay(_workId.value(), deadline));
             _display.display();
 

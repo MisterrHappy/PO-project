@@ -61,12 +61,54 @@ public class Library implements Serializable {
     private List<Rule> _rules = new ArrayList<>();
 
     Library() {
-        _rules.add(CHECK_REQUEST_TWICE);
-        _rules.add(CHECK_USER_IS_SUSPENDED);
-        _rules.add(CHECK_NUMBER_OF_COPIES);
-        _rules.add(CHECK_NUMBER_OF_REQUESTS);
-        _rules.add(CHECK_WORK_CATEGORY);
-        _rules.add(CHECK_WORK_PRICE);
+        _rules.add(new Rule(1) {
+            private static final long serialVersionUID = -5482980888028590048L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (user.checkUserRequest(work.hashCode()) != null)
+                    throw new RuleBrokenException(getId());    
+            }
+        });
+        _rules.add(new Rule(2) {
+            private static final long serialVersionUID = -3483165919640302712L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (!user.checkStatus())
+                    throw new RuleBrokenException(getId());
+            }
+        });
+        _rules.add(new Rule(3) {
+            private static final long serialVersionUID = -752046526405581894L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (work.getNumberOfCopiesAvailable() == 0)
+                    throw new RuleBrokenException(getId());
+            }
+        });
+        _rules.add(new Rule(4) {
+            private static final long serialVersionUID = -381909310264088567L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (user.getUserRequestsNumber() >= user.getBehavior().getMaxRequests())
+                    throw new RuleBrokenException(getId());
+            }
+        });
+        _rules.add(new Rule(5) {
+            private static final long serialVersionUID = 1882428612380599667L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (work.getCategory().toString().equals("Referência"))
+                    throw new RuleBrokenException(getId());
+            }
+        });
+        _rules.add(new Rule(6) {
+            private static final long serialVersionUID = 5496472887415212091L;
+            @Override
+            protected void checkRule(User user, Work work) throws RuleBrokenException {
+                if (!user.getBehavior().checkWorkPrice(work))
+                    throw new RuleBrokenException(getId());
+            }
+        });
     }
 
     /** 
@@ -88,12 +130,15 @@ public class Library implements Serializable {
         return Collections.unmodifiableList(worksSearched);
     }
 
-    void payUserFine(User user) throws UserIsNotSuspendedException {
+    void payUserFine(int userId) throws NoUserFoundException, UserIsNotSuspendedException {
+        User user = getUser(userId);
         user.payFine();
         user.updateUser(getCurrentDate());
     }
 
-    int requestWork(User user, Work work) throws RuleBrokenException {
+    int requestWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, RuleBrokenException {
+        User user = getUser(userId);
+        Work work = getWork(workId);
         for (Rule rule: _rules)
             rule.checkRule(user, work);
         int currentDate = getCurrentDate();
@@ -105,12 +150,14 @@ public class Library implements Serializable {
         return deadline;
     }
 
-    void addObserver(Boolean notificationPreference, int userId, int workId) {
+    void addObserver(boolean notificationPreference, int userId, int workId) {
         if (notificationPreference) 
             _works.get(workId).addObserver(_users.get(userId)); // perguntar ao stor
     }
 
-    int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
+    int returnWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, NoSuchWorkRequestedByUserException {
+        User user = getUser(userId);
+        Work work = getWork(workId);
         Request request = user.checkUserRequest(work.hashCode());
         if (request == null)
             throw new NoSuchWorkRequestedByUserException(work.hashCode());
@@ -121,7 +168,7 @@ public class Library implements Serializable {
         work.removeRequest(request);
 
         if (fine > 0) 
-            user.setLateStreak(user.getLateStreak() + 1);  // perguntar ao stor
+            user.setLateStreak(user.getLateStreak() + 1);
         
         else {
             user.setOnTimeStreak(user.getOnTimeStreak() + 1);
@@ -132,76 +179,22 @@ public class Library implements Serializable {
         return user.getFine();
     }
 
-    void userPaymentChoice(User user, Boolean choice, int fine) {
+    void userPaymentChoice(int userId, Boolean choice, int fine) {
         if (!choice)
             return;
 
         try {
-            payUserFine(user);
+            payUserFine(userId);
 
-        } catch (UserIsNotSuspendedException uinse) {  // perguntar ao stor
-            System.err.println("User was active");
-        }
+        } catch (NoUserFoundException | UserIsNotSuspendedException e) { 
+            System.err.println("User was active or did not exist"); 
+        } // this never happens here, it is only to code reuse and to not have empty catch
     }
 
-    List<Notification> showUserNotifications(User user) {
+    List<Notification> showUserNotifications(int userId) throws NoUserFoundException {
+        User user = getUser(userId);
         return user.getUserNotifications();
     }
-
-    private final Rule CHECK_REQUEST_TWICE = new Rule(1) {
-        private static final long serialVersionUID = -5482980888028590048L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (user.checkUserRequest(work.hashCode()) != null)
-                throw new RuleBrokenException(getId());
-            
-        }
-    };
-
-    private final Rule CHECK_USER_IS_SUSPENDED = new Rule(2) {
-        private static final long serialVersionUID = -3483165919640302712L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (!user.checkStatus())
-                throw new RuleBrokenException(getId());
-        }
-    };
-
-    private final Rule CHECK_NUMBER_OF_COPIES = new Rule(3) {
-        private static final long serialVersionUID = -752046526405581894L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (work.getNumberOfCopiesAvailable() == 0)
-                throw new RuleBrokenException(getId());
-        }
-    };
-
-    private final Rule CHECK_NUMBER_OF_REQUESTS = new Rule(4) {
-        private static final long serialVersionUID = -381909310264088567L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (user.getUserRequestsNumber() >= user.getBehavior().getMaxRequests())
-                throw new RuleBrokenException(getId());
-        }
-    };
-
-    private final Rule CHECK_WORK_CATEGORY = new Rule(5) {
-        private static final long serialVersionUID = 1882428612380599667L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (work.getCategory().toString().equals("Referência"))
-                throw new RuleBrokenException(getId());
-        }
-    };
-
-    private final Rule CHECK_WORK_PRICE = new Rule(6) {
-        private static final long serialVersionUID = 5496472887415212091L;
-        @Override
-        protected void checkRule(User user, Work work) throws RuleBrokenException {
-            if (!user.getBehavior().checkWorkPrice(work))
-                throw new RuleBrokenException(getId());
-        }
-    };
     
     /** 
      * Shows the value of the current date.

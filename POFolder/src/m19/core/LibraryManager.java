@@ -32,28 +32,28 @@ public class LibraryManager {
         return _library.performSearch(term);
     }
     
-    public void payUserFine(User user) throws UserIsNotSuspendedException {
-        _library.payUserFine(user);
+    public void payUserFine(int userId) throws NoUserFoundException, UserIsNotSuspendedException {
+        _library.payUserFine(userId);
     }
 
-    public int requestWork(User user, Work work) throws RuleBrokenException{
-        return _library.requestWork(user, work);
+    public int requestWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, RuleBrokenException{
+        return _library.requestWork(userId, workId);
     }
 
-    public void addObserver(Boolean notificationPreference, int userId, int workId) {
+    public void addObserver(boolean notificationPreference, int userId, int workId) {
         _library.addObserver(notificationPreference, userId, workId);
     }
 
-    public int returnWork(User user, Work work) throws NoSuchWorkRequestedByUserException {
-        return _library.returnWork(user, work);
+    public int returnWork(int userId, int workId) throws NoUserFoundException, NoWorkFoundException, NoSuchWorkRequestedByUserException {
+        return _library.returnWork(userId, workId);
     }
 
-    public void userPaymentChoice(User user, Boolean choice, int fine) {
-        _library.userPaymentChoice(user, choice, fine);
+    public void userPaymentChoice(int userId, boolean choice, int fine) {
+        _library.userPaymentChoice(userId, choice, fine);
     }
 
-    public List<Notification> showUserNotifications(User user) {
-        return _library.showUserNotifications(user);
+    public List<Notification> showUserNotifications(int userId) throws NoUserFoundException {
+        return _library.showUserNotifications(userId);
     }
 
     public int getCurrentDate() {

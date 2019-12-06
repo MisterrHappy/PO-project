@@ -36,9 +36,7 @@ public class DoReturnWork extends Command<LibraryManager> {
     public final void execute() throws DialogException {
         try {
             _form.parse();
-            User user = _receiver.getUser(_userId.value());
-            Work work = _receiver.getWork(_workId.value());
-            int fine = _receiver.returnWork(user, work);
+            int fine = _receiver.returnWork(_userId.value(), _workId.value());
 
             if (fine != 0) {
                 _display.addLine(Message.showFine(_userId.value(), fine));
@@ -46,7 +44,7 @@ public class DoReturnWork extends Command<LibraryManager> {
                 Form formChoice = new Form();
                 _requestFinePaymentChoice = formChoice.addBooleanInput(Message.requestFinePaymentChoice());
                 formChoice.parse();
-                _receiver.userPaymentChoice(user, _requestFinePaymentChoice.value(), fine);
+                _receiver.userPaymentChoice(_userId.value(), _requestFinePaymentChoice.value(), fine);
             }
 
         } catch (NoUserFoundException nufe) {

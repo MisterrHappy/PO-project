@@ -31,8 +31,7 @@ public class DoShowUserNotifications extends Command<LibraryManager> {
     public final void execute() throws DialogException {
         try {
             _form.parse();
-            User user = _receiver.getUser(_userId.value());
-            List<Notification> notifications = _receiver.showUserNotifications(user);
+            List<Notification> notifications = _receiver.showUserNotifications(_userId.value());
 
             if (notifications.isEmpty())
                 _display.addLine("");
