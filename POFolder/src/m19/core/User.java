@@ -66,22 +66,12 @@ public class User implements Observer, Serializable {
         return _isActive;
     }
 
-    public void notifyObserverDelivery(Work work) {
+    public void notifyObserver(Object o) {
         _notifications.add(new Notification(){
             private static final long serialVersionUID = 6695828542505125766L;
             @Override
             public String getMessage() {
-                return "ENTREGA: " + work.getDescription();
-            }
-        });
-    }
-
-    public void notifyObserverRequest(Work work) {
-        _notifications.add(new Notification(){
-            private static final long serialVersionUID = 1434939583493493486L;
-            @Override
-            public String getMessage() {
-                return "REQUESIÇÃO " + work.getDescription();
+                return "ENTREGA: " + ((Work) o).getDescription();
             }
         });
     }
