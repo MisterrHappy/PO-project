@@ -5,7 +5,6 @@ import java.util.List;
 import m19.app.exception.NoSuchUserException;
 import m19.core.LibraryManager;
 import m19.core.Notification;
-import m19.core.User;
 import m19.core.exception.NoUserFoundException;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;

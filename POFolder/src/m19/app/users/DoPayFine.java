@@ -3,7 +3,6 @@ package m19.app.users;
 import m19.app.exception.NoSuchUserException;
 import m19.app.exception.UserIsActiveException;
 import m19.core.LibraryManager;
-import m19.core.User;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.UserIsNotSuspendedException;
 import pt.tecnico.po.ui.Command;

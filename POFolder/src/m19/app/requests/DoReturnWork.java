@@ -4,8 +4,6 @@ import m19.app.exception.NoSuchUserException;
 import m19.app.exception.NoSuchWorkException;
 import m19.app.exception.WorkNotBorrowedByUserException;
 import m19.core.LibraryManager;
-import m19.core.User;
-import m19.core.Work;
 import m19.core.exception.NoSuchWorkRequestedByUserException;
 import m19.core.exception.NoUserFoundException;
 import m19.core.exception.NoWorkFoundException;
