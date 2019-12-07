@@ -15,7 +15,7 @@ public abstract class Work implements Serializable {
     private Category _category;
     private List<Request> _requests = new ArrayList<>();
     private Subject _subjectDelivery = new NotificationDelivery(this);
-    //private Subject _subjectRequest = new Notification(this);
+    private Subject _subjectRequest = new NotificationRequest(this);
 
     protected Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
