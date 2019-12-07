@@ -9,7 +9,7 @@ public class Book extends Work {
     private String _author;
     private String _isbn;
 
-    protected Book(int iD, int price, String title, int numberOfCopies, Category category, String author, String isbn) {
+    Book(int iD, int price, String title, int numberOfCopies, Category category, String author, String isbn) {
         super(iD, price, title, numberOfCopies, category);
         _author = author;
         _isbn = isbn;

@@ -67,17 +67,12 @@ public class User implements Observer, Serializable {
     }
 
     public void notifyObserver(Object o) {
-        _notifications.add(new Notification(){
-            private static final long serialVersionUID = 6695828542505125766L;
-            @Override
-            public String getMessage() {
-                return "ENTREGA: " + ((Work) o).getDescription();
-            }
-        });
+        _notifications.add((NotificationDelivery) o);
     }
 
     List<Notification> getUserNotifications() {
         List<Notification> nots = new ArrayList<>(_notifications);
+
         _notifications.clear();
         return Collections.unmodifiableList(nots);
     }

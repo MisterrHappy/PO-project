@@ -14,7 +14,8 @@ public abstract class Work implements Serializable {
     private int _numberOfCopiesAvailable;
     private Category _category;
     private List<Request> _requests = new ArrayList<>();
-    private List<Observer> _observers = new ArrayList<>();
+    private Subject _subjectDelivery = new NotificationDelivery(this);
+    //private Subject _subjectRequest = new Notification(this);
 
     protected Work(int iD, int price, String title, int numberOfCopies, Category category) {
         _iD = iD;
@@ -23,6 +24,10 @@ public abstract class Work implements Serializable {
         _numberOfCopies = numberOfCopies;
         _numberOfCopiesAvailable = numberOfCopies;
         _category = category;
+    }
+
+    Subject getSubjectDelivery() {
+        return _subjectDelivery;
     }
 
     Category getCategory() {
@@ -41,14 +46,6 @@ public abstract class Work implements Serializable {
         return _numberOfCopies;
     }
 
-    void addObserver(Observer o) {
-        _observers.add(o);
-    }
-
-    void removeObserver(Observer o) {
-        _observers.remove(o);
-    }
-
     void addRequest(Request r) {
         _requests.add(r);
         _numberOfCopiesAvailable--;
@@ -56,12 +53,8 @@ public abstract class Work implements Serializable {
 
     void removeRequest(Request r) {
         _requests.remove(r);
-
-        for (Observer o: _observers)
-            o.notifyObserver(this);
-
-        _observers.clear(); // perguntar ao stor
         _numberOfCopiesAvailable++;
+        _subjectDelivery.notifyObservers(_subjectDelivery);
     }
 
     @Override

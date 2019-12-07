@@ -197,11 +197,17 @@ public class Library implements Serializable {
     }
 
     /**
+     * Used when an user wants to observe a work which he could not make its requisition.
      * 
+     * @param notificationPreference User choice about being notified.
+     * 
+     * @param userId Id of the user whose wants to request the work.
+     * 
+     * @param workId Id of the work which was trying to be requested.
      */
     void addObserver(boolean notificationPreference, int userId, int workId) {
         if (notificationPreference) 
-            _works.get(workId).addObserver(_users.get(userId)); // perguntar ao stor
+            _works.get(workId).getSubjectDelivery().addObserver(_users.get(userId));
     }
 
     /**
@@ -264,7 +270,13 @@ public class Library implements Serializable {
     }
 
     /**
+     * Used to show notifications of the user whose id is given in the argument.
      * 
+     * @param userId Id of the user whose notifications were asked for.
+     * 
+     * @return A list with all user notifications.
+     * 
+     * @throws NoUserFoundException Is thrown when the user to find with the given ID does not exist (is null).
      */
     List<Notification> showUserNotifications(int userId) throws NoUserFoundException {
         User user = getUser(userId);

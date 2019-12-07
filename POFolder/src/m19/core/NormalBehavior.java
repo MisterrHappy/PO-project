@@ -27,11 +27,11 @@ public class NormalBehavior implements Behavior {
     }
 
     @Override
-    public int getRequestTerm(int workCopiesAvailable) {
-        if (workCopiesAvailable == 1)
+    public int getRequestTerm(int workCopies) {
+        if (workCopies == 1)
             return MAX_REQUEST_TERM_FOR_ONE_COPY;
 
-        return workCopiesAvailable <= 5 ? MAX_REQUEST_TERM_FOR_FIVE_COPIES_OR_LESS : MAX_REQUEST_TERM_FOR_MORE_THAN_FIVE_COPIES;
+        return workCopies <= 5 ? MAX_REQUEST_TERM_FOR_FIVE_COPIES_OR_LESS : MAX_REQUEST_TERM_FOR_MORE_THAN_FIVE_COPIES;
     }
 
     @Override

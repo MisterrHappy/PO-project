@@ -20,6 +20,7 @@ public class DoRequestWork extends Command<LibraryManager> {
     private Input<Integer> _userId;
     private Input<Integer> _workId;
     private Input<Boolean> _notificationPreference;
+    private Form _formChoice = new Form();
 
     /**
      * @param receiver
@@ -28,6 +29,7 @@ public class DoRequestWork extends Command<LibraryManager> {
         super(Label.REQUEST_WORK, receiver);
         _userId = _form.addIntegerInput(Message.requestUserId());
         _workId = _form.addIntegerInput(Message.requestWorkId());
+        _notificationPreference = _formChoice.addBooleanInput(Message.requestReturnNotificationPreference());
     }
     
     /** @see pt.tecnico.po.ui.Command#execute() */
@@ -49,10 +51,8 @@ public class DoRequestWork extends Command<LibraryManager> {
             int ruleIndex = rbe.getRuleIndex();
             if (ruleIndex != 3)
                 throw new RuleFailedException(_userId.value(), _workId.value(), ruleIndex);
-            
-            Form formChoice = new Form();
-            _notificationPreference = formChoice.addBooleanInput(Message.requestReturnNotificationPreference());
-            formChoice.parse();
+        
+            _formChoice.parse();
             _receiver.addObserver(_notificationPreference.value(), _userId.value(), _workId.value());
 
         }

@@ -19,6 +19,7 @@ public class DoReturnWork extends Command<LibraryManager> {
     private Input<Integer> _userId;
     private Input<Integer> _workId;
     private Input<Boolean> _requestFinePaymentChoice;
+    private Form _formChoice = new Form();
 
     /**
      * @param receiver
@@ -27,6 +28,7 @@ public class DoReturnWork extends Command<LibraryManager> {
         super(Label.RETURN_WORK, receiver);
         _userId = _form.addIntegerInput(Message.requestUserId());
         _workId = _form.addIntegerInput(Message.requestWorkId());
+        _requestFinePaymentChoice = _formChoice.addBooleanInput(Message.requestFinePaymentChoice());
     }
     
     /** @see pt.tecnico.po.ui.Command#execute() */
@@ -39,9 +41,7 @@ public class DoReturnWork extends Command<LibraryManager> {
             if (fine != 0) {
                 _display.addLine(Message.showFine(_userId.value(), fine));
                 _display.display();
-                Form formChoice = new Form();
-                _requestFinePaymentChoice = formChoice.addBooleanInput(Message.requestFinePaymentChoice());
-                formChoice.parse();
+                _formChoice.parse();
                 _receiver.userPaymentChoice(_userId.value(), _requestFinePaymentChoice.value());
             }
 

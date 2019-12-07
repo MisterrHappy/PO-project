@@ -26,7 +26,7 @@ public class FaultyBehavior implements Behavior {
     }
 
     @Override
-    public int getRequestTerm(int workCopiesAvailable) {
+    public int getRequestTerm(int workCopies) {
         return FAULTY_REQUEST_TERM;
     }
 
