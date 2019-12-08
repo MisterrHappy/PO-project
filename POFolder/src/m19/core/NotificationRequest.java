@@ -11,8 +11,5 @@ public class NotificationRequest extends Notification {
         return "REQUISIÇÃO: " + getWork().getDescription();
     }
 
-    protected void notifyObservers(Object o) {
-        super.notifyObservers(o);
-        super.clearObservers();
-    }
+    protected void notifyObserversAdvancedOptions() {}
 }

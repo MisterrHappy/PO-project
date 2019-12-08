@@ -11,8 +11,7 @@ public class NotificationDelivery extends Notification {
         return "ENTREGA: " + getWork().getDescription();
     }
 
-    protected void notifyObservers(Object o) {
-        super.notifyObservers(o);
-        super.clearObservers();
+    protected void notifyObserversAdvancedOptions() {
+        clearObservers();
     }
 }
