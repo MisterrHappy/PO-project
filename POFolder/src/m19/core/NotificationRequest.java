@@ -7,7 +7,7 @@ public class NotificationRequest extends Notification {
         super(work);
     }
 
-    public String getMessage() {
+    protected String buildMessage() {
         return "REQUISIÇÃO: " + getWork().getDescription();
     }
 

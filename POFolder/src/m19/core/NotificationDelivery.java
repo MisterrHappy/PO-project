@@ -7,7 +7,7 @@ public class NotificationDelivery extends Notification {
         super(work);
     }
 
-    public String getMessage() {
+    protected String buildMessage() {
         return "ENTREGA: " + getWork().getDescription();
     }
 

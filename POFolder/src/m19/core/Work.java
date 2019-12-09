@@ -54,6 +54,7 @@ public abstract class Work implements Serializable {
     void removeRequest(Request r) {
         _requests.remove(r);
         _numberOfCopiesAvailable++;
+        _subjectDelivery.setMessage();
         _subjectDelivery.notifyObservers(_subjectDelivery);
     }
 
