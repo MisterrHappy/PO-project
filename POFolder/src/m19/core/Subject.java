@@ -23,9 +23,9 @@ public abstract class Subject implements Serializable {
 
     protected abstract void notifyObserversAdvancedOptions();
 
-    final void notifyObservers(Object o) {
+    final void notifyObservers(Subject subject) {
         for (Observer observer: _observers) 
-            observer.notifyObserver(o);
+            observer.notifyObserver(subject);
             
         notifyObserversAdvancedOptions();
     }

@@ -5,5 +5,5 @@ import java.io.Serializable;
 interface Observer extends Serializable {
     long serialVersionUID = 20356846356265234L;
 
-    void notifyObserver(Object o);
+    void notifyObserver(Subject subject);
 }

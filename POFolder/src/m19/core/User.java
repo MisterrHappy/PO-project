@@ -66,8 +66,8 @@ public class User implements Observer, Serializable {
         return _isActive;
     }
 
-    public void notifyObserver(Object o) {
-        _notifications.add((NotificationDelivery) o);
+    public void notifyObserver(Subject subject) {
+        _notifications.add((Notification) subject);
     }
 
     List<Notification> getUserNotifications() {
