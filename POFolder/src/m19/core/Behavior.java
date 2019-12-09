@@ -10,6 +10,6 @@ interface Behavior extends Serializable {
     String getBehavior();
     int getMaxRequests();
     boolean checkWorkPrice(Work work);
-    int getRequestTerm(int workCopiess);
+    int getRequestTerm(int workCopies);
     void updateBehavior(User user);
 }
