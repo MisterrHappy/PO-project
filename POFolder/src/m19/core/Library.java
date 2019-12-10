@@ -238,11 +238,14 @@ public class Library implements Serializable {
         user.removeRequest(request);
         work.removeRequest(request);
 
-        if (fine > 0) 
+        if (fine > 0) {
             user.setLateStreak(user.getLateStreak() + 1);
+            user.setOnTimeStreak(0);
+        }
         
         else {
             user.setOnTimeStreak(user.getOnTimeStreak() + 1);
+            user.setLateStreak(0);
             fine = 0;
         }
         user.getBehavior().updateBehavior(user);

@@ -36,9 +36,8 @@ public class ResponsibleBehavior implements Behavior {
 
     @Override
     public void updateBehavior(User user) {
-        if (user.getOnTimeStreak() < RESPONSIBLE_STREAK) {
-            user.setOnTimeStreak(0);
+        if (user.getLateStreak() > 0)
             user.changeBehavior(NormalBehavior._normalBehavior);
-        }
+        
     }
 }

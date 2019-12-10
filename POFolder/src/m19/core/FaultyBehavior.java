@@ -32,9 +32,10 @@ public class FaultyBehavior implements Behavior {
 
     @Override
     public void updateBehavior(User user) {
-        if (user.getOnTimeStreak() == REACH_NORMAL_BEHAVIOR) {
-            user.setLateStreak(0);
+        int onTimeStreak = user.getOnTimeStreak();
+        int lateStreak = user.getLateStreak();
+
+        if (onTimeStreak == REACH_NORMAL_BEHAVIOR) 
             user.changeBehavior(NormalBehavior._normalBehavior);
-        }
     }
 }

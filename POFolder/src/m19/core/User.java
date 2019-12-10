@@ -24,7 +24,7 @@ public class User implements Observer, Serializable {
 
     User(int iD, String name, String email) throws EmptyUserNameOrEmailException {
         if (name.isEmpty() || email.isEmpty())
-        throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
+            throw new EmptyUserNameOrEmailException("User name " + name + " or email " + email + " are empty strings.");
         _iD = iD;
         _name = name;
         _email = email;

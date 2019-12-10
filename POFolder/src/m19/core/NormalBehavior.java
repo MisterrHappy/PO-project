@@ -38,17 +38,11 @@ public class NormalBehavior implements Behavior {
     public void updateBehavior(User user) {
         int lateStreak = user.getLateStreak();
         int onTimeStreak = user.getOnTimeStreak();
-        
-        if (onTimeStreak > 0)
-            user.setLateStreak(0);
-
-        if (lateStreak > 0)
-            user.setOnTimeStreak(0);
 
         if (onTimeStreak == RESPONSIBLE_STREAK)
             user.changeBehavior(ResponsibleBehavior._responsibleBehavior);
 
-        if (lateStreak == FAULTY_STREAK)
+        else if (lateStreak == FAULTY_STREAK)
             user.changeBehavior(FaultyBehavior._faultyBehavior);
     }
 }
