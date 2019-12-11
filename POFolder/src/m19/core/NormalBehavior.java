@@ -36,13 +36,10 @@ public class NormalBehavior implements Behavior {
 
     @Override
     public void updateBehavior(User user) {
-        int lateStreak = user.getLateStreak();
-        int onTimeStreak = user.getOnTimeStreak();
-
-        if (onTimeStreak == RESPONSIBLE_STREAK)
+        if (user.getOnTimeStreak() == RESPONSIBLE_STREAK)
             user.changeBehavior(ResponsibleBehavior._responsibleBehavior);
 
-        else if (lateStreak == FAULTY_STREAK)
+        else if (user.getLateStreak() == FAULTY_STREAK)
             user.changeBehavior(FaultyBehavior._faultyBehavior);
     }
 }
